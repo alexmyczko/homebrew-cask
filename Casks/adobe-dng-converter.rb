@@ -1,15 +1,15 @@
 cask "adobe-dng-converter" do
-  version "14.0"
-  sha256 "200abde368a9eb70c766eff1ac567a401914c99c89b7200a246f3cbaa69fe994"
+  version "15.4"
+  sha256 "e35f39f7fcf79570be834bb8d3b3a0e26e62b6a3e78b2518e1f9bb07ae76799d"
 
   url "https://download.adobe.com/pub/adobe/dng/mac/DNGConverter_#{version.dots_to_underscores}.dmg"
   name "Adobe DNG Converter"
   desc "DNG file converter"
-  homepage "https://helpx.adobe.com/photoshop/using/adobe-dng-converter.html"
+  homepage "https://helpx.adobe.com/camera-raw/using/adobe-dng-converter.html"
 
   livecheck do
-    url "https://helpx.adobe.com/in/photoshop/kb/uptodate.html"
-    regex(%r{The current version of Adobe DNG Converter is <b>(\d+(?:\.\d+)+)</b>}i)
+    url "https://www.adobe.com/go/dng_converter_mac"
+    strategy :header_match
   end
 
   depends_on macos: ">= :mojave"
@@ -21,4 +21,10 @@ cask "adobe-dng-converter" do
               "com.adobe.CameraRawProfiles",
               "com.adobe.DNGConverter",
             ]
+
+  zap trash: [
+    "~/Library/Application Support/Adobe/CameraRaw/GPU/Adobe DNG Converter",
+    "~/Library/Application Support/Adobe/CameraRaw/Logs/DNG Converter Log*",
+    "~/Library/Saved Application State/com.adobe.DNGConverter.savedState",
+  ]
 end

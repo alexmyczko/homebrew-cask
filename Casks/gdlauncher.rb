@@ -1,6 +1,6 @@
 cask "gdlauncher" do
-  version "1.1.15"
-  sha256 "1b2ae2c0c16b7da6dc27bbc68fb31191e37b6b4517c5ded344ea3623dd7f5cb7"
+  version "1.1.30"
+  sha256 "d98a89f76047cef4ca7bdd99fe464f09fbe95c3ae916123ae4179dd8368514b9"
 
   url "https://github.com/gorilla-devs/GDLauncher/releases/download/v#{version}/GDLauncher-mac-setup.dmg",
       verified: "github.com/gorilla-devs/GDLauncher/"
@@ -9,4 +9,12 @@ cask "gdlauncher" do
   homepage "https://gdevs.io/"
 
   app "GDLauncher.app"
+
+  zap trash: [
+    "~/Library/Application Support/gdlauncher",
+    "~/Library/Application Support/gdlauncher_next",
+    "~/Library/Logs/gdlauncher",
+    "~/Library/Preferences/org.gorilladevs.GDLauncher.plist",
+    "~/Library/Saved Application State/org.gorilladevs.GDLauncher.savedState",
+  ]
 end

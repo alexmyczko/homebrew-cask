@@ -1,9 +1,9 @@
 cask "session" do
-  version "1.7.4"
-  sha256 "7b01c6e2b8a327aadc272da4063783e692a3dd64942ab1338439de70fdbf010c"
+  version "1.10.8"
+  sha256 "2cc27f17d3c74a4be92c4e3568c13966da31575ac9fa7f315b2f0bb44eb51a18"
 
-  url "https://github.com/loki-project/session-desktop/releases/download/v#{version}/session-desktop-mac-#{version}.dmg",
-      verified: "github.com/loki-project/session-desktop/"
+  url "https://github.com/oxen-io/session-desktop/releases/download/v#{version}/session-desktop-mac-#{version}.dmg",
+      verified: "github.com/oxen-io/session-desktop/"
   name "Session"
   desc "Onion routing based messenger"
   homepage "https://getsession.org/"

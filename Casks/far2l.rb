@@ -1,34 +1,29 @@
 cask "far2l" do
   # NOTE: "2" is not a version number, but an intrinsic part of the product name
-  if MacOS.version <= :mojave
-    version "far2l-2.3.211204-48654cc,2021-12-04_alpha"
-    url "https://github.com/elfmz/far2l/releases/download/v#{version.csv.second}/far2l-#{version.csv.first}-alpha-MacOS-10.11.dmg"
-    sha256 "113c55b19e8427258bea955415ff9282d18a4669df5f459ca8340bb5ce1726f2"
+  version "2.5.0"
 
-    livecheck do
-      url "https://github.com/elfmz/far2l/releases"
-      regex(%r{/v([^/]+)/far2l-(.+)-alpha-MacOS-10\.11\.dmg}i)
-      strategy :page_match do |page, regex|
-        page.scan(regex).map { |match| "#{match[1]},#{match[0]}" }
-      end
-    end
-  else
-    version "2.3.211204-48654cc4,2021-12-04_alpha"
-    url "https://github.com/elfmz/far2l/releases/download/v#{version.csv.second}/far2l-#{version.csv.first}-alpha-MacOS-10.15.dmg"
-    sha256 "b2e43058b9d77306670afe61d579cf2031827328706dab54e34d3f7597b7fa01"
+  on_mojave :or_older do
+    sha256 "475f1823652c6e59ff5fe4af448c27b6f88a8f38ac0f358a6620d8aaf5f43c99"
 
-    livecheck do
-      url "https://github.com/elfmz/far2l/releases"
-      regex(%r{/v([^/]+)/far2l-(.+)-alpha-MacOS-10\.15\.dmg}i)
-      strategy :page_match do |page, regex|
-        page.scan(regex).map { |match| "#{match[1]},#{match[0]}" }
-      end
-    end
+    url "https://github.com/elfmz/far2l/releases/download/v_#{version}/far2l-#{version}-beta-MacOS-10.11.dmg"
+  end
+  on_catalina :or_newer do
+    sha256 "9cdde68842f5bfd8e0eda9fdab6507e47eeda2b7a8a6941a8a5966fe89a97435"
+
+    url "https://github.com/elfmz/far2l/releases/download/v_#{version}/far2l-#{version}-beta-MacOS-10.15.dmg"
   end
 
   name "far2l"
   desc "Unix fork of FAR Manager v2"
   homepage "https://github.com/elfmz/far2l"
+
+  # This check should be updated to avoid unstable versions if/when stable
+  # versions become available in the future.
+  livecheck do
+    url "https://github.com/elfmz/far2l/releases"
+    regex(%r{href=["']?[^"' >]*?/tree/[^"' >]*?(\d+(?:\.\d+)+)(?:[._-]?(?:alpha|beta))?["' >]}i)
+    strategy :page_match
+  end
 
   depends_on macos: ">= :el_capitan"
 

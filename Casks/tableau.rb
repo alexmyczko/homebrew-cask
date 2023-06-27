@@ -1,6 +1,6 @@
 cask "tableau" do
-  version "2021.3.4"
-  sha256 "33c686d0981b07af49bd2f3bd780c8ffdcb0d2f0bf42f8c167229af002a51061"
+  version "2023.2.0"
+  sha256 "eabd7b60bf51106a259c6fbffbfa149f0e568a4fd81621a93be2113984edb2d1"
 
   url "https://downloads.tableau.com/tssoftware/TableauDesktop-#{version.dots_to_hyphens}.dmg"
   name "Tableau Desktop"
@@ -10,17 +10,16 @@ cask "tableau" do
   livecheck do
     url "https://www.tableau.com/downloads/desktop/mac"
     strategy :header_match do |headers|
-      headers["location"][/-(\d+-\d+-\d+)\.dmg/i, 1].tr("-", ".")
+      headers["location"][/TableauDesktop[._-]v?(\d+(?:-\d+)+)\.dmg/i, 1].tr("-", ".")
     end
   end
 
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :mojave"
 
   pkg "Tableau Desktop.pkg"
 
   uninstall pkgutil: [
     "com.amazon.redshiftodbc",
-    "simba.sparkodbc",
     "com.simba.sparkodbc",
     "com.simba.sqlserverodbc",
     "com.tableausoftware.Desktop.app",
@@ -29,5 +28,18 @@ cask "tableau" do
     "com.tableausoftware.mysql",
     "com.tableausoftware.oracle",
     "com.tableausoftware.postgresql",
+    "simba.sparkodbc",
   ]
+
+  zap trash:  [
+        "/Library/Preferences/com.tableau.Tableau-#{version.major_minor}.plist",
+        "~/Documents/My Tableau Repository",
+        "~/Library/Caches/com.tableau.caching",
+        "~/Library/Caches/com.tableausoftware.MapTiles",
+        "~/Library/Preferences/com.tableau.Registration.plist",
+        "~/Library/Preferences/com.tableau.Tableau-#{version.major_minor}.plist",
+        "~/Library/Saved Application State/com.tableausoftware.tableaudesktop.savedState",
+        "~/Library/Tableau",
+      ],
+      delete: "/Library/Preferences/com.tableau.Tableau-#{version.major_minor}.plist"
 end

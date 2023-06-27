@@ -1,38 +1,52 @@
 cask "openvpn-connect" do
-  version "3.3.2,4125"
-  sha256 "8c91ed756461b11a87bc51eb631015706017757296445ea48424ecf85f1aad49"
+  arch arm: "arm64", intel: "x86_64"
 
-  url "https://swupdate.openvpn.net/downloads/connect/openvpn-connect-#{version.before_comma}.#{version.after_comma}_signed.dmg"
+  version "3.4.2,4547"
+  sha256 "d13968eb0c72f2d816be889e2a13dba2b18897e052c9f370c52b541b3ea568e8"
+
+  url "https://swupdate.openvpn.net/downloads/connect/openvpn-connect-#{version.csv.first}.#{version.csv.second}_signed.dmg"
   name "OpenVPN Connect client"
   desc "Client program for the OpenVPN Access Server"
   homepage "https://openvpn.net/client-connect-vpn-for-mac-os/"
 
   livecheck do
     url "https://openvpn.net/downloads/openvpn-connect-v#{version.major}-macos.dmg"
-    strategy :header_match do |headers|
-      match = headers["location"].match(%r{/openvpn-connect-(\d+(?:\.\d+)+)\.(\d+)_signed\.dmg}i)
-      next if match.blank?
-
-      "#{match[1]},#{match[2]}"
+    regex(%r{/openvpn[._-]connect[._-]v?(\d+(?:\.\d+)+)\.(\d+)[._-]signed\.dmg}i)
+    strategy :header_match do |headers, regex|
+      headers["location"].scan(regex).map { |match| "#{match[0]},#{match[1]}" }
     end
   end
 
-  pkg "OpenVPN_Connect_#{version.before_comma.dots_to_underscores}(#{version.after_comma})_Installer_signed.pkg"
+  pkg "OpenVPN_Connect_#{version.csv.first.dots_to_underscores}(#{version.csv.second})_#{arch}_Installer_signed.pkg"
 
-  uninstall launchctl: [
-    "org.openvpn.client",
-    "org.openvpn.helper",
-  ],
-            script:    {
-              executable: "/Applications/OpenVPN Connect/Uninstall OpenVPN Connect.app/Contents/Resources/remove.sh",
-              sudo:       true,
-            },
-            pkgutil:   [
+  uninstall quit:       "org.openvpn.client.app",
+            launchctl:  [
+              "org.openvpn.client",
+              "org.openvpn.helper",
+            ],
+            pkgutil:    [
+              "org.openvpn.client.pkg",
               "org.openvpn.client_framework.pkg",
               "org.openvpn.client_launch.pkg",
               "org.openvpn.client_uninstall.pkg",
-              "org.openvpn.client.pkg",
               "org.openvpn.helper_framework.pkg",
               "org.openvpn.helper_launch.pkg",
-            ]
+            ],
+            delete:     [
+              "/Applications/OpenVPN Connect",
+              "/Applications/OpenVPN Connect.app",
+            ],
+            login_item: "OpenVPN Connect"
+
+  zap trash:  [
+        "~/Library/Application Support/OpenVPN Connect",
+        "~/Library/Logs/OpenVPN Connect",
+        "~/Library/Preferences/org.openvpn.client.app.helper.plist",
+        "~/Library/Preferences/org.openvpn.client.app.plist",
+        "~/Library/Saved Application State/org.openvpn.client.app.savedState",
+      ],
+      script: {
+        executable: "security",
+        args:       ["delete-keychain", "openvpn.keychain-db"],
+      }
 end

@@ -1,6 +1,6 @@
 cask "ariang" do
-  version "1.2.3"
-  sha256 "9aa1928a45f98316b1245d961faa5402fd39faf062f9a97a5b621d6380ea0002"
+  version "1.3.6"
+  sha256 "ffe1b07cecd03a9387eb7de896339cbc2ab4ea724230124e04b1123cfa8b3d5a"
 
   url "https://github.com/mayswind/AriaNg-Native/releases/download/#{version}/AriaNg_Native-#{version}-macOS-x64.dmg"
   name "AriaNg Native"
@@ -8,4 +8,9 @@ cask "ariang" do
   homepage "https://github.com/mayswind/AriaNg-Native"
 
   app "AriaNg Native.app"
+
+  zap trash: [
+    "~/Library/Preferences/net.mayswind.ariang.plist",
+    "~/Library/Saved Application State/net.mayswind.ariang.savedState",
+  ]
 end

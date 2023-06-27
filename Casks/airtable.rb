@@ -1,6 +1,6 @@
 cask "airtable" do
-  version "1.4.5"
-  sha256 "c4078c92678b41dbbd7cd79af10280eb2f89a8c4ff22f6edbf554d8c080c186a"
+  version "1.6.3"
+  sha256 "fbba5a1e4a2290d94c10c7e08376dccd4173c84b6383620a76f30fea4d4f0d2d"
 
   url "https://static.airtable.com/download/macos/Airtable-#{version}.dmg"
   name "Airtable"
@@ -8,24 +8,27 @@ cask "airtable" do
   homepage "https://airtable.com/"
 
   livecheck do
-    url "https://airtable.com/mac"
-    strategy :page_match
-    regex(%r{href=.*?/Airtable-(\d+(?:\.\d+)+)\.dmg}i)
+    url "https://airtable.com/desktopAppLatestVersion?version=0.0.0&platform=darwin"
+    strategy :json do |json|
+      json["version"]
+    end
   end
 
   auto_updates true
 
   app "Airtable.app"
 
-  uninstall quit: "com.FormaGrid.Airtable"
+  uninstall quit:   "com.FormaGrid.Airtable",
+            delete: "/Library/Logs/DiagnosticReports/Airtable*.*_resource.diag"
 
   zap trash: [
-    "/Library/Logs/DiagnosticReports/Airtable*.*_resource.diag",
-    "~/Library/Logs/Airtable",
+    "~/Library/Application Support/Airtable",
     "~/Library/Caches/com.FormaGrid.Airtable*",
     "~/Library/Cookies/com.FormaGrid.Airtable.binarycookies",
-    "~/Library/Application Support/Airtable",
-    "~/Library/Preferences/com.FormaGrid.Airtable*.plist",
+    "~/Library/HTTPStorages/com.FormaGrid.Airtable*",
+    "~/Library/Logs/Airtable",
     "~/Library/Preferences/ByHost/com.FormaGrid.Airtable.ShipIt.*.plist",
+    "~/Library/Preferences/com.FormaGrid.Airtable*.plist",
+    "~/Library/Saved Application State/com.FormaGrid.Airtable.savedState",
   ]
 end

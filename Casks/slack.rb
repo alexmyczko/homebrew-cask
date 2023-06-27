@@ -1,12 +1,24 @@
 cask "slack" do
-  arch = Hardware::CPU.intel? ? "x64" : "arm64"
+  arch arm: "arm64", intel: "x64"
 
-  version "4.22.0"
+  on_mojave :or_older do
+    version "4.29.149"
+    sha256 arm:   "367f9d143dc7fc1cbe6813cb0f19cf9de357b8597eb4774b87125779804c3918",
+           intel: "13462738f9da5857b5ee00a9172c31bb9b87b35a4492d035b54bb842abca858c"
 
-  if Hardware::CPU.intel?
-    sha256 "f79705c4cbc2c3d839d8b1ce6572039761276301424099aec3a59ab2fd4e9724"
-  else
-    sha256 "a463684c4f73a9fd3a02b5c4ef6c73297730c92aa30426c0e9b2c7a4f66357fc"
+    livecheck do
+      skip "Legacy version"
+    end
+  end
+  on_catalina :or_newer do
+    version "4.32.127"
+    sha256 arm:   "513b258579c5b578c4a9410343bfdb6b364c3350a2293abd6fa7a11f085ca11b",
+           intel: "5aae1b6c814d23c5d0b878194179866440fb22091341dc76f8ceaec3de37aa4c"
+
+    livecheck do
+      url "https://slack.com/ssb/download-osx"
+      strategy :header_match
+    end
   end
 
   url "https://downloads.slack-edge.com/releases/macos/#{version}/prod/#{arch}/Slack-#{version}-macOS.dmg",
@@ -14,11 +26,6 @@ cask "slack" do
   name "Slack"
   desc "Team communication and collaboration software"
   homepage "https://slack.com/"
-
-  livecheck do
-    url "https://slack.com/ssb/download-osx"
-    strategy :header_match
-  end
 
   auto_updates true
   conflicts_with cask: "homebrew/cask-versions/slack-beta"
@@ -39,7 +46,7 @@ cask "slack" do
     "~/Library/Cookies/com.tinyspeck.slackmacgap.binarycookies",
     "~/Library/Group Containers/*.com.tinyspeck.slackmacgap",
     "~/Library/Group Containers/*.slack",
-    "~/Library/HTTPStorages/com.tinyspeck.slackmacgap.binarycookies",
+    "~/Library/HTTPStorages/com.tinyspeck.slackmacgap*",
     "~/Library/Logs/Slack",
     "~/Library/Preferences/ByHost/com.tinyspeck.slackmacgap.ShipIt.*.plist",
     "~/Library/Preferences/com.tinyspeck.slackmacgap.helper.plist",

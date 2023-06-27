@@ -1,6 +1,6 @@
 cask "scihubeva" do
-  version "5.1.1"
-  sha256 "23d51b7f9984e33f46c16f4fe8baebd9b2d7c3b5fe5a9de2f1f9816ccf7235f7"
+  version "6.1.0"
+  sha256 "324ff6867fc26d9d163e18244637a871f896c8a12dca69a194f2ee0d0852a169"
 
   url "https://github.com/leovan/SciHubEVA/releases/download/v#{version}/SciHubEVA-v#{version}.dmg"
   name "SciHubEVA"
@@ -8,4 +8,12 @@ cask "scihubeva" do
   homepage "https://github.com/leovan/SciHubEVA"
 
   app "SciHubEVA.app"
+
+  zap trash: [
+    "~/Library/Caches/LeoVan",
+    "~/Library/Logs/LeoVan",
+    "~/Library/Preferences/me.leovan.SciHubEVA.plist",
+    "~/Library/Preferences/SciHubEVA.plist",
+    "~/Library/Saved Application State/SciHubEVA.savedState",
+  ]
 end

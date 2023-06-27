@@ -1,15 +1,11 @@
 cask "intellij-idea-ce" do
-  arch = Hardware::CPU.intel? ? "" : "-aarch64"
+  arch arm: "-aarch64"
 
-  version "2021.3,213.5744.223"
+  version "2023.1.3,231.9161.38"
+  sha256 arm:   "c815f1f1af1e4c781b4cb8fda629e83b40e12b6f18485a2bf3a5cfce8a9a78dc",
+         intel: "a7a71c941df436b8b5e78b679f1810cb9395663a788a114c1bbaeb99054e0ccf"
 
-  url "https://download.jetbrains.com/idea/ideaIC-#{version.before_comma}#{arch}.dmg"
-  if Hardware::CPU.intel?
-    sha256 "af37aa7c0af6bc32bdfd58277a19cf5d30e5eb8558b8926a0ae7c8d5fcf3ea55"
-  else
-    sha256 "0489726513267c93e38ce29f7d082460858c2337d6b4669552df4110e1a2fb38"
-  end
-
+  url "https://download.jetbrains.com/idea/ideaIC-#{version.csv.first}#{arch}.dmg"
   name "IntelliJ IDEA Community Edition"
   name "IntelliJ IDEA CE"
   desc "IDE for Java development - community edition"
@@ -17,8 +13,8 @@ cask "intellij-idea-ce" do
 
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=IIC&latest=true&type=release"
-    strategy :page_match do |page|
-      JSON.parse(page)["IIC"].map do |release|
+    strategy :json do |json|
+      json["IIC"].map do |release|
         "#{release["version"]},#{release["build"]}"
       end
     end
@@ -32,7 +28,7 @@ cask "intellij-idea-ce" do
 
   uninstall_postflight do
     ENV["PATH"].split(File::PATH_SEPARATOR).map { |path| File.join(path, "idea") }.each do |path|
-      if File.exist?(path) &&
+      if File.readable?(path) &&
          File.readlines(path).grep(/# see com.intellij.idea.SocketLock for the server side of this interface/).any?
         File.delete(path)
       end

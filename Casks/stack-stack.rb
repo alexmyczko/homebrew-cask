@@ -1,14 +1,15 @@
 cask "stack-stack" do
-  version "3.36.1"
+  version "3.43.2"
 
-  if Hardware::CPU.intel?
-    sha256 "682af014498759c38723666d7fbaa67915fc08636d5b3c4e73e302b4b14f7cc7"
-
-    url "https://binaries.getstack.app/builds/prod/Stack-#{version}.dmg"
-  else
-    sha256 "b2e866d059c9736810a172d02d91b443807aa4b3d9df6dffd50914b341ef2740"
+  on_arm do
+    sha256 "2615a79ea08750e3fd4f60b376f8a4e617d578e4c21863a55af0adccc8504dc5"
 
     url "https://binaries.getstack.app/builds/prod/mac/arm64/Stack%20#{version}-arm64.dmg"
+  end
+  on_intel do
+    sha256 "5846b9af905bdbaef11f04c099a0d0015ab62077ca4d17f33946ca473ef9dd91"
+
+    url "https://binaries.getstack.app/builds/prod/Stack-#{version}.dmg"
   end
 
   name "Stack"
@@ -21,7 +22,7 @@ cask "stack-stack" do
   end
 
   auto_updates true
-  depends_on macos: ">= :yosemite"
+  depends_on macos: ">= :el_capitan"
 
   app "Stack.app"
 

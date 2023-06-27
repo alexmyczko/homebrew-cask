@@ -1,27 +1,14 @@
 cask "appcode" do
-  arch = Hardware::CPU.intel? ? "" : "-aarch64"
+  arch arm: "-aarch64"
 
-  version "2021.3,213.5744.274"
-
-  if Hardware::CPU.intel?
-    sha256 "727380fdf44ded0a52e88a8b8e23a6c3305cbc4b3323951b56f8769e2cf0a8e6"
-  else
-    sha256 "d6abb0b0e73dc0be5aaf6eeb97f61e32dd9c0e1e864c650d980466b065e29769"
-  end
+  version "2022.3.2,223.8617.49"
+  sha256 arm:   "c38bf4e2558d2a41ab856390f713f01a44fade55d21b107cfaef0c8bf6606f86",
+         intel: "b78910b83ccbd6e19b7912fdfb675912e2b003fd1e4c800d656258504994ede1"
 
   url "https://download.jetbrains.com/objc/AppCode-#{version.csv.first}#{arch}.dmg"
   name "AppCode"
   desc "IDE for Swift, Objective-C, C, and C++ development"
   homepage "https://www.jetbrains.com/objc/"
-
-  livecheck do
-    url "https://data.services.jetbrains.com/products/releases?code=AC&latest=true&type=release"
-    strategy :page_match do |page|
-      JSON.parse(page)["AC"].map do |release|
-        "#{release["version"]},#{release["build"]}"
-      end
-    end
-  end
 
   auto_updates true
   depends_on macos: ">= :high_sierra"
@@ -30,7 +17,7 @@ cask "appcode" do
 
   uninstall_postflight do
     ENV["PATH"].split(File::PATH_SEPARATOR).map { |path| File.join(path, "appcode") }.each do |path|
-      if File.exist?(path) &&
+      if File.readable?(path) &&
          File.readlines(path).grep(/# see com.intellij.idea.SocketLock for the server side of this interface/).any?
         File.delete(path)
       end
@@ -43,4 +30,8 @@ cask "appcode" do
     "~/Library/Logs/AppCode#{version.major_minor}",
     "~/Library/Preferences/AppCode#{version.major_minor}",
   ]
+
+  caveats do
+    discontinued
+  end
 end

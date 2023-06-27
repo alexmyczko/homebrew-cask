@@ -9,11 +9,13 @@ cask "cscreen" do
 
   livecheck do
     url :homepage
-    regex(%r{href=.*?/(\d{4})/(\d{2})/cscreenIntel\.dmg})
+    regex(%r{href=.*?/(\d{4})/(\d{2})/cscreenIntel\.dmg}i)
     strategy :page_match do |page, regex|
       page.scan(regex).map { |match| "#{match[0]}.#{match[1]}" }
     end
   end
 
   binary "cscreen"
+
+  # No zap stanza required
 end

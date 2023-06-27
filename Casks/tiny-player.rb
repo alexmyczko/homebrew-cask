@@ -1,15 +1,15 @@
 cask "tiny-player" do
-  version "1.5.9,187"
-  sha256 "5cd46cecbe1d9a444ae84dc6330cd2638edcf83bb819d859014ceb9fd35d7905"
+  version "1.6.7"
+  sha256 "a52e40e004e7486a889318b33325e0c61b7a3079ec86040870477cd6bf28b4c7"
 
-  url "https://download.catnapgames.com/TinyPlayer-#{version.before_comma}.zip"
+  url "https://download.catnapgames.com/TinyPlayer-#{version}.zip"
   name "Tiny Player for Mac"
   desc "Media player"
   homepage "https://www.catnapgames.com/tiny-player-for-mac/"
 
   livecheck do
     url "https://download.catnapgames.com/TinyPlayerAppcast.xml"
-    strategy :sparkle
+    strategy :sparkle, &:short_version
   end
 
   auto_updates true

@@ -1,6 +1,6 @@
 cask "metaz" do
-  version "1.0.1"
-  sha256 "102a57e1e0553149a3075aa68bfb8adf5c037178ceb3e04ee7db9a2091439747"
+  version "1.0.3"
+  sha256 "0458c1fdcadc198aeca68e1d775195c3022b549f70c0483e57930731af913cbe"
 
   url "https://github.com/griff/metaz/releases/download/v#{version}/MetaZ-#{version}.zip",
       verified: "github.com/griff/metaz/"
@@ -9,9 +9,8 @@ cask "metaz" do
   homepage "https://metaz.maven-group.org/"
 
   livecheck do
-    url :url
+    url :homepage
     regex(/href=.*?MetaZ[._-]v?(.+)\.zip/i)
-    strategy :github_latest
   end
 
   app "MetaZ.app"

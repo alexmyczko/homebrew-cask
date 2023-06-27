@@ -1,6 +1,6 @@
 cask "openineditor-lite" do
-  version "1.2.3"
-  sha256 "68f9c93c18324885c03a03d571ca110a24a2fd0fd90d923165d82f4db7e0699d"
+  version "1.2.5"
+  sha256 "745f81ba178795d44e97c8c60b8b28022f7258f70f673555da0da3a34637519d"
 
   url "https://github.com/Ji4n1ng/OpenInTerminal/releases/download/v#{version}/OpenInEditor-Lite.app.zip"
   name "OpenInEditor-Lite"
@@ -8,8 +8,7 @@ cask "openineditor-lite" do
   homepage "https://github.com/Ji4n1ng/OpenInTerminal"
 
   livecheck do
-    url "https://raw.githubusercontent.com/Ji4n1ng/OpenInTerminal/master/Resources/README-Lite.md"
-    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)*)}i)
+    skip "No reliable way to get version info"
   end
 
   app "OpenInEditor-Lite.app"

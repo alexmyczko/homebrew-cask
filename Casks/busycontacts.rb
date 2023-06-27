@@ -1,8 +1,8 @@
 cask "busycontacts" do
-  version "1.6.2,2021-11-05-00-56"
-  sha256 "1f53fecafed0861019c20ee85ee4862ea3090008f0e6c92224e2be885585ade8"
+  version "2023.2.1,2023-05-29-14-52"
+  sha256 "5322fa9f45a4ccecfc8449ea27b913861c3562811deaa623e87ee097e1376b08"
 
-  url "https://7e968b6ce8a839f034d9-23cfb9eddcb7b94cb43ba95f95a76900.ssl.cf1.rackcdn.com/bct-#{version.before_comma}-#{version.after_comma}.zip",
+  url "https://7e968b6ce8a839f034d9-23cfb9eddcb7b94cb43ba95f95a76900.ssl.cf1.rackcdn.com/bct-#{version.csv.first}-#{version.csv.second}.zip",
       verified: "7e968b6ce8a839f034d9-23cfb9eddcb7b94cb43ba95f95a76900.ssl.cf1.rackcdn.com/"
   name "BusyContacts"
   desc "Contact manager focusing on efficiency"
@@ -25,4 +25,14 @@ cask "busycontacts" do
   uninstall pkgutil: "com.busymac.busycontacts.pkg",
             quit:    "com.busymac.busycontacts",
             signal:  ["KILL", "com.busymac.busycontacts"]
+
+  zap trash: [
+    "~/Library/Application Scripts/com.busymac.busycontacts",
+    "~/Library/Application Scripts/N4RA379GBW.com.busymac.busycontacts",
+    "~/Library/Application Scripts/N4RA379GBW.com.busymac.contacts/",
+    "~/Library/Application Support/Mail/BusyContacts/",
+    "~/Library/Containers/com.busymac.busycontacts",
+    "~/Library/Group Containers/N4RA379GBW.com.busymac.busycontacts",
+    "~/Library/Group Containers/N4RA379GBW.com.busymac.contacts",
+  ]
 end

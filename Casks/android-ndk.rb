@@ -1,8 +1,8 @@
 cask "android-ndk" do
-  version "22b"
-  sha256 "b05d2087a6346d66cd26a1dc89fcc877b59e49feab6269b665aa67c784a81512"
+  version "25c"
+  sha256 "1856108efde22d502399216c65e2a0f7823bdfac1df69fe6a1f3b71ff7be6ced"
 
-  url "https://dl.google.com/android/repository/android-ndk-r#{version}-darwin-x86_64.zip",
+  url "https://dl.google.com/android/repository/android-ndk-r#{version}-darwin.dmg",
       verified: "dl.google.com/android/repository/"
   name "Android NDK"
   desc "Toolset to implement parts of Android apps in native code"
@@ -10,19 +10,18 @@ cask "android-ndk" do
 
   livecheck do
     url "https://developer.android.com/ndk/downloads"
-    regex(/Latest\s+Stable\s+Version\s+\(r(\d+[a-z]?)\)/i)
+    regex(/Latest.*?r(\d+[a-z]?)\b(?!\s+Preview)/i)
   end
-
-  conflicts_with cask: "crystax-ndk"
 
   # shim script (https://github.com/Homebrew/homebrew-cask/issues/18809)
   shimscript = "#{staged_path}/ndk_exec.sh"
   preflight do
-    FileUtils.ln_sf("#{staged_path}/android-ndk-r#{version}", "#{HOMEBREW_PREFIX}/share/android-ndk")
+    build = File.read("#{staged_path}/source.properties").match(/(?<=Pkg.Revision\s=\s\d\d.\d.)\d+/)
+    FileUtils.ln_sf("#{staged_path}/AndroidNDK#{build}.app/Contents/NDK", "#{HOMEBREW_PREFIX}/share/android-ndk")
 
     File.write shimscript, <<~EOS
       #!/bin/bash
-      readonly executable="#{staged_path}/android-ndk-r#{version}/$(basename ${0})"
+      readonly executable="#{staged_path}/AndroidNDK#{build}.app/Contents/NDK/$(basename ${0})"
       test -f "${executable}" && exec "${executable}" "${@}"
     EOS
   end
@@ -38,6 +37,8 @@ cask "android-ndk" do
   uninstall_postflight do
     FileUtils.rm_f("#{HOMEBREW_PREFIX}/share/android-ndk")
   end
+
+  # No zap stanza required
 
   caveats <<~EOS
     You may want to add to your profile:

@@ -1,15 +1,15 @@
 cask "mi" do
-  version "3.5.3,1035"
-  sha256 "849603d9dd14d5ad8527b44105dde9e48dc225046da579afcaf21155f86b99b8"
+  version "3.7.5"
+  sha256 "12085323b38e9facffad676a0080344831cee58f88c602468e5a15ea647ec54b"
 
-  url "https://www.mimikaki.net/download/mi#{version.before_comma}.dmg"
+  url "https://www.mimikaki.net/download/mi#{version}.dmg"
   name "mi"
   desc "Text editor"
   homepage "https://www.mimikaki.net/"
 
   livecheck do
     url "https://www.mimikaki.net/download/appcast.xml"
-    strategy :sparkle
+    strategy :sparkle, &:short_version
   end
 
   conflicts_with cask: "homebrew/cask-versions/mi-beta"

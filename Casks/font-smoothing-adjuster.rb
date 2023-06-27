@@ -1,17 +1,16 @@
 cask "font-smoothing-adjuster" do
-  version "1.2.1"
-  sha256 "f0f02948be588bdff455195baeb8f72c0c45977775ab936644e8bf9053c316a6"
+  version "2.0.0"
+  sha256 "187401950b827c58262a9bb86878c5dd5820550c00ca414f971ce82837d7419f"
 
   url "https://font-smoothing-adjuster-updates.s3.eu-west-2.amazonaws.com/Font+Smoothing+Adjuster+#{version}.dmg",
-      verified: "font-smoothing-adjuster-updates.s3.eu-west-2.amazonaws.com"
+      verified: "font-smoothing-adjuster-updates.s3.eu-west-2.amazonaws.com/"
   name "Font Smoothing Adjuster"
   desc "Re-enable the font smoothing controls"
   homepage "https://www.fontsmoothingadjuster.com/"
 
   livecheck do
     url "https://font-smoothing-adjuster-updates.s3.eu-west-2.amazonaws.com/appcast.xml"
-    strategy :page_match
-    regex(/Font%20Smoothing%20Adjuster%20(\d+(?:\.\d+)*)\.dmg/i)
+    regex(/Font%20Smoothing%20Adjuster%20v?(\d+(?:\.\d+)+)\.dmg/i)
   end
 
   app "Font Smoothing Adjuster.app"

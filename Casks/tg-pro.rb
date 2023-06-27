@@ -1,18 +1,19 @@
 cask "tg-pro" do
-  version "2.63,12892"
-  sha256 "d50f76982a8530e1a70bc3f0535a94aea489080dc3c6e04718c172a019b436da"
+  version "2.82"
+  sha256 "81ce529497aac2cf9b86d3de103fe0a5812cc25902fb3248b7a3c8a01e9c5f3c"
 
-  url "https://www.tunabellysoftware.com/resources/TG%20Pro%20#{version.csv.first}.dmg"
+  url "https://www.tunabellysoftware.com/resources/TG%20Pro%20#{version}.dmg"
   name "TG Pro"
   desc "Temperature monitoring, fan control and diagnostics"
   homepage "https://www.tunabellysoftware.com/tgpro/"
 
   livecheck do
     url "https://www.tunabellysoftware.com/resources/sparkle/tgpro.xml"
-    strategy :sparkle
+    strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :el_capitan"
+  auto_updates true
+  depends_on macos: ">= :high_sierra"
 
   app "TG Pro.app"
 

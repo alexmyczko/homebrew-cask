@@ -1,6 +1,6 @@
 cask "removebg" do
-  version "1.4.4"
-  sha256 "65e72720bf38f28368b35a1b3ebeb11c162717013484700d79578357ce241253"
+  version "1.4.7"
+  sha256 "8b1994f3c9f91a867157de8ddc1bba5211672eb3f510090f4c256c4391af7b8e"
 
   url "https://static.remove.bg/download/removebg-for-mac-#{version}.dmg"
   name "remove.bg"
@@ -12,7 +12,12 @@ cask "removebg" do
     regex(%r{/removebg[._-]for[._-]mac[._-](\d+(?:\.\d+)+)\.dmg}i)
   end
 
-  depends_on macos: ">= :yosemite"
-
   app "remove.bg.app"
+
+  zap trash: [
+    "~/Library/Application Support/remove.bg-desktop",
+    "~/Library/Logs/remove.bg",
+    "~/Library/Preferences/bg.remove.mac.new.plist",
+    "~/Library/Saved Application State/bg.remove.mac.new.savedState",
+  ]
 end

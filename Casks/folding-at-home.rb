@@ -9,17 +9,18 @@ cask "folding-at-home" do
 
   livecheck do
     url "https://download.foldingathome.org/releases/public/release/fah-installer/osx-10.11-64bit/v#{version.major_minor}/"
-    strategy :page_match
-    regex(/href=.*?fah-installer_(\d+(?:\.\d+)*)_x86_64.mpkg\.zip/i)
+    regex(/href=.*?fah[._-]installer[._-]v?(\d+(?:\.\d+)+)[._-]x86[._-]64.mpkg\.zip/i)
   end
+
+  conflicts_with cask: "homebrew/cask-versions/folding-at-home-beta"
 
   pkg "fah-installer_#{version}_x86_64-b.pkg"
 
   uninstall pkgutil:   "org.foldingathome.*",
             launchctl: "org.foldingathome.fahclient",
             quit:      [
-              "org.foldingathome.fahviewer",
               "org.foldingathome.fahcontrol",
+              "org.foldingathome.fahviewer",
             ]
 
   zap trash: "/Library/Application Support/FAHClient"

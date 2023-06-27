@@ -1,8 +1,11 @@
 cask "sage" do
-  version "9.4,1.2.2"
-  sha256 "d59e16c3ec816f5b1ca0a9ad1e77fe5710d6f6d65f84495c64a0e846d9df4da8"
+  arch arm: "arm64", intel: "x86_64"
 
-  url "https://github.com/3-manifolds/Sage_macOS/releases/download/v#{version.csv.second}/SageMath-#{version.csv.first}%2B.dmg",
+  version "10.0,2.0.1"
+  sha256 arm:   "5c52a885e9403c25763dd35a8f4a2045a94896e1dedd7d7cfca6a36027da171e",
+         intel: "c07b2c2a3a534264f6df9ae10b0b781db389dc44e0191a58d23304959f61294d"
+
+  url "https://github.com/3-manifolds/Sage_macOS/releases/download/v#{version.csv.second}/SageMath-#{version.csv.first}_#{arch}.dmg",
       verified: "github.com/3-manifolds/Sage_macOS/"
   name "Sage"
   desc "Mathematics software system"
@@ -10,11 +13,19 @@ cask "sage" do
 
   livecheck do
     url "https://github.com/3-manifolds/Sage_macOS/releases/latest"
-    strategy :page_match do |page|
-      match = page.match(%r{href=.*?/v?(\d+(?:\.\d+)+)/SageMath-(\d+(?:\.\d+)+)\+?\.dmg}i)
-      next if match.blank?
+    regex(%r{href=.*?/v?(\d+(?:\.\d+)+)/SageMath[._-]v?(\d+(?:\.\d+)+)[._-].*?#{arch}\.dmg}i)
+    strategy :header_match do |headers, regex|
+      next if headers["location"].blank?
 
-      "#{match[2]},#{match[1]}"
+      # Identify the latest tag from the response's `location` header
+      latest_tag = File.basename(headers["location"])
+      next if latest_tag.blank?
+
+      # Fetch the assets list HTML for the latest tag and match within it
+      assets_page = Homebrew::Livecheck::Strategy.page_content(
+        @url.sub(%r{/releases/?.+}, "/releases/expanded_assets/#{latest_tag}"),
+      )
+      assets_page[:content]&.scan(regex)&.map { |match| "#{match[1]},#{match[0]}" }
     end
   end
 
@@ -24,11 +35,11 @@ cask "sage" do
   pkg "Recommended_#{version.csv.first.dots_to_underscores}.pkg"
 
   uninstall quit:    [
-    "org.computop.sage",
-    "org.computop.SageMath",
-    "com.tcltk.tcllibrary",
-    "com.tcltk.tklibrary",
-  ],
+              "org.computop.sage",
+              "org.computop.SageMath",
+              "com.tcltk.tcllibrary",
+              "com.tcltk.tklibrary",
+            ],
             pkgutil: [
               "org.computop.SageMath.#{version.csv.first.dots_to_underscores}.bin",
               "org.computop.SageMath.#{version.csv.first.dots_to_underscores}.share",

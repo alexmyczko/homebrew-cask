@@ -1,6 +1,6 @@
 cask "tableau-reader" do
-  version "2021.3.1"
-  sha256 "44c44a3513d7ba5a7bacb5fb19e9496b54cc17a5015b284bee1665f1e9f0dd9a"
+  version "2023.2.0"
+  sha256 "afaa0b1a6816594b3427f11dc9b26a9350f18ffc424bc637fdd2e0475a7d375a"
 
   url "https://downloads.tableau.com/tssoftware/TableauReader-#{version.dots_to_hyphens}.dmg"
   name "Tableau Reader"
@@ -10,7 +10,7 @@ cask "tableau-reader" do
   livecheck do
     url "https://www.tableau.com/downloads/reader/mac"
     strategy :header_match do |headers|
-      headers["location"][/-(\d+-\d+-\d+)\.dmg/i, 1].tr("-", ".")
+      headers["location"][/-(\d+(?:-\d+)+)\.dmg/i, 1].tr("-", ".")
     end
   end
 
@@ -19,5 +19,11 @@ cask "tableau-reader" do
   uninstall pkgutil: [
     "com.tableausoftware.FLEXNet.*",
     "com.tableausoftware.Reader.app",
+  ]
+
+  zap trash: [
+    "/Library/Preferences/com.tableau.Tableau-Reader-*.plist",
+    "~/Library/Preferences/com.tableau.Tableau-Reader-*.plist",
+    "~/Library/Saved Application State/com.tableausoftware.tableaureader.savedState",
   ]
 end

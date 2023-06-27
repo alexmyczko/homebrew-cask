@@ -5,8 +5,12 @@ cask "cubicsdr" do
   url "https://github.com/cjcliffe/CubicSDR/releases/download/#{version}/CubicSDR-#{version}-Darwin.dmg",
       verified: "github.com/cjcliffe/CubicSDR/"
   name "CubicSDR"
-  desc "Cross-Platform Software-Defined Radio Application"
+  desc "Cross-platform software-defined radio application"
   homepage "https://cubicsdr.com/"
+
+  livecheck do
+    skip "No reliable way to get version info"
+  end
 
   app "CubicSDR.app"
 end

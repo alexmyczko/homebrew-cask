@@ -1,8 +1,8 @@
 cask "monodraw" do
-  version "1.5,107"
-  sha256 "f5f9042605bd9f80efd0a0a634c27f04ff079e2e55d12491d0c9f22fd4f0a09c"
+  version "1.6.1,111"
+  sha256 "8cdd852f3185ffb4c0ac374b23a49e6471b8cd061fe39088572f4ff7d58f4976"
 
-  url "https://updates.helftone.com/monodraw/downloads/Monodraw-b#{version.after_comma}.zip"
+  url "https://updates.helftone.com/monodraw/downloads/Monodraw-b#{version.csv.second}.zip"
   name "Monodraw"
   desc "Tool to create text-based art"
   homepage "https://monodraw.helftone.com/"

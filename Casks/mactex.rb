@@ -1,8 +1,8 @@
 cask "mactex" do
-  version "2021.0328"
-  sha256 "e541257d70f911550341853709fc45d9fa9fcd4c93058382000ebb19b284833b"
+  version "2023.0314"
+  sha256 "57304ece58618f0dfc6a41be39d1d6e8f688d81247c84a89eb1cc788b280050b"
 
-  url "http://mirror.ctan.org/systems/mac/mactex/mactex-#{version.no_dots}.pkg",
+  url "https://mirror.ctan.org/systems/mac/mactex/mactex-#{version.no_dots}.pkg",
       verified: "mirror.ctan.org/systems/mac/mactex/"
   name "MacTeX"
   desc "Full TeX Live distribution with GUI applications"
@@ -29,13 +29,13 @@ cask "mactex" do
       choices: [
         {
           # Ghostscript
-          "choiceIdentifier" => "org.tug.mactex.ghostscript9.53.3",
+          "choiceIdentifier" => "org.tug.mactex.ghostscript10.00",
           "choiceAttribute"  => "selected",
           "attributeSetting" => 0,
         },
         {
           # Ghostscript Dynamic Library
-          "choiceIdentifier" => "org.tug.mactex.ghostscript9.53.3libgs",
+          "choiceIdentifier" => "org.tug.mactex.ghostscript10.00-libgs",
           "choiceAttribute"  => "selected",
           "attributeSetting" => 0,
         },
@@ -54,9 +54,9 @@ cask "mactex" do
       ]
 
   uninstall pkgutil: [
-    "org.tug.mactex.gui#{version.major}",
-    "org.tug.mactex.texlive#{version.major}",
-  ],
+              "org.tug.mactex.gui#{version.major}",
+              "org.tug.mactex.texlive#{version.major}",
+            ],
             delete:  [
               "/usr/local/texlive/#{version.major}",
               "/Applications/TeX",
@@ -66,32 +66,34 @@ cask "mactex" do
             ]
 
   zap trash: [
-    "/usr/local/texlive/texmf-local",
-    # TexShop:
-    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/texshop.sfl*",
-    "~/Library/Application Support/TeXShop",
-    "~/Library/Caches/com.apple.helpd/Generated/TeXShop Help*",
-    "~/Library/Caches/TeXShop",
-    "~/Library/Preferences/TeXShop.plist",
-    "~/Library/TeXShop",
-    # BibDesk:
-    "~/Library/Application Support/BibDesk",
-    "~/Library/Caches/com.apple.helpd/Generated/edu.ucsd.cs.mmccrack.bibdesk.help*",
-    "~/Library/Caches/edu.ucsd.cs.mmccrack.bibdesk",
-    "~/Library/Cookies/edu.ucsd.cs.mmccrack.bibdesk.binarycookies",
-    "~/Library/Preferences/edu.ucsd.cs.mmccrack.bibdesk.plist",
-    # LaTeXiT:
-    "~/Library/Caches/fr.chachatelier.pierre.LaTeXiT",
-    "~/Library/Cookies/fr.chachatelier.pierre.LaTeXiT.binarycookies",
-    "~/Library/Preferences/fr.chachatelier.pierre.LaTeXiT.plist",
-    # TeX Live Utility:
-    "~/Library/Application Support/TeX Live Utility",
-    "~/Library/Caches/com.apple.helpd/Generated/TeX Live Utility Help*",
-  ],
+        "/usr/local/texlive/texmf-local",
+        # TexShop:
+        "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/texshop.sfl*",
+        "~/Library/Application Support/TeXShop",
+        "~/Library/Caches/com.apple.helpd/Generated/TeXShop Help*",
+        "~/Library/Caches/TeXShop",
+        "~/Library/Preferences/TeXShop.plist",
+        "~/Library/TeXShop",
+        # BibDesk:
+        "~/Library/Application Support/BibDesk",
+        "~/Library/Caches/com.apple.helpd/Generated/edu.ucsd.cs.mmccrack.bibdesk.help*",
+        "~/Library/Caches/edu.ucsd.cs.mmccrack.bibdesk",
+        "~/Library/Cookies/edu.ucsd.cs.mmccrack.bibdesk.binarycookies",
+        "~/Library/Preferences/edu.ucsd.cs.mmccrack.bibdesk.plist",
+        # LaTeXiT:
+        "~/Library/Caches/fr.chachatelier.pierre.LaTeXiT",
+        "~/Library/Cookies/fr.chachatelier.pierre.LaTeXiT.binarycookies",
+        "~/Library/Preferences/fr.chachatelier.pierre.LaTeXiT.plist",
+        # TeX Live Utility:
+        "~/Library/Application Support/TeX Live Utility",
+        "~/Library/Caches/com.apple.helpd/Generated/TeX Live Utility Help*",
+      ],
       rmdir: "/usr/local/texlive"
 
   caveats <<~EOS
-    You must restart your terminal window for the installation of MacTex CLI tools to take effect.
+    You must restart your terminal window for the installation of MacTeX CLI
+    tools to take effect.
+
     Alternatively, Bash and Zsh users can run the command:
 
       eval "$(/usr/libexec/path_helper)"

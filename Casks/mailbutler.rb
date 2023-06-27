@@ -1,14 +1,14 @@
 cask "mailbutler" do
-  version "4610,2029752"
-  sha256 "a8bf6824a400727c8e291ee1175c49e504e522bc8046e5bfbf03cc59dfb24aeb"
+  version "6527,2884828"
+  sha256 "b6fe646d32f853e51918e838dedae7036b0521e4eb95e008f9a94d1c2e01a9ed"
 
-  url "https://downloads.mailbutler.io/sparkle/public/Mailbutler_#{version.before_comma}-#{version.after_comma}.zip"
+  url "https://downloads.mailbutler.io/sparkle/public/Mailbutler_#{version.csv.first}-#{version.csv.second}.zip"
   name "Mailbutler"
   desc "Personal assistant and productivity tool for Apple Mail"
   homepage "https://www.mailbutler.io/"
 
   livecheck do
-    url "https://www.mailbutler.io/appcast2.php"
+    url "https://downloads.mailbutler.io/sparkle/public/appcast.xml"
     strategy :sparkle
   end
 

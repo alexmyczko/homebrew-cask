@@ -1,6 +1,6 @@
 cask "usbimager" do
-  version "1.0.8"
-  sha256 "4e1d67cb1a8971b88396e9bf4ca4814415e5c9bb21d791ef1deef75c4240ecf1"
+  version "1.0.9"
+  sha256 "766e81df347975da3c0e0424adc979a3e0398fc708c8bf1b9378f9f0baca1a9f"
 
   url "https://gitlab.com/bztsrc/usbimager/raw/binaries/usbimager_#{version}-intel-macosx-cocoa.zip",
       verified: "gitlab.com/bztsrc/usbimager/"
@@ -9,7 +9,8 @@ cask "usbimager" do
   homepage "https://bztsrc.gitlab.io/usbimager/"
 
   livecheck do
-    url "https://gitlab.com/bztsrc/usbimager.git"
+    url :homepage
+    regex(%r{/usbimager[._-]v?(\d+(?:\.\d+)+)[._-][^"' >]*?macosx?[^"' >]*?\.zip}i)
   end
 
   app "USBImager.app"

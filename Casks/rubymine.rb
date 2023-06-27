@@ -1,23 +1,19 @@
 cask "rubymine" do
-  arch = Hardware::CPU.intel? ? "" : "-aarch64"
+  arch arm: "-aarch64"
 
-  version "2021.3,213.5744.254"
+  version "2023.1.3,231.9161.40"
+  sha256 arm:   "f367b80a7bfe5ceffee0af865a9722de195823b1049df3afc2301fc6ede66878",
+         intel: "b6a92e6451d12c618c5489e554d06e24a0967edb6ebf194cf244b9e1f23d4ca5"
 
-  url "https://download.jetbrains.com/ruby/RubyMine-#{version.before_comma}#{arch}.dmg"
-  if Hardware::CPU.intel?
-    sha256 "c3673db74ac4ce16b51ca3c1f0612e4d9b5f040a4b34855bf5cf2ae11f3bec43"
-  else
-    sha256 "75d29df3bf11305657a52984c8637c7bb9259dd78e11de67ba9a86e9584e57bf"
-  end
-
+  url "https://download.jetbrains.com/ruby/RubyMine-#{version.csv.first}#{arch}.dmg"
   name "RubyMine"
   desc "Ruby on Rails IDE"
   homepage "https://www.jetbrains.com/ruby/"
 
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=RM&latest=true&type=release"
-    strategy :page_match do |page|
-      JSON.parse(page)["RM"].map do |release|
+    strategy :json do |json|
+      json["RM"].map do |release|
         "#{release["version"]},#{release["build"]}"
       end
     end
@@ -30,7 +26,7 @@ cask "rubymine" do
 
   uninstall_postflight do
     ENV["PATH"].split(File::PATH_SEPARATOR).map { |path| File.join(path, "mine") }.each do |path|
-      if File.exist?(path) &&
+      if File.readable?(path) &&
          File.readlines(path).grep(/# see com.intellij.idea.SocketLock for the server side of this interface/).any?
         File.delete(path)
       end

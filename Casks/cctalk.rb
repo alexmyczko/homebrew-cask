@@ -1,19 +1,27 @@
 cask "cctalk" do
-  version "7.9.0.3"
-  sha256 "37b59274ec2db2fd9e45ca113982691529452813acc0ced3e5f30b95249b1f05"
+  version "7.10.9-1352"
+  sha256 :no_check
 
-  url "https://cc.hjfile.cn/cc/#{version}/8/1/103/#{version}.dmg",
-      verified: "cc.hjfile.cn/"
+  url "https://www.cctalk.com/webapi/basic/v1.1/version/down?apptype=1&terminalType=8&versionType=103"
   name "CCtalk"
   desc "Real-time interactive education platform"
   homepage "https://www.cctalk.com/download/"
 
   livecheck do
-    url "https://www.cctalk.com/webapi/basic/v1.1/version/down?apptype=1&terminalType=8&versionType=103"
+    url :url
+    regex(/(\d+(?:\.\d+)+-*\d*)\.dmg/i)
     strategy :header_match
   end
 
   depends_on macos: ">= :el_capitan"
 
   app "CCtalk.app"
+
+  zap trash: [
+    "~/Library/Application Support/CCtalk",
+    "~/Library/Application Support/com.hujiang.mac.cctalk",
+    "~/Library/Caches/com.crashlytics.data/com.hujiang.mac.cctalk",
+    "~/Library/HTTPStorages/com.hujiang.mac.cctalk",
+    "~/Library/Preferences/com.hujiang.mac.cctalk.plist",
+  ]
 end

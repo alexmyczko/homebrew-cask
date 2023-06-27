@@ -1,11 +1,17 @@
 cask "lantern" do
-  version :latest
+  version "7.4.9"
   sha256 :no_check
 
-  url "https://raw.githubusercontent.com/getlantern/lantern-binaries/master/lantern-installer.dmg",
-      verified: "raw.githubusercontent.com/getlantern/lantern-binaries/"
+  url "https://s3.amazonaws.com/lantern/lantern-installer.dmg",
+      verified: "s3.amazonaws.com/lantern/"
   name "Lantern"
-  homepage "https://getlantern.org/"
+  desc "Open Internet For All"
+  homepage "https://lantern.io/"
+
+  livecheck do
+    url "https://github.com/getlantern/lantern/releases"
+    strategy :github_latest
+  end
 
   app "Lantern.app"
 

@@ -1,23 +1,33 @@
 cask "natron" do
-  version "2.4.1"
+  version "2.5.0"
 
-  if MacOS.version <= :mojave
-    sha256 "88fcb9f9659e35e267a6f11f79b7bd94b05471a2b82c639d5d7ea4871c9a0661"
-    url "https://github.com/NatronGitHub/Natron/releases/download/vsha/Natron-#{version}-OSX109-x86_64.dmg",
+  on_mojave :or_older do
+    sha256 "4bf8ce890fe51446c01fc8480e8159cd559cfaac2445eae1699ae1718121fa7a"
+
+    url "https://github.com/NatronGitHub/Natron/releases/download/v#{version}/Natron-#{version}-OSX109-x86_64.dmg",
         verified: "github.com/NatronGitHub/Natron/"
-  elsif MacOS.version <= :catalina
-    sha256 "fa4fbcd079c229956b6cf0abfd8bbd684f93de1370c6c72eb095fb817cc3531f"
+  end
+  on_catalina do
+    sha256 "1c97a1f373c3adcdbb933f20b02d0ebd4d7737d44e5344a372bd7b9e5211860e"
+
     url "https://github.com/NatronGitHub/Natron/releases/download/v#{version}/Natron-#{version}-macOS1015-x86_64.dmg",
         verified: "github.com/NatronGitHub/Natron/"
-  else
-    sha256 "c7434206bb81700bf62644d9d0e3c46f576dc002a125923afee751eddcfc8406"
-    url "https://github.com/NatronGitHub/Natron/releases/download/v#{version}/Natron-#{version}-macOS11-x86_64.dmg",
+  end
+  on_big_sur :or_newer do
+    sha256 "aa31fb6963344c281b53ca6e93823885e09f7d115ed5cc311abb833de4647537"
+
+    url "https://github.com/NatronGitHub/Natron/releases/download/v#{version}/Natron-#{version}-macOS12-x86_64.dmg",
         verified: "github.com/NatronGitHub/Natron/"
   end
 
   name "Natron"
   desc "Open-source node-graph based video compositing software"
   homepage "https://NatronGitHub.github.io/"
+
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
 
   app "Natron.app"
 end

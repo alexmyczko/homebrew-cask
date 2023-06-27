@@ -1,22 +1,24 @@
 cask "gifox" do
-  version "2.3.0,020300.01"
-  sha256 "0fcaf18d57a7912de08e9c6b19a0a873375ccf1e8f5bbac00bb430f071489e90"
+  version "2.6.1,020601.00"
+  sha256 "9adbcfed147a7fc904e0a7e00556dfdc47f8ed5e808e5403ff068e977a03ab64"
 
-  url "https://d3si16icyi9iar.cloudfront.net/gifox/#{version.after_comma}.dmg",
-      verified: "d3si16icyi9iar.cloudfront.net/gifox/"
+  url "https://d1fqctmfkpkkcg.cloudfront.net/gifox/#{version.csv.second}.dmg",
+      verified: "d1fqctmfkpkkcg.cloudfront.net/gifox/"
   name "gifox"
-  desc "App to record the screen"
+  desc "GIF recording and sharing"
   homepage "https://gifox.io/"
 
   livecheck do
     url "https://gifox.io/download/latest"
-    strategy :header_match do |headers|
-      match = headers["location"].match(%r{/(\d(\d)\d(\d)\d(\d).\d\d)\.dmg}i)
-      next if match.blank?
-
-      "#{match[2]}.#{match[3]}.#{match[4]},#{match[1]}"
+    regex(%r{/(\d(\d)\d(\d)\d(\d).\d\d)\.dmg}i)
+    strategy :header_match do |headers, regex|
+      headers["location"].scan(regex).map do |match|
+        "#{match[1]}.#{match[2]}.#{match[3]},#{match[0]}"
+      end
     end
   end
+
+  depends_on macos: ">= :high_sierra"
 
   app "Gifox.app"
 

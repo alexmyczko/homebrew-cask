@@ -1,6 +1,6 @@
 cask "revolver-office" do
-  version "8.12.3"
-  sha256 "fae87bb58908319bf0bb7da62fc30bed67195ac30e691e7de55a6a17e0dbc8d0"
+  version "8.12.6"
+  sha256 "3119d61f749d20b390dccd6189a81754369c8f4dab6906e9d357863d09a5cb3c"
 
   url "https://download.revolver.info/r#{version.major}/#{version.minor}/#{version.patch}/mac/revolveroffice#{version.no_dots}.dmg"
   name "Revolver Office"

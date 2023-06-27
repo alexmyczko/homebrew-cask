@@ -1,13 +1,9 @@
 cask "clash-for-windows" do
-  arch = Hardware::CPU.intel? ? "" : "-arm64"
+  arch arm: "-arm64"
 
-  version "0.19.0"
-
-  if Hardware::CPU.intel?
-    sha256 "c79c8b3beee96d970dc8bd1b7816e2da9828203cdff589997ba8d9387fa814f5"
-  else
-    sha256 "2181a6db75ca8d367ea5c5b2bc9407feab77c0e75ab512f0bec275fcc8083c7c"
-  end
+  version "0.20.27"
+  sha256 arm:   "f3ecf1d27508b439346a1abacc900ec490c78a7fda30477f216429beba45234f",
+         intel: "2187a6042d35bbd61c57a4b6c10eacd90a129ce53f82fc98c72e9f9bb00e3f71"
 
   url "https://github.com/Fndroid/clash_for_windows_pkg/releases/download/#{version}/Clash.for.Windows-#{version}#{arch}.dmg"
   name "Clash for Windows"
@@ -19,5 +15,13 @@ cask "clash-for-windows" do
     strategy :github_latest
   end
 
+  auto_updates true
+
   app "Clash for Windows.app"
+
+  zap trash: [
+    "~/Library/Application Support/clash_win",
+    "~/Library/Logs/clash_win",
+    "~/Library/Preferences/com.lbyczf.clashwin.plist",
+  ]
 end

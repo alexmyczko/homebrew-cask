@@ -1,16 +1,16 @@
 cask "intune-company-portal" do
-  version "2.12.210101"
-  sha256 "9b327c4b47129b4bb25e0de4ca16387187e8d7f134f2ff4c58c197f7c26b4abc"
+  version "5.2305.0"
+  sha256 :no_check
 
-  url "https://officecdn.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/CompanyPortal_#{version}-Installer.pkg"
+  url "https://officecdn.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/CompanyPortal-Installer.pkg"
   name "Company Portal"
   desc "App to manage access to corporate apps, data, and resources"
   homepage "https://docs.microsoft.com/en-us/mem/intune/user-help/enroll-your-device-in-intune-macos-cp"
 
   livecheck do
-    url "https://go.microsoft.com/fwlink/?linkid=853070"
-    strategy :header_match do |headers|
-      headers["location"][%r{/CompanyPortal_(\d+(?:\.\d+)*)-Installer\.pkg}i, 1]
+    url :url
+    strategy :extract_plist do |items|
+      items["com.microsoft.CompanyPortalMac"].short_version
     end
   end
 
@@ -18,7 +18,7 @@ cask "intune-company-portal" do
   depends_on cask: "microsoft-auto-update"
   depends_on macos: ">= :mojave"
 
-  pkg "CompanyPortal_#{version}-Installer.pkg",
+  pkg "CompanyPortal-Installer.pkg",
       choices: [
         {
           "choiceIdentifier" => "com.microsoft.package.Microsoft_AutoUpdate.app", # Office16_autoupdate_updater.pkg
@@ -27,11 +27,26 @@ cask "intune-company-portal" do
         },
       ]
 
-  uninstall pkgutil: [
-    "com.microsoft.CompanyPortalMac",
-    "com.microsoft.CompanyPortal",
-  ],
-            delete:  [
-              "/Applications/Company Portal.app",
-            ]
+  uninstall quit:    "com.microsoft.autoupdate2",
+            pkgutil: [
+              "com.microsoft.CompanyPortalMac",
+              "com.microsoft.CompanyPortal",
+            ],
+            delete:  "/Applications/Company Portal.app"
+
+  zap trash: [
+    "~/Library/Application Scripts/com.microsoft.CompanyPortalMac.ssoextension/",
+    "~/Library/Application Support/com.microsoft.CompanyPortalMac/",
+    "~/Library/Caches/com.microsoft.CompanyPortalMac",
+    "~/Library/Caches/com.plausiblelabs.crashreporter.data/com.microsoft.CompanyPortalMac/",
+    "~/Library/Caches/CompanyPortalCache",
+    "~/Library/Containers/com.microsoft.CompanyPortalMac.ssoextension/",
+    "~/Library/HTTPStorages/com.microsoft.CompanyPortalMac.binarycookies",
+    "~/Library/HTTPStorages/com.microsoft.CompanyPortalMac/",
+    "~/Library/Logs/Company Portal/*",
+    "~/Library/Preferences/com.microsoft.CompanyPortalMac.plist",
+    "~/Library/Preferences/group.com.microsoft.CompanyPortalMac.plist",
+    "~/Library/Saved Application State/com.microsoft.CompanyPortalMac.savedState/",
+    "~/Library/WebKit/com.microsoft.CompanyPortalMac/",
+  ]
 end

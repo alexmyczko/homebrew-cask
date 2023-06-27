@@ -1,17 +1,13 @@
 cask "kui" do
-  arch = Hardware::CPU.intel? ? "x64" : "arm64"
+  arch arm: "arm64", intel: "x64"
 
-  version "10.8.2"
+  version "13.1.4"
+  sha256 arm:   "ba707efd53ad1ff9f61bf9c28b0bff02684b2d8950790ab2292aeceeab8df389",
+         intel: "2bd61658192a1a513a6a5c2ba0c45df95bafb07790f8d7fce63df8f98eea24c1"
 
   url "https://github.com/kubernetes-sigs/kui/releases/download/v#{version}/Kui-darwin-#{arch}.tar.bz2"
-  if Hardware::CPU.intel?
-    sha256 "4d2fe54d3cc167ca93f9c1586c59ef53e2d8943dab1e4ea09522591b65871bfb"
-  else
-    sha256 "807e6a17b808cb9a0ae6edda28ce2e12d9da3e9c2c98e53ffb2e7d660aa9c2ad"
-  end
-
   name "Kui"
-  desc "Hybrid command-line/UI development experience for cloud-native development"
+  desc "CLI graphics framework"
   homepage "https://github.com/kubernetes-sigs/kui"
 
   livecheck do

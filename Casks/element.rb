@@ -1,15 +1,14 @@
 cask "element" do
-  version "1.9.5"
-  sha256 "611130e5d4d698b15abb4247a4f8df34d3c0c0907f3ce17f7f92f3e780d0ea6a"
+  version "1.11.34"
+  sha256 :no_check
 
-  url "https://packages.riot.im/desktop/install/macos/Element-#{version}-universal.dmg",
-      verified: "packages.riot.im/desktop/"
+  url "https://packages.element.io/desktop/install/macos/Element.dmg"
   name "Element"
   desc "Matrix collaboration client"
   homepage "https://element.io/get-started"
 
   livecheck do
-    url "https://github.com/vector-im/riot-desktop"
+    url "https://github.com/vector-im/element-desktop"
     strategy :github_latest
   end
 

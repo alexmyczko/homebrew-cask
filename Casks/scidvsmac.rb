@@ -1,17 +1,22 @@
 cask "scidvsmac" do
-  version "4.22"
-  sha256 "31b12bd5598262d9f00c87020c24635506f55ad126c7de7e23736d8476672eee"
+  version "4.24"
+  sha256 "9ef2941b782208af05cdb286c08324013936991387da6e8673e74edfefac25aa"
 
-  url "https://downloads.sourceforge.net/scidvspc/ScidvsMac-#{version}.dmg"
+  url "https://downloads.sourceforge.net/scidvspc/ScidvsMac-#{version}.x64.dmg"
   name "Scid vs. Mac"
   desc "Chess toolkit"
-  homepage "http://scidvspc.sourceforge.net/"
+  homepage "https://scidvspc.sourceforge.net/"
 
   livecheck do
     url :homepage
-    strategy :page_match
-    regex(/ScidvsMac-(\d+(?:\.\d+)*)\.dmg/i)
+    regex(/ScidvsMac-(\d+(?:\.\d+)*)\.x64\.dmg/i)
   end
 
   app "ScidvsMac.app"
+
+  zap trash: [
+    "~/.scidvspc",
+    "~/Library/Preferences/net.sf.scid.plist",
+    "~/Library/Saved Application State/net.sf.scid.savedState",
+  ]
 end

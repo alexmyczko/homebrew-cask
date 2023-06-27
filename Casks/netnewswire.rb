@@ -1,6 +1,6 @@
 cask "netnewswire" do
-  version "6.0.3"
-  sha256 "d1eaf3776dcc75ad260cfa14bd5b8f6cb3b572c84ac01b545fe6ccf1a609777c"
+  version "6.1.3"
+  sha256 "e90b17dc0d35b6774f8b885635e78d21a3e9eb61807aef9b1201040cb055cd5b"
 
   url "https://github.com/Ranchero-Software/NetNewsWire/releases/download/mac-#{version}/NetNewsWire#{version}.zip",
       verified: "github.com/Ranchero-Software/NetNewsWire/"
@@ -10,8 +10,7 @@ cask "netnewswire" do
 
   livecheck do
     url :url
-    strategy :git
-    regex(/^mac-(\d+(?:\.\d+)*)$/i)
+    regex(/^mac[._-]v?(\d+(?:\.\d+)+)$/i)
   end
 
   auto_updates true

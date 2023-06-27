@@ -1,8 +1,11 @@
 cask "hey" do
-  version "1.2.2"
-  sha256 "0c0553576874e6d72c81890066f9631c3be9a191328f46fd9843bbea5beefa95"
+  arch arm: "-arm64"
 
-  url "https://hey-desktop.s3.amazonaws.com/HEY-#{version}.dmg",
+  version "1.2.12"
+  sha256 arm:   "2602ce36f5e23b25795d0a5e352039d1b3e4490c8e37f82c682e80aa15c0727a",
+         intel: "4ba9e4b883f985d226978d6dc54aa5c2651609a0ebebabca6004a578796aa6e6"
+
+  url "https://hey-desktop.s3.amazonaws.com/HEY-#{version}#{arch}-mac.zip",
       verified: "hey-desktop.s3.amazonaws.com/"
   name "HEY"
   desc "Access the HEY email service"

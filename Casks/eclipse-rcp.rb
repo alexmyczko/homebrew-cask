@@ -1,8 +1,11 @@
 cask "eclipse-rcp" do
-  version "4.21.0,2021-09"
-  sha256 "c0bd9807a84114f1cf472b7bbc4432526b495a228850c17755f82a07dec667d2"
+  arch arm: "aarch64", intel: "x86_64"
 
-  url "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/#{version.csv.second}/R/eclipse-rcp-#{version.csv.second}-R-macosx-cocoa-x86_64.dmg&r=1"
+  version "4.28.0,2023-06"
+  sha256 arm:   "a55f238145d64f94f20bcbc01655ba7de3f05499f942d49615ac0fec07342972",
+         intel: "6fed38d8ff4ea14875063034eb86d20397519f2012e9f0f729162ee25ed299c8"
+
+  url "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/#{version.csv.second}/R/eclipse-rcp-#{version.csv.second}-R-macosx-cocoa-#{arch}.dmg&r=1"
   name "Eclipse for RCP and RAP Developers"
   desc "Eclipse IDE for RCP and RAP developers"
   homepage "https://eclipse.org/"
@@ -13,4 +16,10 @@ cask "eclipse-rcp" do
 
   # Renamed to avoid conflict with other Eclipse.
   app "Eclipse.app", target: "Eclipse RCP.app"
+
+  zap trash: [
+    "~/.eclipse",
+    "~/eclipse-workspace",
+    "~/Library/Preferences/epp.package.rcp.plist",
+  ]
 end

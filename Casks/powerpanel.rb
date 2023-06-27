@@ -1,6 +1,6 @@
 cask "powerpanel" do
-  version "2.3.0"
-  sha256 "5500b9ff1528c72ef2dacf0c03558b9cf3cbb68a5cc0bc0657c51bf49566b847"
+  version "2.4.8"
+  sha256 "b3517556c2fb9b6dfc0b912ec60b10f12ce54d7075f43d2d727a48d3e264f1b0"
 
   url "https://dl4jz3rbrsfum.cloudfront.net/software/ppp_macos_#{version.dots_to_underscores}.dmg",
       verified: "dl4jz3rbrsfum.cloudfront.net/"
@@ -9,12 +9,10 @@ cask "powerpanel" do
   homepage "https://www.cyberpowersystems.com/products/software/power-panel-personal/"
 
   livecheck do
-    url :homepage
-    strategy :page_match do |page|
-      match = page[%r{href=.*?/ppp_macos_(\d+(?:_\d+)*)\.dmg}i, 1]
-      next if match.blank?
-
-      match.tr("_", ".")
+    url "https://www.cyberpowersystems.com/product/software/power-panel-personal/powerpanel-personal-mac/"
+    regex(%r{href=.*?/ppp_macos[._-]v?(\d+(?:_\d+)*)\.dmg}i)
+    strategy :page_match do |page, regex|
+      page.scan(regex).map { |match| match[0].tr("_", ".").to_s }
     end
   end
 
@@ -25,4 +23,13 @@ cask "powerpanel" do
   uninstall pkgutil:   "com.cpsww.ppupsd",
             launchctl: "com.cpsww.ppupsd",
             delete:    "/Applications/CyberPower PowerPanel Personal"
+
+  zap trash:  [
+        "~/Library/Preferences/PowerPanel Personal.plist",
+        "~/Library/Saved Application State/PowerPanel Personal.savedState",
+      ],
+      delete: [
+        "/Library/LaunchAgents/com.cyberpower.powerpanel-personal.client.plist",
+        "/Library/LaunchDaemons/com.cyberpower.powerpanel-personal.daemon.plist",
+      ]
 end

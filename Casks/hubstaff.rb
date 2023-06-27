@@ -1,8 +1,8 @@
 cask "hubstaff" do
-  version "1.6.2,3675"
-  sha256 "1c0cf7f45b7474551d6347f862f4caa496d2b1cd5059dc5e37fc513117eb5aed"
+  version "1.6.14,5624"
+  sha256 "21481a5a92728aaa925efbea1b250dfbf8ae60aea48ccfb70be6b6a52dc0a353"
 
-  url "https://app.hubstaff.com/download/#{version.after_comma}-mac-os-x-#{version.before_comma.dots_to_hyphens}-release"
+  url "https://app.hubstaff.com/download/#{version.csv.second}-standard-mac-os-x-#{version.csv.first.dots_to_hyphens}-release"
   name "Hubstaff"
   desc "Work time tracker"
   homepage "https://hubstaff.com/"
@@ -10,7 +10,7 @@ cask "hubstaff" do
   livecheck do
     url "https://app.hubstaff.com/appcast.xml"
     strategy :sparkle do |item|
-      "#{item.short_version.split("-").first},#{item.url[%r{/(\d+)-mac-os-x-(?:\d(?:-\d+)*)-release}i, 1]}"
+      "#{item.short_version.split("-").first},#{item.url[%r{/(\d+)(?:-standard)?-mac.*?-release}i, 1]}"
     end
   end
 

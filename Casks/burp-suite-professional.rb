@@ -1,16 +1,19 @@
 cask "burp-suite-professional" do
-  version "2021.10.3"
-  sha256 "c96f482d59e34e424c73da3bd265366f487bdf1bae32590755880cded2c9bd9e"
+  arch arm: "MacOsArm64", intel: "MacOsx"
 
-  url "https://portswigger.net/burp/releases/download?product=pro&version=#{version}&type=MacOsx"
+  version "2023.5.4"
+  sha256 arm:   "ec73180d68675600de48730553bbe3a162494e52da41cf17c08d10dff06e4bab",
+         intel: "b452c5811d1cd66658cc5933ad3dfbd35c91c2f624fedc044fe89133b58a1d90"
+
+  url "https://portswigger.net/burp/releases/download?product=pro&version=#{version}&type=#{arch}"
   name "Burp Suite Professional"
   desc "Web security testing toolkit"
   homepage "https://portswigger.net/burp/pro"
 
   livecheck do
     url "https://portswigger.net/burp/releases/data"
-    strategy :page_match do |page|
-      all_versions = JSON.parse(page)["ResultSet"]["Results"]
+    strategy :json do |json|
+      all_versions = json["ResultSet"]["Results"]
       next if all_versions.blank?
 
       all_versions.map do |item|
@@ -18,24 +21,13 @@ cask "burp-suite-professional" do
               item["releaseChannels"].include?("Stable") &&
               item["categories"].include?("Professional") &&
               item["builds"].any? do |build|
-                build["ProductPlatform"] == "MacOsx"
+                build["ProductPlatform"] == arch.to_s
               end
       end.compact
     end
   end
 
-  installer script: {
-    executable: "Burp Suite Professional Installer.app/Contents/MacOS/JavaApplicationStub",
-    args:       ["-q"],
-    sudo:       true,
-  }
-
-  postflight do
-    set_ownership "/Applications/Burp Suite Professional.app"
-    set_permissions "/Applications/Burp Suite Professional.app", "a+rX"
-  end
-
-  uninstall delete: "/Applications/Burp Suite Professional.app"
+  app "Burp Suite Professional.app"
 
   zap trash: "~/.BurpSuite"
 end

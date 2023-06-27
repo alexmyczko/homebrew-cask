@@ -1,18 +1,18 @@
 cask "calendar-366" do
-  version "2.11,3403"
-  sha256 "2eebb27ae48d3b386bddb93db659980c15786b181f089a5421a0213dd18beb47"
+  version "2.14.4"
+  sha256 "df47c6d6aa8def2ff8ea8d52dcb2eee78a7f5d2edc86d37ee2af0fac4c418e89"
 
-  url "https://nspektor.com/downloads/Calendar366_v#{version.before_comma}.dmg"
+  url "https://nspektor.com/downloads/Calendar366_v#{version}.dmg"
   name "Calendar 366 II"
   desc "Menu bar calendar for events and reminders"
   homepage "https://nspektor.com/calendar366/mac"
 
   livecheck do
     url "https://nspektor.com/downloads/Calendar366IIAsset.xml"
-    strategy :sparkle
+    strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :sierra"
+  depends_on macos: ">= :mojave"
 
   app "Calendar 366 II.app"
 

@@ -1,13 +1,9 @@
 cask "clickup" do
-  arch = Hardware::CPU.intel? ? "x64" : "arm64"
+  arch arm: "arm64", intel: "x64"
 
-  version "3.0.3"
-
-  if Hardware::CPU.intel?
-    sha256 "27cf93a049e7fbf5689c39f2a6dd7dd8a3d428b907af142c1702653597773082"
-  else
-    sha256 "32829cb826bb440c9f563cbcf6934747f358fd6679a7c8032c6b6bada014f1d7"
-  end
+  version "3.3.20"
+  sha256 arm:   "b6809b027b620dff7f41cfda1f9b9c73aea6662f51871511cab71c5f1ebf9b28",
+         intel: "ad3e53184d913e9143d3f2a5afd3ed09ab30887c0a76049ec1e40ef168088ff3"
 
   url "https://download.todesktop.com/210531zdwwjv8ke/ClickUp%20#{version}-#{arch}.dmg",
       verified: "download.todesktop.com/210531zdwwjv8ke/"

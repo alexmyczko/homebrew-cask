@@ -1,6 +1,6 @@
 cask "geotag" do
-  version "4.9"
-  sha256 "ad90415ca66aeea9029e00eeb829ad9706365bbd44340d3467f40d71e5c1d4b4"
+  version "5.1"
+  sha256 "c4dcfd65c50d06ef70001fccdf0ea20ce588c82065f98d9cf6d163e2c98426d8"
 
   url "https://www.snafu.org/GeoTag/GeoTag-#{version}.dmg"
   name "GeoTag"
@@ -8,8 +8,8 @@ cask "geotag" do
   homepage "https://www.snafu.org/GeoTag/"
 
   livecheck do
-    url "https://github.com/marchyman/GeoTag"
-    strategy :git
+    url :homepage
+    regex(/href=.*?GeoTag[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
   end
 
   depends_on macos: ">= :sierra"

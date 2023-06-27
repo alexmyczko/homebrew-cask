@@ -1,17 +1,23 @@
 cask "qq" do
-  version "6.7.5.20299"
-  sha256 "39086ce6bf7f57ed657e468ad165f89945606239f558cbf026806c6271e50e53"
+  version "6.9.17-12118,7547c696"
+  sha256 "8fc0e92adebe546a6332673df9adbdfd54920cd6ab8cbd83a1b6eb229f3d6ab8"
 
-  url "https://dldir1.qq.com/qqfile/QQforMac/QQ_#{version}.dmg"
+  url "https://dldir1.qq.com/qqfile/qq/QQNT/#{version.csv.second}/QQ_v#{version.csv.first}.dmg"
   name "QQ"
   desc "Instant messaging tool"
-  homepage "https://im.qq.com/macqq/"
+  homepage "https://im.qq.com/macqq/index.shtml"
 
   livecheck do
-    url "https://im.qq.com/proxy/domain/qzonestyle.gtimg.cn/qzone/qzactStatics/configSystem/data/1373/config1.js"
-    strategy :page_match
-    regex(%r{/QQforMac/QQ_(\d+(?:\.\d+)+)\.dmg}i)
+    url "https://im.qq.com/rainbow/ntQQDownload/"
+    regex(%r{QQNT/([a-z0-9]+)/QQ[._-]v?(\d+(?:\.\d+)+-\d+)\.dmg}i)
+    strategy :page_match do |page, regex|
+      page.scan(regex).map do |match|
+        "#{match[1]},#{match[0]}"
+      end
+    end
   end
+
+  auto_updates true
 
   app "QQ.app"
 

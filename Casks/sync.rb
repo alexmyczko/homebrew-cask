@@ -1,5 +1,5 @@
 cask "sync" do
-  version "2.0.18"
+  version "2.2.6"
   sha256 :no_check
 
   url "https://www.sync.com/download/apple/Sync.dmg"
@@ -9,8 +9,16 @@ cask "sync" do
 
   livecheck do
     url "https://www.sync.com/install/"
-    regex(/(\d+(?:\.\d+)*)\n.*release\s*notes/i)
+    regex(/(\d+(?:\.\d+)+)\n.*release\s*notes/i)
   end
 
   app "Sync.app"
+
+  zap trash: [
+        "~/Library/Application Scripts/com.sync.desktop",
+        "~/Library/Application Scripts/com.sync.desktop.findersync",
+        "~/Library/Group Containers/com.sync.desktop",
+        "~/Library/Preferences/com.sync.desktop.plist",
+      ],
+      rmdir: "~/Sync"
 end

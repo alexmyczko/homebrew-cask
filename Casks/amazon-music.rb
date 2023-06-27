@@ -1,8 +1,8 @@
 cask "amazon-music" do
-  version "8.8.2.2305,23051118_02624dcfac75462d853bb932c93b00fc"
-  sha256 "a2ac4cfcdb8d5d043a7e7aaf56528ba06e0d8bd698aa66fa7428ce3c70151925"
+  version "9.4.3,24200414_c3f7cf6206fd2e7b9834c0f5394db6bb"
+  sha256 "1c0a94ad7a585850463c9fc74da2a8197ff65fb036ac5b919daaefce7433827e"
 
-  url "https://d2j9xt6n9dg5d3.cloudfront.net/mac/#{version.after_comma}/Amazon+Music+Installer.dmg",
+  url "https://d2j9xt6n9dg5d3.cloudfront.net/mac/#{version.csv.second}/Amazon+Music+Installer.dmg",
       verified: "d2j9xt6n9dg5d3.cloudfront.net/mac/"
   name "Amazon Music"
   desc "Desktop client for Amazon Music"
@@ -21,9 +21,9 @@ cask "amazon-music" do
   }
 
   uninstall quit:      [
-    "com.amazon.music",
-    "com.amazon.music-renderer",
-  ],
+              "com.amazon.music",
+              "com.amazon.music-renderer",
+            ],
             delete:    "/Applications/Amazon Music.app",
             launchctl: [
               "com.amazon.music",

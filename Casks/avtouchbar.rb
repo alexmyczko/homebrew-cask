@@ -2,18 +2,16 @@ cask "avtouchbar" do
   version "3.0.7,2021.08"
   sha256 "d04c1a6685e7ce59e10bae4464b6a113aa7bf302f5b515768055aa8326ecb8e1"
 
-  url "https://www.avtouchbar.com/wp-content/uploads/#{version.after_comma.major}/#{version.after_comma.minor}/AVTouchBar-#{version.before_comma}.zip"
+  url "https://www.avtouchbar.com/wp-content/uploads/#{version.csv.second.major}/#{version.csv.second.minor}/AVTouchBar-#{version.csv.first}.zip"
   name "AVTouchBar"
   desc "Audio Visualizer for the Touch Bar"
   homepage "https://www.avtouchbar.com/"
 
   livecheck do
     url "https://www.avtouchbar.com/downloads/"
-    strategy :page_match do |page|
-      match = page.match(%r{href=.*?/uploads/(\d+)/(\d+)/AVTouchBar[._-]?(\d+(?:\.\d+)+)\.zip}i)
-      next if match.blank?
-
-      "#{match[3]},#{match[1]}.#{match[2]}"
+    regex(%r{href=.*?/uploads/(\d+)/(\d+)/AVTouchBar[._-]?(\d+(?:\.\d+)+)\.zip}i)
+    strategy :page_match do |page, regex|
+      page.scan(regex).map { |match| "#{match[2]},#{match[0]}.#{match[1]}" }
     end
   end
 

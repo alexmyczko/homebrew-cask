@@ -1,6 +1,6 @@
 cask "renpy" do
-  version "7.4.10"
-  sha256 "3b618753be5e22da6195d1d414cfaf4e639313cc46eb1ef85d5cc7a7914efd11"
+  version "8.1.1"
+  sha256 "6944ffff49b37f703c2257c23ca28cfab5d2a41944dd171f676c7385ba18b0f6"
 
   url "https://www.renpy.org/dl/#{version}/renpy-#{version}-sdk.zip"
   name "Ren'Py"
@@ -13,4 +13,9 @@ cask "renpy" do
   end
 
   suite "renpy-#{version}-sdk"
+
+  zap trash: [
+    "~/Library/RenPy",
+    "~/Library/Saved Application State/org.renpy.sdk.savedState",
+  ]
 end

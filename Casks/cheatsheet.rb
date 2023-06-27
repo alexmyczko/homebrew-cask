@@ -1,12 +1,11 @@
 cask "cheatsheet" do
-  version "1.6.1"
-  sha256 "fffada8dd3480326dd399bf8a9c0deda6c9554ca48c23507a2bd3339880c26b6"
+  version "1.6.4"
+  sha256 "0af341585bc93a6935266e280c2661642cd8496ceb37ccad4056ecf2f002ea34"
 
-  url "https://mediaatelier.com/CheatSheet/CheatSheet_#{version}.zip",
-      verified: "mediaatelier.com/CheatSheet/"
+  url "https://www.mediaatelier.com/CheatSheet/CheatSheet_#{version}.dmg"
   name "CheatSheet"
   desc "Tool to list all active shortcuts of the current application"
-  homepage "https://www.cheatsheetapp.com/CheatSheet/"
+  homepage "https://www.mediaatelier.com/CheatSheet/"
 
   livecheck do
     url "https://mediaatelier.com/CheatSheet/feed.php"

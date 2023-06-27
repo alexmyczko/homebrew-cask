@@ -1,6 +1,6 @@
 cask "bonitastudiocommunity" do
-  version "2021.2-u0"
-  sha256 "28a753a453e4085a706b23b5cf323f7bdd39d073a2974ecbd57e58e3c5d06016"
+  version "2023.1-u0"
+  sha256 "d1d62cca0adef3ce478061e1949983ccaa9ddc1974b869dd6081250e195327a9"
 
   url "https://github.com/bonitasoft/bonita-platform-releases/releases/download/#{version}/BonitaStudioCommunity-#{version}-x86_64.dmg",
       verified: "github.com/bonitasoft/bonita-platform-releases/"
@@ -10,8 +10,8 @@ cask "bonitastudiocommunity" do
 
   livecheck do
     url :url
+    regex(/(\d+(?:[.-]\d+)+(?:-\w+)?)/i)
     strategy :github_latest
-    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)+(?:[a-z\d_-]+))["' >]}i)
   end
 
   installer script: {
@@ -23,7 +23,7 @@ cask "bonitastudiocommunity" do
             delete: "/Applications/BonitaStudioCommunity-#{version}.app"
 
   zap trash: [
-    "~/Library/Preferences/org.bonitasoft.studio.product.plist",
     "/Library/Caches/org.bonitasoft.studio.product",
+    "~/Library/Preferences/org.bonitasoft.studio.product.plist",
   ]
 end

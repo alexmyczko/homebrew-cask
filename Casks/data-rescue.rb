@@ -1,16 +1,29 @@
 cask "data-rescue" do
-  version "6.0.5,6212.14.08"
-  sha256 "e5964d3ff514915de923d8c843530f318cb40c5b278cbe96dd8fefa3b67b737f"
+  version "6.0.7"
+  sha256 "45ba579f20251bbe4c7d8cd52a31da210abbb15428c4d42d6c617ac40ce3fd69"
 
-  url "https://downloads.prosofteng.com/dr/Data_Rescue_#{version.before_comma}.dmg"
+  url "https://downloads.prosofteng.com/dr/Data_Rescue_#{version}.dmg"
   name "Data Rescue #{version.major}"
   desc "Data recovery software"
   homepage "https://www.prosofteng.com/data-rescue-recovery-software/"
 
   livecheck do
     url "https://www.prosofteng.com/resources/dr#{version.major}/dr#{version.major}_updates_mac.xml"
-    strategy :sparkle
+    strategy :sparkle, &:short_version
   end
 
+  depends_on macos: ">= :sierra"
+
   app "Data Rescue.app"
+
+  uninstall quit:   "com.prosofteng.DataRescue",
+            delete: "/Library/Application Support/Data Rescue"
+
+  zap trash: [
+    "~/Library/Application Support/Data Rescue",
+    "~/Library/HTTPStorages/com.prosofteng.DataRescue",
+    "~/Library/Preferences/com.prosofteng.Data Rescue.plist",
+    "~/Library/Preferences/com.prosofteng.DataRescue.plist",
+    "~/Library/Saved Application State/com.prosofteng.DataRescue.savedState",
+  ]
 end

@@ -1,22 +1,24 @@
 cask "blender-benchmark" do
-  version "2.0.4"
-  sha256 "5197bf7d262bda630ea2c01bf0d097c2f7f1533f1affe33d0ceac383d3c30b2e"
+  version "3.1.0,2.0"
+  sha256 "b7a77c636ac4bbb32bc5469fe8ae1429bb13a7af9cb6690094c38271de30b3bc"
 
-  url "https://opendata.blender.org/cdn/BlenderBenchmark#{version.major_minor}/launcher/benchmark-launcher-#{version}-macos.dmg"
+  url "https://opendata.blender.org/cdn/BlenderBenchmark#{version.csv.second}/launcher/benchmark-launcher-#{version.csv.first}-macos.dmg"
   name "Blender Open Data Benchmark"
   desc "3D performance benchmarking tool"
   homepage "https://opendata.blender.org/"
 
   livecheck do
-    url "https://opendata.blender.org/cdn/BlenderBenchmark#{version.major_minor}/launcher/"
-    strategy :page_match
-    regex(/href=.*benchmark[._-]launcher[._-](\d+(?:\.\d+)+)[._-]macos\.dmg/i)
+    url :homepage
+    regex(%r{["'][^"']+?Benchmark(\d+(?:\.\d+)+)/[^"']*?benchmark[._-]launcher[._-](\d+(?:\.\d+)+)[._-]macos\.dmg}i)
+    strategy :page_match do |page, regex|
+      page.scan(regex).map { |match| "#{match[1]},#{match[0]}" }
+    end
   end
 
   app "Blender Benchmark Launcher.app"
 
   zap trash: [
     "~/Library/Caches/blender-benchmark-launcher",
-    "~/Library/Saved Appication State/org.blenderfoundation.benchmark.release.savedState",
+    "~/Library/Saved Application State/org.blenderfoundation.benchmark.release.savedState",
   ]
 end

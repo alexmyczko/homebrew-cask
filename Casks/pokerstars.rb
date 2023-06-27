@@ -1,8 +1,8 @@
 cask "pokerstars" do
-  version "44.837"
+  version "60.737"
   sha256 :no_check
 
-  url "https://download.pokerstars.net/client/download/"
+  url "https://download.pokerstars.net/PokerStars.net.app.zip"
   name "PokerStars"
   desc "Free-to-play online poker"
   homepage "https://www.pokerstars.net/"
@@ -17,9 +17,9 @@ cask "pokerstars" do
   app "PokerStars.net.app"
 
   uninstall quit:   [
-    "com.pokerstars.PokerStars.net",
-    "com.pokerstars.PokerStarsBrowse",
-  ],
+              "com.pokerstars.PokerStars.net",
+              "com.pokerstars.PokerStarsBrowse",
+            ],
             delete: "#{appdir}/PokerStars.net.app"
 
   zap trash: [

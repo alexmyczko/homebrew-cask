@@ -1,6 +1,6 @@
 cask "splashtop-streamer" do
-  version "3.4.8.0"
-  sha256 "6661374e71629f9cf8f6b577b9cb4fc197ee7c3af77fee70672557545a5543ce"
+  version "3.5.8.1"
+  sha256 "6bd0996c9fed834bf81d555753445a9ef13def8b4f37293a301afcc957b7f0e0"
 
   url "https://d17kmd0va0f0mp.cloudfront.net/mac/Splashtop_Streamer_Mac_INSTALLER_v#{version}.dmg",
       verified: "d17kmd0va0f0mp.cloudfront.net/"
@@ -9,8 +9,8 @@ cask "splashtop-streamer" do
   homepage "https://www.splashtop.com/downloads"
 
   livecheck do
-    url "https://www.splashtop.com/wp-content/themes/responsive/downloadx.php?platform=mac"
-    regex(/v(\d+(?:\.\d+)+)\.dmg/i)
+    url "https://redirect.splashtop.com/srs/mac"
+    strategy :header_match
   end
 
   auto_updates true
@@ -25,4 +25,9 @@ cask "splashtop-streamer" do
               "com.splashtop.streamer-srioframebuffer",
             ],
             pkgutil:   "com.splashtop.Splashtop-Streamer"
+
+  zap trash: [
+    "Library/Application Support/Splashtop Streamer",
+    "Library/Preferences/com.splashtop.Splashtop-Streamer.plist",
+  ]
 end

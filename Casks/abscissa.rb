@@ -1,6 +1,6 @@
 cask "abscissa" do
-  version "4.0.5"
-  sha256 "27ba34c800000871f3b4ce24feb92c85c9e11fa0a7799d4b1a76bb9a4fddfdc5"
+  version "4.1.1"
+  sha256 "2a43ba146b1c2e6ffec3e056d3a850296b42c0f309c22b33c2bef3e4678b4288"
 
   url "http://rbruehl.macbay.de/Abscissa/Downloads/Abscissa-#{version}.zip"
   name "Abscissa"
@@ -9,9 +9,10 @@ cask "abscissa" do
 
   livecheck do
     url "http://rbruehl.macbay.de/Abscissa/Downloads/"
-    strategy :page_match
     regex(/href=.*?Abscissa-(\d+(?:\.\d+)+)\.zip/i)
   end
+
+  depends_on macos: ">= :sierra"
 
   app "Abscissa.app"
 end

@@ -1,8 +1,8 @@
 cask "pretzel" do
-  version "2.9.4"
-  sha256 "3d8b59ab6790ebe87207473bbfb2180e9d7ed4e712e17dbf92c3041fbf32b906"
+  version "2.12.5"
+  sha256 "af086a4be02da8600366a8f330f822bc7c9231dbd89d882e75fa3025d90e3bcf"
 
-  url "https://download.pretzel.rocks/Pretzel-#{version}-mac.zip"
+  url "https://download.pretzel.rocks/Pretzel-#{version}-universal-mac.zip"
   name "Pretzel"
   desc "DMCA-safe music for creators"
   homepage "https://www.pretzel.rocks/"

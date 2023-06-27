@@ -1,25 +1,34 @@
 cask "bettertouchtool" do
-  version "3.626,1778"
-  sha256 "e9dbdba5acaae4cbe3df8f8ba24ffd6d1f813bc53f6b7cd59330c632e758e3b4"
+  version "4.119,2334"
+  sha256 "acc0dc6628da5103bfff846485b29f550b052d9802c0d359ceb275ff21bbc4dd"
 
-  url "https://folivora.ai/releases/btt#{version.before_comma}-#{version.after_comma}.zip"
+  url "https://folivora.ai/releases/btt#{version.csv.first}-#{version.csv.second}.zip"
   name "BetterTouchTool"
   desc "Tool to customize input devices and automate computer systems"
   homepage "https://folivora.ai/"
 
   livecheck do
     url "https://folivora.ai/releases/"
-    strategy :page_match do |page|
-      page.scan(/btt(\d+(?:[._-]\d+)*)\.zip.*?(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2})/i)
-          .max_by { |(_, time)| Time.parse(time) }
-          .first
-          .tr("-", ",")
+    regex(/btt(\d+(?:[._-]\d+)*)\.zip.*?(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2})/i)
+    strategy :page_match do |page, regex|
+      current_version, current_build = version.csv
+      version, build = page.scan(regex).max_by { |match| Time.parse(match[1]) }&.first&.split("-", 2)
+
+      # Throttle updates to every 5th release.
+      if build && current_build.to_i + 5 > build.to_i
+        version = current_version
+        build = current_build
+      end
+
+      "#{version},#{build}"
     end
   end
 
   auto_updates true
 
   app "BetterTouchTool.app"
+
+  uninstall quit: "com.hegenberg.BetterTouchTool"
 
   zap trash: [
     "~/Library/Application Support/BetterTouchTool",

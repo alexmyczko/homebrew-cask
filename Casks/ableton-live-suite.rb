@@ -1,8 +1,8 @@
 cask "ableton-live-suite" do
-  version "11.0.12"
-  sha256 "291b277b42485d5b4ce959883b0600d7dbb7743056eac5007e3c73237672c9ea"
+  version "11.3.3"
+  sha256 "5f8771fdcc8fdb7caff95b75d5fc25ac129b95583f6fbeaebab7297a18b4bcb3"
 
-  url "https://cdn-downloads.ableton.com/channels/#{version}/ableton_live_suite_#{version}_64.dmg"
+  url "https://cdn-downloads.ableton.com/channels/#{version}/ableton_live_suite_#{version}_universal.dmg"
   name "Ableton Live Suite"
   desc "Sound and music editor"
   homepage "https://www.ableton.com/en/live/"

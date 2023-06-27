@@ -1,8 +1,8 @@
 cask "wezterm" do
-  version "20210814-124438,54e29167"
-  sha256 "1b3a86e881ad24dd93b39cc7c50478804482438f734aee7ca44cefa5384188a8"
+  version "20230408-112425,69ae8472"
+  sha256 "74061e67748885735f09dfbf3bc80d450072c10ea4a84a52dca94aff3b717af6"
 
-  url "https://github.com/wez/wezterm/releases/download/#{version.before_comma}-#{version.after_comma}/WezTerm-macos-#{version.before_comma}-#{version.after_comma}.zip",
+  url "https://github.com/wez/wezterm/releases/download/#{version.csv.first}-#{version.csv.second}/WezTerm-macos-#{version.csv.first}-#{version.csv.second}.zip",
       verified: "github.com/wez/wezterm/"
   name "WezTerm"
   desc "GPU-accelerated cross-platform terminal emulator and multiplexer"
@@ -10,16 +10,15 @@ cask "wezterm" do
 
   livecheck do
     url :url
-    regex(%r{href=.*?/WezTerm-macos-(\d{8}-\d{6})-([0-9a-f]+)\.zip}i)
-    strategy :github_latest do |page, regex|
-      match = page.match(regex)
-      next if match.blank?
-
-      "#{match[1]},#{match[2]}"
+    regex(/^(\d+(?:[.-]\d+)+)-(\h+)$/i)
+    strategy :github_latest do |json, regex|
+      json["tag_name"]&.scan(regex)&.map { |match| "#{match[0]},#{match[1]}" }
     end
   end
 
-  app "WezTerm-macos-#{version.before_comma}-#{version.after_comma}/WezTerm.app"
+  conflicts_with cask: "homebrew/cask-versions/wezterm-nightly"
+
+  app "WezTerm.app"
 
   %w[
     wezterm
@@ -30,9 +29,14 @@ cask "wezterm" do
     binary "#{appdir}/WezTerm.app/Contents/MacOS/#{tool}"
   end
 
-  zap trash: [
-    "~/.config/wezterm/",
-    "~/.wezterm.lua",
-    "~/Library/Saved Application State/com.github.wez.wezterm.savedState",
-  ]
+  preflight do
+    # Move "WezTerm-macos-#{version}/WezTerm.app" out of the subfolder
+    staged_subfolder = staged_path.glob(["WezTerm-*", "wezterm-*"]).first
+    if staged_subfolder
+      FileUtils.mv(staged_subfolder/"WezTerm.app", staged_path)
+      FileUtils.rm_rf(staged_subfolder)
+    end
+  end
+
+  zap trash: "~/Library/Saved Application State/com.github.wez.wezterm.savedState"
 end

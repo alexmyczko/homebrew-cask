@@ -1,8 +1,8 @@
 cask "keyboard-maestro" do
-  version "10.0.1,1001"
-  sha256 "1f1b4a6a11fe75cee12e0cd805b22247ce0af936188781163c19f6bc8dc5906a"
+  version "10.2,1020"
+  sha256 "3f782b9b241851d025392375187a02342293fe24401823d38e65badd7bbc0d8f"
 
-  url "https://files.stairways.com/keyboardmaestro-#{version.after_comma}.zip",
+  url "https://files.stairways.com/keyboardmaestro-#{version.csv.second}.zip",
       verified: "stairways.com/"
   name "Keyboard Maestro"
   desc "Automation software"

@@ -1,6 +1,6 @@
 cask "td-agent" do
-  version "4.2.0"
-  sha256 "f670067a052187c6ddc3464669eece49bd99dd929ce2c7ed1672ae525b3c8a85"
+  version "4.4.1"
+  sha256 "518d9089f8f163a6da51fe55622535776fc5dd5b45bdb277745cf8a14f600ff7"
 
   url "https://s3.amazonaws.com/packages.treasuredata.com/#{version.major}/macosx/td-agent-#{version}.dmg",
       verified: "s3.amazonaws.com/packages.treasuredata.com/"
@@ -16,8 +16,8 @@ cask "td-agent" do
   pkg "td-agent-#{version}.pkg"
 
   uninstall pkgutil:   [
-    "com.treasuredata.tdagent",
-    "test.treasuredatainc.pkg.td-agent",
-  ],
+              "com.treasuredata.tdagent",
+              "test.treasuredatainc.pkg.td-agent",
+            ],
             launchctl: "td-agent"
 end

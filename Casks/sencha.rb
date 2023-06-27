@@ -1,10 +1,16 @@
 cask "sencha" do
-  version "7.2.0.66"
-  sha256 "e93272a168b7afcd64eaa373d93e9d356b2cf03bd19b56b6a976a3c816ef5614"
+  version "7.7.0.36"
+  sha256 "ce90a05124d257c543d74dfd890c58704d34cb6ff15453252cbb9ecf0dd61b81"
 
-  url "https://cdn.sencha.com/cmd/#{version}/jre/SenchaCmd-#{version}-osx.app.zip"
+  url "https://trials.sencha.com/cmd/#{version.major_minor_patch}/SenchaCmd-#{version}-osx.app.zip"
   name "Sencha Cmd"
+  desc "Productivity and performance optimization tool for Sencha Ext JS"
   homepage "https://www.sencha.com/products/sencha-cmd/"
+
+  livecheck do
+    url "https://www.sencha.com/products/extjs/cmd-download/"
+    regex(/href=.*?SenchaCmd[._-]v?(\d+(?:\.\d+)+)[._-]osx\.app\.zip/i)
+  end
 
   installer script: {
     executable: "SenchaCmd-#{version}-osx.app/Contents/MacOS/JavaApplicationStub",
@@ -21,6 +27,8 @@ cask "sencha" do
     args:       ["-Djava.awt.headless=true", "-q"],
     sudo:       true,
   }
+
+  # No zap stanza required
 
   caveats do
     license "https://www.sencha.com/legal/sencha-tools-software-license-agreement/"

@@ -1,18 +1,24 @@
 cask "xmind" do
-  version "3.7.9.201912052356,8-update9"
-  sha256 "120745d98a6122af56f944f666c59a6c3e06099be3838c365e6554e82db19211"
+  version "22.11.3771-202305311748"
+  sha256 "921e2c0499356a7b391ff879d3ae6c6fc38c627cc16e75966b1f006a1818d53b"
 
-  url "https://dl3.xmind.net/xmind-#{version.after_comma}-macosx.dmg"
-  appcast "https://www.xmind.net/download/xmind8/",
-          must_contain: version.after_comma
+  url "https://dl3.xmind.net/Xmind-for-macOS-#{version}.dmg"
   name "XMind"
   desc "Mind mapping and brainstorming tool"
   homepage "https://www.xmind.net/"
 
-  app "XMind.app"
+  livecheck do
+    url "https://www.xmind.net/zen/download/mac/"
+    regex(/XMind[._-]for[._-]macOS[._-]v?(\d+(?:[.-]\d+)+)\.dmg/i)
+    strategy :header_match
+  end
+
+  conflicts_with cask: "homebrew/cask-versions/xmind8"
+
+  app "Xmind.app"
 
   zap trash: [
-    "~/Library/XMind",
     "~/Library/Saved Application State/org.xmind.cathy.application.savedState",
+    "~/Library/XMind",
   ]
 end

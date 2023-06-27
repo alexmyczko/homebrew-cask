@@ -19,7 +19,7 @@ puts 'Detecting changes…'
   '.github/*.md',
   '.github/*.yml',
   '.github/ISSUE_TEMPLATE/*.{md,yml}',
-  '.github/workflows/{cache,ci,dispatch-command,rebase,rerun-workflow,review,triage}.yml',
+  '.github/workflows/{autopublish,cache,ci,dispatch-command,publish-commit-casks,rebase,rerun-workflow,review,triage}.yml',
   '.gitignore',
   '.travis.yml',
   'Casks/.rubocop.yml',
@@ -36,8 +36,6 @@ puts 'Detecting changes…'
     FileUtils.cp path, repo_dir.join(path)
   end
 end
-
-FileUtils.rm repo_dir.join('.github/ISSUE_TEMPLATE/02_feature_request.yml')
 
 workflow = File.read(repo_dir.join('.github/PULL_REQUEST_TEMPLATE.md'))
 File.write repo_dir.join('.github/PULL_REQUEST_TEMPLATE.md'), workflow.gsub(/Homebrew\/homebrew-cask\/(pulls|issues|search)/, "#{repo}/\\1")
@@ -65,4 +63,6 @@ modified_paths.each do |modified_path|
 end
 puts
 
-puts '::set-output name=pull_request::true'
+File.open(ENV.fetch('GITHUB_OUTPUT'), 'a') do |f|
+  f.puts('pull_request=true')
+end

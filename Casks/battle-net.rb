@@ -1,5 +1,5 @@
 cask "battle-net" do
-  version :latest
+  version "1.18.5.3106"
   sha256 :no_check
 
   language "en", default: true do
@@ -13,6 +13,11 @@ cask "battle-net" do
   desc "Online gaming platform"
   homepage "https://www.battle.net/"
 
+  livecheck do
+    url :url
+    strategy :extract_plist
+  end
+
   installer manual: "Battle.net-Setup.app"
 
   preflight do
@@ -22,21 +27,22 @@ cask "battle-net" do
   uninstall delete: "/Applications/Battle.net.app"
 
   zap trash: [
-    "~/Library/Application Support/Battle.net",
-    "~/Library/Caches/net.battle.bootstrapper",
-    "~/Library/Preferences/net.battle.net.app.plist",
-    "~/Library/Preferences/net.battle.app.helper.plist",
-    "~/Library/Preferences/net.battle.Authenticator.prefs",
-    "~/Library/Preferences/net.battle.Identity.prefs",
-    "~/Library/Preferences/net.battle.plist",
-    "~/Library/Preferences/net.battnet.battle.plist",
-    "~/Library/Saved Application State/net.battle.app.savedState",
-    "/Users/Shared/Battle.net",
-    "/Users/Shared/Blizzard",
-  ],
+        "~/Library/Application Support/Battle.net",
+        "~/Library/Caches/net.battle.bootstrapper",
+        "~/Library/Preferences/net.battle.net.app.plist",
+        "~/Library/Preferences/net.battle.app.helper.plist",
+        "~/Library/Preferences/net.battle.Authenticator.prefs",
+        "~/Library/Preferences/net.battle.Identity.prefs",
+        "~/Library/Preferences/net.battle.plist",
+        "~/Library/Preferences/net.battnet.battle.plist",
+        "~/Library/Saved Application State/net.battle.app.savedState",
+        "/Users/Shared/Battle.net",
+        "/Users/Shared/Blizzard",
+      ],
       rmdir: "~/Blizzard"
 
   caveats <<~EOS
-    If you pick an installation directory other than /Applications when installing this cask, you will need to uninstall it manually
+    If your installation directory is not /Applications, you will need to
+    uninstall this cask manually.
   EOS
 end

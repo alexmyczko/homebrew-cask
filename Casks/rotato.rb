@@ -1,20 +1,28 @@
 cask "rotato" do
-  version "112,1604697138"
-  sha256 "4d68cbb8832e23d306f34123a65de3788c70e3f6eb49c055136febc8f864405c"
+  version "140.37"
+  sha256 "39d08cad386e766183dc78a02a47d65b2d618c8b28469972494035fa4ed56b5c"
 
-  url "https://dl.devmate.com/com.mortenjust.Rendermock/#{version.before_comma}/#{version.after_comma}/DesignCamera-#{version.before_comma}.zip",
-      verified: "dl.devmate.com/com.mortenjust.Rendermock/"
+  url "https://rotato.app/api/releases/download/#{version}"
   name "Rotato"
-  homepage "https://rotato.xyz/"
+  desc "Mockup generator & animator 3D"
+  homepage "https://rotato.app/"
 
   livecheck do
-    url "https://updates.devmate.com/com.mortenjust.Rendermock.xml"
-    strategy :sparkle do |item|
-      "#{item.short_version},#{item.url[%r{/(\d+)/DesignCamera-\d+\.zip}i, 1]}"
-    end
+    url "https://api.appcenter.ms/v0.1/public/sparkle/apps/a62ce1b5-fb95-4615-a1b0-fd246b7ce1ed"
+    strategy :sparkle
   end
 
-  depends_on macos: ">= :high_sierra"
+  auto_updates true
+  depends_on macos: ">= :big_sur"
 
   app "Rotato.app"
+
+  zap trash: [
+    "~/Library/Application Support/com.mortenjust.Rendermock",
+    "~/Library/Application Support/Rotato",
+    "~/Library/Caches/com.mortenjust.Rendermock",
+    "~/Library/HTTPStorages/com.mortenjust.Rendermock",
+    "~/Library/HTTPStorages/com.mortenjust.Rendermock.binarycookies",
+    "~/Library/Preferences/com.mortenjust.Rendermock.plist",
+  ]
 end

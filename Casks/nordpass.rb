@@ -1,11 +1,11 @@
 cask "nordpass" do
-  version "4.14.20"
+  version "5.3.16"
   sha256 :no_check
 
   url "https://downloads.npass.app/mac/NordPass.dmg",
-      verified: "https://downloads.npass.app/"
+      verified: "downloads.npass.app/mac/"
   name "NordPass"
-  desc "Store credentials in a single place and log in on any device, even when offline"
+  desc "Password manager"
   homepage "https://nordpass.com/"
 
   livecheck do
@@ -14,7 +14,7 @@ cask "nordpass" do
   end
 
   auto_updates true
-  depends_on macos: ">= :yosemite"
+  depends_on macos: ">= :el_capitan"
 
   app "NordPass.app"
 

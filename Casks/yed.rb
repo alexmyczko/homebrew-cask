@@ -1,6 +1,6 @@
 cask "yed" do
-  version "3.21.1"
-  sha256 "a13b762d517107fd7f6350536054d650764d1bea5f5891b0f32b8eaca624a162"
+  version "3.23.1"
+  sha256 "ac4baa4f76b025539a1c41fe5741e9c395463d6b5cae5fef02cd07f298a9db08"
 
   url "https://www.yworks.com/resources/yed/demo/yEd-#{version}_with-JRE15.dmg"
   name "yWorks yEd"
@@ -13,4 +13,9 @@ cask "yed" do
   end
 
   app "yEd.app"
+
+  zap trash: [
+    "~/Library/Saved Application State/com.yworks.yEd.savedState",
+    "~/Library/yWorks/yEd",
+  ]
 end

@@ -1,6 +1,6 @@
 cask "blackhole-16ch" do
-  version "0.2.10"
-  sha256 "804b3925abb34762a7c1e027376d500809133ab3f15bec8008a79676dca08cfa"
+  version "0.5.0"
+  sha256 "573240f711010fd527698e1c63291487eee53ac1fd9e2f8ade0bf337abafcc83"
 
   url "https://existential.audio/downloads/BlackHole16ch.v#{version}.pkg"
   name "BlackHole 16ch"
@@ -27,4 +27,6 @@ cask "blackhole-16ch" do
 
   uninstall quit:    "com.apple.audio.AudioMIDISetup",
             pkgutil: "audio.existential.BlackHole16ch"
+
+  # No zap stanza required
 end

@@ -1,22 +1,26 @@
 cask "openttd" do
-  if MacOS.version <= :high_sierra
+  on_high_sierra :or_older do
     version "1.11.2"
     sha256 "44f7e08b806124cce8d99c5adc906eb4280ba8057609b8c309080d63fcfb17c2"
-  else
-    version "12.1"
-    sha256 "e7f7f84a6372a2ef11756c727b92c4778592ea9eb899168e4da772ed6a7e1640"
+
+    livecheck do
+      skip "Legacy version"
+    end
+  end
+  on_mojave :or_newer do
+    version "13.3"
+    sha256 "8e61fbcbd8b6ca8fc5a2840c5683ff0ee7d75949a8d6df7596cd5f6578d5635a"
+
+    livecheck do
+      url "https://www.openttd.org/downloads/openttd-releases/latest.html"
+      regex(%r{href=.*?/openttd-(\d+(?:\.\d+)*)-macos-universal\.zip}i)
+    end
   end
 
   url "https://proxy.binaries.openttd.org/openttd-releases/#{version}/openttd-#{version}-macos-universal.zip"
   name "OpenTTD"
   desc "Open-source transport simulation game"
   homepage "https://www.openttd.org/"
-
-  livecheck do
-    url "https://www.openttd.org/downloads/openttd-releases/latest.html"
-    strategy :page_match
-    regex(%r{href=.*?/openttd-(\d+(?:\.\d+)*)-macos-universal\.zip}i)
-  end
 
   app "OpenTTD.app"
 

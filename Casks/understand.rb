@@ -1,16 +1,23 @@
 cask "understand" do
-  version "6.0.1070"
-  sha256 "d03b05492b623c1ad0861c862dbf0d0cf9329e7d5b83afa96c54a24c2dc017ab"
+  version "6.4.1142"
+  sha256 "c23de1eccd6e6997d17a0444cc2b784ab05908e89a5dbc3c42d78d309020842c"
 
-  url "http://builds.scitools.com/all_builds/b#{version.patch}/Understand/Understand-#{version}-MacOSX-x86.dmg"
+  url "https://latest.scitools.com/Understand/Understand-#{version}-macOS-Universal.dmg"
   name "SciTools Understand"
   desc "Code visualization and exploration tool"
-  homepage "https://scitools.com/features/"
+  homepage "https://scitools.com/features"
 
   livecheck do
-    url "https://licensing.scitools.com/download"
-    regex(/stablefilepaths=["'][^"']*?Understand[._-]v?(\d+(?:\.\d+)+)[._-]MacOSX[._-]x86\.dmg/i)
+    url "https://licensing.scitools.com/download/thanks/macOS-Universal.dmg"
+    regex(/Understand[._-]v?(\d+(?:\.\d+)+)[._-]macOS[._-]Universal\.dmg/i)
   end
 
   app "Understand.app"
+
+  zap trash: [
+    "~/Library/Application Support/SciTools",
+    "~/Library/Preferences/com.scitools.License.plist",
+    "~/Library/Preferences/com.scitools.Understand.plist",
+    "~/Library/Saved Application State/com.scitools.Understand.savedState",
+  ]
 end

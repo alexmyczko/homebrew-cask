@@ -9,16 +9,15 @@ cask "skyfonts" do
 
   livecheck do
     url "https://api.skyfonts.com/api/SkyFontsAppCast?osid=3"
-    strategy :page_match
     regex(%r{href=.*?/Monotype_SkyFonts_Mac64_(\d+(?:\.\d+)*)\.dmg}i)
   end
 
   installer manual: "Install SkyFonts.app"
 
   uninstall quit:      [
-    "com.mti.Monotype-SkyFonts",
-    "com.mti.Monotype-SkyFontsHelper",
-  ],
+              "com.mti.Monotype-SkyFonts",
+              "com.mti.Monotype-SkyFontsHelper",
+            ],
             launchctl: "com.mti.Monotype-SkyFontsHelper",
             delete:    "/Applications/Skyfonts"
 end

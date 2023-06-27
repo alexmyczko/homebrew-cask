@@ -1,7 +1,7 @@
 cask "kid3" do
   # NOTE: "3" is not a version number, but an intrinsic part of the product name (ID3 tags)
-  version "3.8.7"
-  sha256 "236d02b5c87d4758e7c0f415a3937028ff88b22a400a1f42536e1021aa1b64b7"
+  version "3.9.3"
+  sha256 "3b7e6c59c87a633c60e36371307eb2341fd1d396ab8f3b19e0b55902ec9da216"
 
   url "https://downloads.sourceforge.net/kid3/kid3-#{version}-Darwin.dmg",
       verified: "downloads.sourceforge.net/kid3/"
@@ -11,4 +11,6 @@ cask "kid3" do
 
   app "kid3.app"
   binary "#{appdir}/kid3.app/Contents/MacOS/kid3-cli"
+
+  zap trash: "~/Library/Preferences/com.kid3.Kid3.plist"
 end

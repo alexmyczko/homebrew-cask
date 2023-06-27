@@ -1,20 +1,26 @@
 cask "wifi-explorer-pro" do
-  version "3.4.1,20"
-  sha256 "cfb2f567004e6dca3e70ea05195ac1a15015b129e690f45b6567489b58dc8b5f"
+  version "3.5.6"
+  sha256 "1e3a138106b7a51a6bcece26b6f1e2d60d108e92691f7f4fbbe14faf9f4828d0"
 
-  url "https://www.intuitibits.com/appcasts/WiFiExplorerPro_#{version.before_comma}.zip"
+  url "https://www.intuitibits.com/downloads/WiFiExplorerPro_#{version}.pkg"
   name "WiFi Explorer Pro"
   desc "Scan, monitor, and troubleshoot wireless networks"
   homepage "https://www.intuitibits.com/products/wifi-explorer/"
 
   livecheck do
     url "https://www.intuitibits.com/appcasts/com.intuitibits.wifiexplorerpro#{version.major}cast.xml"
-    strategy :sparkle
+    strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :mojave"
 
-  app "WiFi Explorer Pro #{version.major}.app"
+  pkg "WiFiExplorerPro_#{version}.pkg"
+
+  uninstall pkgutil:   [
+              "com.intuitibits.wifiexplorerpro#{version.major}.pkg",
+              "com.intuitibits.wifiexplorerpro-helper.pkg",
+            ],
+            launchctl: "com.intuitibits.wifiexplorerpro#{version.major}.wifiexplorerpro-bpf"
 
   zap trash: [
     "~/Library/Application Support/WiFi Explorer Pro #{version.major}",

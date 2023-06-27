@@ -7,5 +7,16 @@ cask "quickhue" do
   desc "Menu bar utility for controlling the Philips Hue lighting system"
   homepage "https://github.com/danparsons/QuickHue"
 
+  livecheck do
+    url :url
+    strategy :extract_plist
+  end
+
   app "QuickHue.app"
+
+  zap trash: [
+    "~/Library/Application Support/QuickHue",
+    "~/Library/Caches/cat.moo.QuickHue",
+    "~/Library/Preferences/cat.moo.QuickHue.plist",
+  ]
 end

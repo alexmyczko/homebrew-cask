@@ -1,13 +1,22 @@
 cask "obs-websocket" do
-  version "4.9.1"
-  sha256 "cdfb87b0d9ed1ae3fee61af957fb25402a4b65e9d4350e3959704b72e9b89fdb"
+  version "5.0.1"
+  sha256 "baf54b5dad9bc355c3af960ce94ddf8e88ed86c7d23d86e41baa8377cb1d4d06"
 
-  url "https://github.com/Palakis/obs-websocket/releases/download/#{version}/obs-websocket-#{version}-macOS.pkg"
+  url "https://github.com/obsproject/obs-websocket/releases/download/#{version}/obs-websocket-#{version}-macOS.pkg"
   name "obs-websocket"
   desc "Remote-control OBS Studio through WebSockets"
-  homepage "https://github.com/Palakis/obs-websocket"
+  homepage "https://github.com/obsproject/obs-websocket"
+
+  # Upstream has published releases for two different major versions, so the
+  # "latest" release may be for an older major version. Unless/until this is
+  # resolved, we have to check more than just the "latest" release.
+  livecheck do
+    url "https://github.com/obsproject/obs-websocket/releases?q=prerelease%3Afalse"
+    regex(%r{href=["']?[^"' >]*?/tag/v?(\d+(?:\.\d+)+)[^"' >]*?["' >]}i)
+    strategy :page_match
+  end
 
   pkg "obs-websocket-#{version}-macOS.pkg"
 
-  uninstall pkgutil: "fr.palakis.obs-websocket"
+  uninstall pkgutil: "com.obsproject.obs-websocket"
 end

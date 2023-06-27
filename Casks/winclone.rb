@@ -1,6 +1,6 @@
 cask "winclone" do
-  version "10.0,50054"
-  sha256 "615adf440025982f22a242383a8fe1f995595b80b4fb7df9874e2d889655f502"
+  version "10.2"
+  sha256 "e7f5f5d5370d9a4bbfaffb034a8c3b38823d98621126adbcfbd76a29cffeb53b"
 
   url "https://twocanoes-software-updates.s3.amazonaws.com/Winclone#{version.major}.dmg",
       verified: "twocanoes-software-updates.s3.amazonaws.com/"
@@ -10,7 +10,7 @@ cask "winclone" do
 
   livecheck do
     url "https://twocanoes.com/winclone/updates/winclone#{version.major}-software-updates.xml"
-    strategy :sparkle
+    strategy :sparkle, &:short_version
   end
 
   depends_on macos: ">= :catalina"
@@ -26,7 +26,7 @@ cask "winclone" do
                    sudo: true
   end
 
-  uninstall signal:  [["TERM", "com.twocanoes.Winclone#{version.major}"]],
+  uninstall signal:  ["TERM", "com.twocanoes.Winclone#{version.major}"],
             pkgutil: "com.twocanoes.pkg.Winclone*"
 
   zap trash: [

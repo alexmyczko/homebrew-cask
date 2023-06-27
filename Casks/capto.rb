@@ -1,5 +1,5 @@
 cask "capto" do
-  version "1.2.24,1001.2.24005"
+  version "1.2.36,1001.2.36002"
   sha256 :no_check
 
   url "https://d3l6g06uqih57x.cloudfront.net/Captomac/webstore/Capto.dmg",
@@ -9,8 +9,18 @@ cask "capto" do
   homepage "https://www.globaldelight.com/capto/"
 
   livecheck do
-    skip "unversioned URL"
+    url :url
+    strategy :extract_plist
   end
 
   app "Capto.app"
+
+  zap trash: [
+    "~/Library/Application Scripts/U4MRT5KL8R.com.globaldelight.Capto.Web",
+    "~/Library/Caches/com.globaldelight.*",
+    "~/Library/Group Containers/U4MRT5KL8R.com.globaldelight.Capto.Web",
+    "~/Library/HTTPStorages/com.globaldelight.*",
+    "~/Library/Preferences/com.globaldelight.*.plist",
+    "~/Pictures/Capto",
+  ]
 end

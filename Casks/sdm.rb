@@ -1,15 +1,18 @@
 cask "sdm" do
-  version "15.44.0"
-  sha256 :no_check
+  version "15.58.0,9CEBD65A85DBAD91F1D6296C4122894DC7A91E0D"
+  sha256 "27767acb103a90170d8c0b0102f6936e82dde5ba83835ad3b9037ce888b4c937"
 
-  url "https://app.strongdm.com/downloads/client/darwin"
+  url "https://downloads.strongdm.com/builds/sdm-gui/#{version.csv.first}/darwin/universal/#{version.csv.second}/SDM-#{version.csv.first}.universal.zip"
   name "sdm"
   desc "Strongdm client"
   homepage "https://www.strongdm.com/"
 
   livecheck do
-    url :url
-    strategy :extract_plist
+    url "https://app.strongdm.com/releases/client/darwin/0.0.0"
+    regex(%r{https:.*?/(\h+)/SDM[._-]v?(\d+(?:\.\d+)+)\.universal\.zip}i)
+    strategy :page_match do |page, regex|
+      page.scan(regex).map { |match| "#{match[1]},#{match[0]}" }
+    end
   end
 
   app "SDM.app"
@@ -18,6 +21,7 @@ cask "sdm" do
 
   zap trash: [
     "~/.sdm",
+    "/usr/local/bin/sdm",
     "~/Library/Application Support/SDM",
     "~/Library/Caches/com.electron.sdm*",
     "~/Library/Preferences/com.electron.sdm.plist",

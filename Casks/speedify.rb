@@ -1,14 +1,14 @@
 cask "speedify" do
-  version "11.6.0,8791"
-  sha256 :no_check
+  version "13.2.1,9474"
+  sha256 "e683cbd1f3b67a89039d8105a20fce72d30232b7cc81c3b2151f0d9e78ac1b6b"
 
-  url "https://downloads.speedify.com/speedify.php?platform=osx"
+  url "https://downloads.speedify.com/Speedify-#{version.csv.first}.#{version.csv.second}.dmg"
   name "Speedify"
   desc "VPN client"
   homepage "https://speedify.com/"
 
   livecheck do
-    url :url
+    url "https://downloads.speedify.com/SpeedifyInstaller.dmg"
     strategy :extract_plist
   end
 
@@ -18,10 +18,9 @@ cask "speedify" do
 
   uninstall launchctl: [
     "me.connectify.SMJobBlessHelper",
-    "SwitchboardService",
     "SpeedifyService",
-  ],
-            script:    "#{appdir}/Speedify.app/Contents/Resources/uninstall-speedify-service.sh"
+    "SwitchboardService",
+  ]
 
   zap trash: "~/Library/Speedify"
 end

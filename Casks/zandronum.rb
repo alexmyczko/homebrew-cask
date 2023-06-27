@@ -1,6 +1,6 @@
 cask "zandronum" do
-  version "3.0"
-  sha256 "9e50fee5eea4c3eda08ea6433f1a5bc8edb60ea44be634511f06109357686616"
+  version "3.1"
+  sha256 "2adcc9eca3ed7119bb8c28de371318b99ae691a0412f3fcacd4f577955d39933"
 
   url "https://zandronum.com/downloads/zandronum#{version}-macosx.dmg"
   name "Zandronum"
@@ -9,7 +9,7 @@ cask "zandronum" do
 
   livecheck do
     url "https://zandronum.com/downloads/"
-    regex(/href=.*?zandronum[._-]?v?(\d+(?:\.\d+)+)-macosx\.dmg/i)
+    regex(/href=.*?zandronum[._-]?v?(\d+(?:\.\d+)+)[._-]macosx\.dmg/i)
   end
 
   app "Zandronum.app"
@@ -27,6 +27,8 @@ cask "zandronum" do
   caveats <<~EOS
     Install IWADs to ~/Library/Application Support/Zandronum/
 
-    For more information, see: https://wiki.zandronum.com/Zandronum_and_IWAD_Files
+    For more information, see:
+
+      https://wiki.zandronum.com/Zandronum_and_IWAD_Files
   EOS
 end

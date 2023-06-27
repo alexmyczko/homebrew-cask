@@ -1,5 +1,5 @@
 cask "ultdata" do
-  version "9.6.2.1"
+  version "9.7.19.5"
   sha256 :no_check
 
   url "https://download.tenorshare.com/downloads/ultdata-ios-mac.dmg"
@@ -8,11 +8,11 @@ cask "ultdata" do
   homepage "https://www.tenorshare.com/products/iphone-data-recovery.html"
 
   livecheck do
-    skip "unversioned URL"
+    url :url
+    strategy :extract_plist
   end
 
   auto_updates true
-  depends_on macos: ">= :yosemite"
 
   app "UltData.app"
 

@@ -1,8 +1,8 @@
 cask "p4v" do
-  version "2021.3,2186916"
-  sha256 "b8faf97681488c7ccc71669481dac09b0e7c3e4eadbf8a50953404c65f99bfc6"
+  version "2023.2,2446649"
+  sha256 "a837f5d46526603ff179630d371944cb4acfba1cada5458bf733ef3c9f7b71f6"
 
-  url "https://cdist2.perforce.com/perforce/r#{version.major[-2..]}.#{version.minor}/bin.macosx1015x86_64/P4V.dmg"
+  url "https://www.perforce.com/downloads/perforce/r#{version.major[-2..]}.#{version.minor}/bin.macosx12u/P4V.dmg"
   name "Perforce Helix Visual Client"
   name "P4Merge"
   name "P4V"
@@ -10,11 +10,10 @@ cask "p4v" do
   homepage "https://www.perforce.com/products/helix-core-apps/helix-visual-client-p4v"
 
   livecheck do
-    url "https://www.perforce.com/perforce/doc.current/user/p4vnotes.txt"
-    strategy :page_match do |page|
-      page.scan(%r{Supporting\s+Libraries\s+for\s+v?(\d+\.\d+)(?:\.\d+)*/(\d+)}i).map do |match|
-        "#{match[0]},#{match[1]}"
-      end
+    url "https://www.perforce.com/support/software-release-index"
+    regex(%r{(?:Patch|Release) for[^<]+?Helix Visual Client[^<]+?v?(\d+(?:\.\d+)+)/(\d+)}im)
+    strategy :page_match do |page, regex|
+      page.scan(regex).map { |match| "#{match[0]},#{match[1]}" }
     end
   end
 

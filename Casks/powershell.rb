@@ -1,13 +1,9 @@
 cask "powershell" do
-  version "7.2.0"
+  arch arm: "arm64", intel: "x64"
 
-  arch = Hardware::CPU.intel? ? "x64" : "arm64"
-
-  if Hardware::CPU.intel?
-    sha256 "f73682927bdadb127cf0c18641d5efe9ea12e53053e65d5c54f06fd4ef413a4a"
-  else
-    sha256 "6293A48CEAD807DD3C9F932176021533254BD6883754C5574E36A1775D797959"
-  end
+  version "7.3.4"
+  sha256 arm:   "afd80f3aebd68ad2b00977dcebc4c08d1e651d0763449935ce50aa3bf655e40e",
+         intel: "1a09511f1cec1cc491354413eaff3502641f0caf4e5a6f317b038830b9f1e53f"
 
   url "https://github.com/PowerShell/PowerShell/releases/download/v#{version}/powershell-#{version}-osx-#{arch}.pkg"
   name "PowerShell"
@@ -15,11 +11,11 @@ cask "powershell" do
   homepage "https://github.com/PowerShell/PowerShell"
 
   livecheck do
-    url :homepage
-    strategy :git
-    regex(/^v?(\d+(?:\.\d+)*)$/)
+    url :url
+    regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 
+  depends_on formula: "openssl"
   depends_on macos: ">= :mojave"
 
   pkg "powershell-#{version}-osx-#{arch}.pkg"
@@ -28,7 +24,12 @@ cask "powershell" do
 
   zap trash: [
     "~/.cache/powershell",
-    "~/.config/PowerShell",
+    "~/.config/powershell",
     "~/.local/share/powershell",
   ]
+
+  caveats <<~EOS
+    To use Homebrew in PowerShell, set:
+      Add-Content -Path $PROFILE.CurrentUserAllHosts -Value '$(#{HOMEBREW_PREFIX}/bin/brew shellenv) | Invoke-Expression'
+  EOS
 end

@@ -1,18 +1,14 @@
 cask "drawio" do
-  arch = Hardware::CPU.intel? ? "x64" : "arm64"
+  arch arm: "arm64", intel: "x64"
 
-  version "15.8.7"
+  version "21.5.0"
+  sha256 arm:   "0ec784eef052a99c5fa6b076ce191fa2467c440a38958a83e347faf165b02714",
+         intel: "ea42d6f07ee7fdccc8499fc86475f338aede7939c9c1091c6260245197a1c8bd"
 
   url "https://github.com/jgraph/drawio-desktop/releases/download/v#{version}/draw.io-#{arch}-#{version}.dmg",
       verified: "github.com/jgraph/drawio-desktop/"
-  if Hardware::CPU.intel?
-    sha256 "054e687e4db89cc9f461a366da5b0746f8482125d222b7163ebe7cf99dd3de2f"
-  else
-    sha256 "289115dde3e51fa201191da1eb998a4a05d590a79d1c83b5f213c4e28ff04311"
-  end
-
   name "draw.io Desktop"
-  desc "Draw.io is free online diagram software"
+  desc "Online diagram software"
   homepage "https://www.diagrams.net/"
 
   livecheck do

@@ -1,23 +1,18 @@
 cask "home-assistant" do
-  version "2021.11.1,2021.266"
-  sha256 "fa285482b0ed54b63003ebae10be24631a71a7c5af52a5d2f2007641db6cf4e3"
+  version "2023.4,2023.460"
+  sha256 "96a4a029e51c9c4c4abd2e6ce6748cf0ff6f5b2674a2cd03b5ca80959ebcddaf"
 
-  url "https://github.com/home-assistant/iOS/releases/download/release%2F#{version.before_comma}%2F#{version.after_comma}/home-assistant-mac.zip",
+  url "https://github.com/home-assistant/iOS/releases/download/release%2F#{version.csv.first}%2F#{version.csv.second}/home-assistant-mac.zip",
       verified: "github.com/home-assistant/iOS/"
   name "Home Assistant"
   desc "Companion app for Home Assistant home automation software"
   homepage "https://companion.home-assistant.io/"
 
-  # We use the GitHubLatest strategy as Home Assistant also tags pre-releases, and
-  # we also specify a regex since tags are unconventional, e.g. `2021.2.2/2021.55`,
-  # and use a custom block to replace the slash with a comma in the resulting version
   livecheck do
     url :url
-    strategy :github_latest do |page|
-      version = page.match(%r{href=".+/tree/(?:mac|release)/([\d.]+)/([\d.]+)"}i)
-      next if version.blank?
-
-      "#{version[1]},#{version[2]}"
+    regex(%r{^(?:mac|release)/(\d+(?:\.\d+)+)/(\d+(?:\.\d+)*)}i)
+    strategy :github_latest do |json, regex|
+      json["tag_name"]&.scan(regex)&.map { |match| "#{match[0]},#{match[1]}" }
     end
   end
 
@@ -27,7 +22,7 @@ cask "home-assistant" do
 
   zap trash: [
     "~/Library/Application Scripts/io.robbie.HomeAssistant",
-    "~/Library/Group Containers/group.io.robbie.homeassistant",
     "~/Library/Containers/io.robbie.HomeAssistant",
+    "~/Library/Group Containers/group.io.robbie.homeassistant",
   ]
 end

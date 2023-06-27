@@ -1,6 +1,6 @@
 cask "8bitdo-ultimate-software" do
-  version "2.0.4"
-  sha256 "09db1657af3df1c0a2ffa87993c620762377f3a00d8127ec6ed784cef50d5a2f"
+  version "2.0.6"
+  sha256 "21c0af67e6aad0cda117d0ded8d964abf51f2957ab1c7caf0258fdc3e0178abb"
 
   url "http://tools.8bitdo.com/8BitdoUltimateSoftware/8BitDoUltimateSoftwareV#{version}.zip"
   name "8BitDo Ultimate Software"
@@ -11,6 +11,9 @@ cask "8bitdo-ultimate-software" do
     url "http://tools.8bitdo.com/8BitdoUltimateSoftware/appcast.xml"
     strategy :sparkle
   end
+
+  auto_updates true
+  depends_on macos: ">= :high_sierra"
 
   app "8BitDo Ultimate Software.app"
 

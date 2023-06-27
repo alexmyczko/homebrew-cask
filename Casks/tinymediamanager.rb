@@ -1,6 +1,6 @@
 cask "tinymediamanager" do
-  version "4.2.3"
-  sha256 "d83ecea85fed7f34151e04e80f8568deb8ef47a76b8b1010f380e56852943ff8"
+  version "4.3.11.1"
+  sha256 "46a6317a4cd0ae96271d7dc8a38a3eca1310b6753270488349f1c80eebab971f"
 
   url "https://release.tinymediamanager.org/v#{version.major}/dist/tmm_#{version}_macos-x86_64.zip"
   name "tinyMediaManager"
@@ -15,4 +15,6 @@ cask "tinymediamanager" do
   auto_updates true
 
   app "tinyMediaManager.app"
+
+  # No zap stanza required
 end

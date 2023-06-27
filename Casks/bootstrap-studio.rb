@@ -1,8 +1,11 @@
 cask "bootstrap-studio" do
-  version "5.8.6"
-  sha256 "4bc1a4649093215c14f5064815868ca5b6783412d1f86641d4465178a3e56831"
+  arch arm: "arm64", intel: "x64"
 
-  url "https://bootstrapstudio.io/releases/desktop/#{version}/Bootstrap%20Studio.dmg"
+  version "6.4.3"
+  sha256 arm:   "000575890793bc3fbf5be5fc1463e768f392266fb81115e1a39e9089cc66cd5e",
+         intel: "c82cddf2297a16a4dc51039cc6d2788cf76643a7b6bfed1a9812329e5497233b"
+
+  url "https://releases.bootstrapstudio.io/#{version}/Bootstrap%20Studio%20(#{arch}).dmg"
   name "Bootstrap Studio"
   desc "Design and prototype websites using the Bootstrap framework"
   homepage "https://bootstrapstudio.io/"
@@ -13,7 +16,6 @@ cask "bootstrap-studio" do
   end
 
   auto_updates true
-  depends_on macos: ">= :yosemite"
 
   app "Bootstrap Studio.app"
 

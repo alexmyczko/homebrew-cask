@@ -1,6 +1,6 @@
 cask "iridium" do
-  version "2021.10.95"
-  sha256 "923d54e713d3e6d4de385033ab99bd6fbaeb94ef51d87ec3049038e1339c0e70"
+  version "2022.04.100"
+  sha256 "04bb2dd6ebbdcc3f4f25a53610d074be413dcbb1c446a3e658751a34a6f382b2"
 
   url "https://downloads.iridiumbrowser.de/macos/#{version}/iridium-browser_#{version}_macos.dmg"
   name "Iridium Browser"

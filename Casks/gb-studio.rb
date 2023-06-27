@@ -1,8 +1,8 @@
 cask "gb-studio" do
-  version "1.2.2"
-  sha256 "5de89971ecb27a855c5250b2b3eddfb906c818f01bdcbee75a444355f456512c"
+  version "3.1.0"
+  sha256 "73d5d487962aab11268d281cad80e8fd42cf08e16e82c527a402acf63703a2ef"
 
-  url "https://github.com/chrismaltby/gb-studio/releases/download/v#{version}/gb-studio-develop-darwin_x86_64.zip",
+  url "https://github.com/chrismaltby/gb-studio/releases/download/v#{version}/gb-studio-mac.zip",
       verified: "github.com/chrismaltby/gb-studio/"
   name "GB Studio"
   desc "Drag and drop retro game creator"

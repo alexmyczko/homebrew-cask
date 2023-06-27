@@ -1,6 +1,6 @@
 cask "zerotier-one" do
-  version "1.8.4"
-  sha256 "ac715952d6bb512ae3720d6165269effce9cc6eac540afa540e3e06a75f6db8c"
+  version "1.10.6"
+  sha256 "a1ff5720ee46f49fe949c8261dbc05d4dc283016d204b6abfb802654ed775c20"
 
   url "https://download.zerotier.com/RELEASES/#{version}/dist/ZeroTier%20One.pkg"
   name "ZeroTier One"
@@ -11,6 +11,8 @@ cask "zerotier-one" do
     url "https://github.com/zerotier/ZeroTierOne"
     strategy :github_latest
   end
+
+  depends_on macos: ">= :high_sierra"
 
   pkg "ZeroTier One.pkg"
 

@@ -1,16 +1,19 @@
 cask "burp-suite" do
-  version "2021.10.3"
-  sha256 "495476d68622657e0376b4dfaddccba27cbfaabe900771a4acd2799c79f82819"
+  arch arm: "MacOsArm64", intel: "MacOsx"
 
-  url "https://portswigger.net/burp/releases/download?product=community&version=#{version}&type=MacOsx"
+  version "2023.5.4"
+  sha256 arm:   "3de53acfc8b84576913d4ba6af79cda8713c331aa86ae2722e645d2d6306a600",
+         intel: "9a79730999a8ab2c9b44028ddfa909d7e698a3d0fe65d90495b02cb384440831"
+
+  url "https://portswigger.net/burp/releases/download?product=community&version=#{version}&type=#{arch}"
   name "Burp Suite Community Edition"
   desc "Web security testing toolkit"
   homepage "https://portswigger.net/burp/"
 
   livecheck do
     url "https://portswigger.net/burp/releases/data"
-    strategy :page_match do |page|
-      all_versions = JSON.parse(page)["ResultSet"]["Results"]
+    strategy :json do |json|
+      all_versions = json["ResultSet"]["Results"]
       next if all_versions.blank?
 
       all_versions.map do |item|
@@ -18,24 +21,13 @@ cask "burp-suite" do
               item["releaseChannels"].include?("Stable") &&
               item["categories"].include?("Community") &&
               item["builds"].any? do |build|
-                build["ProductPlatform"] == "MacOsx"
+                build["ProductPlatform"] == arch.to_s
               end
       end.compact
     end
   end
 
-  installer script: {
-    executable: "Burp Suite Community Edition Installer.app/Contents/MacOS/JavaApplicationStub",
-    args:       ["-q"],
-    sudo:       true,
-  }
-
-  postflight do
-    set_ownership "/Applications/Burp Suite Community Edition.app"
-    set_permissions "/Applications/Burp Suite Community Edition.app", "a+rX"
-  end
-
-  uninstall delete: "/Applications/Burp Suite Community Edition.app"
+  app "Burp Suite Community Edition.app"
 
   zap trash: "~/.BurpSuite"
 end

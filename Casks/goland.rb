@@ -1,23 +1,19 @@
 cask "goland" do
-  arch = Hardware::CPU.intel? ? "" : "-aarch64"
+  arch arm: "-aarch64"
 
-  version "2021.3,213.5744.269"
+  version "2023.1.3,231.9161.41"
+  sha256 arm:   "d0b923a44305ef3ce113cabd2a19e1f2bfd0adec0cdc0571765851206aad5160",
+         intel: "6f7173843e157f24001b837f4d50827bf55b629df4d82f9b95c08ec29dc2ff3b"
 
-  if Hardware::CPU.intel?
-    sha256 "eb637e92ba88f8316a024d0691ecc87d48a65e0dda24986cc9b5fec51ecfc2cd"
-  else
-    sha256 "c64cad5f261aebd70751a2c1df1a19b7c9e3340c5ad3da31de1bc358db667da2"
-  end
-
-  url "https://download.jetbrains.com/go/goland-#{version.before_comma}#{arch}.dmg"
+  url "https://download.jetbrains.com/go/goland-#{version.csv.first}#{arch}.dmg"
   name "Goland"
   desc "Go (golang) IDE"
   homepage "https://www.jetbrains.com/go/"
 
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=GO&latest=true&type=release"
-    strategy :page_match do |page|
-      JSON.parse(page)["GO"].map do |release|
+    strategy :json do |json|
+      json["GO"].map do |release|
         "#{release["version"]},#{release["build"]}"
       end
     end
@@ -30,7 +26,7 @@ cask "goland" do
 
   uninstall_postflight do
     ENV["PATH"].split(File::PATH_SEPARATOR).map { |path| File.join(path, "goland") }.each do |path|
-      if File.exist?(path) &&
+      if File.readable?(path) &&
          File.readlines(path).grep(/# see com.intellij.idea.SocketLock for the server side of this interface/).any?
         File.delete(path)
       end
@@ -42,8 +38,8 @@ cask "goland" do
     "~/Library/Application Support/JetBrains/GoLand#{version.major_minor}",
     "~/Library/Caches/JetBrains/GoLand#{version.major_minor}",
     "~/Library/Logs/JetBrains/GoLand#{version.major_minor}",
-    "~/Library/Preferences/GoLand#{version.major_minor}",
     "~/Library/Preferences/com.jetbrains.goland.plist",
+    "~/Library/Preferences/GoLand#{version.major_minor}",
     "~/Library/Saved Application State/com.jetbrains.goland.SavedState",
   ]
 end

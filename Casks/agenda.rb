@@ -1,18 +1,18 @@
 cask "agenda" do
-  version "13.1.1,195"
-  sha256 "5ce0632c652b69c51135d2137ac5b1e9e3be1007866a1a13878024b3bceb61af"
+  version "17.0.2"
+  sha256 "92ffbb58558f53bbfead168c8a5987230883efac37f01788e74ec8c333aa53ac"
 
-  url "https://downloads.agenda.com/Agenda_#{version.before_comma}.zip"
+  url "https://downloads.agenda.com/Agenda_#{version}.zip"
   name "Agenda"
   desc "Note taking application focusing on dates"
   homepage "https://agenda.com/"
 
   livecheck do
-    url "https://downloads.agenda.com/AgendaSparkleAppcast.xml"
-    strategy :sparkle
+    url "https://agenda.community/t/release-notes/34763/61"
+    regex(/version\s+(\d+(?:\.\d+)+)/i)
   end
 
-  depends_on macos: ">= :sierra"
+  depends_on macos: ">= :mojave"
 
   app "Agenda.app"
 

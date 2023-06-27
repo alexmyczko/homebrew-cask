@@ -1,8 +1,11 @@
 cask "kap" do
-  version "3.4.2"
-  sha256 "29e1e8c812a8a997c002c7130eba2c0594ca4b58ce2643ca1fb1cf23dc4d32b7"
+  arch arm: "arm64", intel: "x64"
 
-  url "https://github.com/wulkano/kap/releases/download/v#{version.major_minor_patch}/Kap-#{version}.dmg",
+  version "3.6.0"
+  sha256 arm:   "0f4b69d5fd4ec59da7b6e153722314c93dc263db2b81c0d0191e256360473ce3",
+         intel: "8086dd10963177b878bdc709081e4efbbc713baeacb64d962bcd081bd0bf780f"
+
+  url "https://github.com/wulkano/kap/releases/download/v#{version.major_minor_patch}/Kap-#{version}-#{arch}.dmg",
       verified: "github.com/wulkano/kap/"
   name "Kap"
   desc "Open-source screen recorder built with web technology"

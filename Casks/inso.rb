@@ -1,6 +1,6 @@
 cask "inso" do
-  version "2.4.0"
-  sha256 "7bf1437f75f829585a0d71b8dbc106b4af624ef5a2641dc7e5a081ac25ed84b2"
+  version "3.16.0"
+  sha256 "2d8476eb74f068c1f9a18d076c639c1ec918160e98cb12ee2cb3a93c58ecb3b0"
 
   url "https://github.com/Kong/insomnia/releases/download/lib%40#{version}/inso-macos-#{version}.zip",
       verified: "github.com/Kong/insomnia/"
@@ -9,12 +9,12 @@ cask "inso" do
   homepage "https://insomnia.rest/products/inso"
 
   livecheck do
-    url "https://github.com/Kong/insomnia/releases"
-    strategy :page_match
-    regex(/href=.*?inso-macos-(?:latest-)*(\d+(?:\.\d+).*?)\.zip/i)
+    regex(/lib@v?(\d+(?:\.\d+)+)(?!.)/i)
   end
 
-  conflicts_with cask: "homebrew/cask-versions/inso-alpha"
+  conflicts_with cask: "homebrew/cask-versions/inso-beta"
 
   binary "inso"
+
+  # No zap stanza required
 end

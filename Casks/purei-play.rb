@@ -1,18 +1,17 @@
 cask "purei-play" do
-  version "2021-11-30,fb60da43"
-  sha256 "c0a7ca92cd5623ec15b8e62aac33a8217857552bf3903ced962d9bd5166b2e07"
+  version "2023-06-20,4f14f5ca"
+  sha256 "b7cc3bae256998b2686b7c421f22f89c92b66e69ab9d8c329e26a5e01a64c215"
 
   url "https://s3.us-east-2.amazonaws.com/playbuilds/#{version.csv.second}/Play.dmg",
-      verified: "https://s3.us-east-2.amazonaws.com/playbuilds/"
+      verified: "s3.us-east-2.amazonaws.com/playbuilds/"
   name "Play!"
   desc "PlayStation 2 emulator"
   homepage "https://purei.org/"
 
   livecheck do
     url "https://services.purei.org/api/builds"
-    strategy :page_match do |page|
-      build = JSON.parse(page)
-      "#{build["commitDate"][/^(\d+(?:-\d+)+)T/i, 1]},#{build["commitHash"]}"
+    strategy :json do |json|
+      "#{json["commitDate"][/^(\d+(?:-\d+)+)T/i, 1]},#{json["commitHash"]}"
     end
   end
 

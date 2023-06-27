@@ -1,6 +1,6 @@
 cask "multipass" do
-  version "1.8.1"
-  sha256 "dd34235b8e5532860010e98e535595b9cc356c432a62b6a5d1ac1822bf994bef"
+  version "1.12.0"
+  sha256 "6695c81ac1ad003af01b1b8a25bf61917a1be12a6786c48df17ce2c416dcf6c1"
 
   url "https://github.com/canonical/multipass/releases/download/v#{version}/multipass-#{version}+mac-Darwin.pkg"
   name "Multipass"
@@ -8,9 +8,8 @@ cask "multipass" do
   homepage "https://github.com/canonical/multipass/"
 
   livecheck do
-    url "https://github.com/canonical/multipass/releases/"
-    strategy :page_match
-    regex(/multipass[._-]?(\d+(?:\.\d+)*)\+mac[._-]?Darwin\.pkg/i)
+    url :url
+    strategy :github_latest
   end
 
   depends_on macos: ">= :mojave"

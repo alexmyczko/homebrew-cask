@@ -1,15 +1,15 @@
 cask "clicker-for-youtube" do
-  version "1.19,52"
-  sha256 "5294f0278794745bddf74a87da4883e123ed78c71f7e5538a1ac5f7c67a421bd"
+  version "1.22"
+  sha256 "5ebdc7c2f4d9e25895512193ae89dedafb86625f30ca341871d053e595957dbf"
 
-  url "https://www.dbklabs.com/clicker-for-youtube/appcast/Clicker%20for%20YouTube%20#{version.before_comma}.dmg"
+  url "https://www.dbklabs.com/clicker-for-youtube/appcast/Clicker%20for%20YouTube%20#{version}.dmg"
   name "Clicker for YouTube"
   desc "Standalone YouTube app"
   homepage "https://www.dbklabs.com/clicker-for-youtube/"
 
   livecheck do
     url "https://www.dbklabs.com/clicker-for-youtube/appcast/appcast.xml"
-    strategy :sparkle
+    strategy :sparkle, &:short_version
   end
 
   depends_on macos: ">= :sierra"

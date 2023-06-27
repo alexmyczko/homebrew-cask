@@ -1,6 +1,6 @@
 cask "genymotion" do
-  version "3.2.1"
-  sha256 "60dc9996e988f42a09e2870766a10072010b49a21fe9fd655a02b944db3a3f2d"
+  version "3.4.0"
+  sha256 "362013934b2ede115953310cc4d9aba848e8a313b88483c6ab80b6e16991dd98"
 
   url "https://dl.genymotion.com/releases/genymotion-#{version}/genymotion-#{version}.dmg"
   name "Genymotion"
@@ -9,11 +9,8 @@ cask "genymotion" do
 
   livecheck do
     url "https://www.genymotion.com/download/"
-    strategy :page_match
-    regex(/Genymotion\s*Desktop\s*(\d+(?:\.\d+)*)/i)
+    regex(/Genymotion\s*Desktop\s*(\d+(?:\.\d+)+)/i)
   end
-
-  depends_on cask: "virtualbox"
 
   app "Genymotion.app"
   app "Genymotion Shell.app"
@@ -27,4 +24,8 @@ cask "genymotion" do
     "~/Library/Saved Application State/com.genymobile.genymotion.savedState",
     "~/Library/Saved Application State/com.genymobile.player.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -1,9 +1,9 @@
 cask "rstudio" do
-  version "2021.09.1,372"
-  sha256 "daec6a4034ca93d562e4c4103eb7f764a1005fe4d774ec2ad13e547a51d8d942"
+  version "2023.06.0,421"
+  sha256 "37ced5647fbb8ed5ea48f2b1b96ddef1ad09a24039e7e2419af8ac21c16f3d5c"
 
-  url "https://rstudio-desktop.s3.amazonaws.com/desktop/macos/RStudio-#{version.before_comma}-#{version.after_comma}.dmg",
-      verified: "rstudio-desktop.s3.amazonaws.com/"
+  url "https://download1.rstudio.org/electron/macos/RStudio-#{version.csv.first}-#{version.csv.second}.dmg",
+      verified: "download1.rstudio.org/electron/macos/"
   name "RStudio"
   desc "Data science software focusing on R and Python"
   homepage "https://www.rstudio.com/"
@@ -18,7 +18,6 @@ cask "rstudio" do
     end
   end
 
-  conflicts_with cask: "homebrew/cask-versions/rstudio-preview"
   depends_on macos: ">= :high_sierra"
 
   app "RStudio.app"

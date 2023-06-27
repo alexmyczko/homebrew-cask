@@ -1,6 +1,6 @@
 cask "oracle-jdk-javadoc" do
-  version "17.0.1,12,2a2082e5a09d4267845be086888add4f"
-  sha256 "126a130be9a45d3f079d462c0b2ece8bcef7d422d252d06d1c8ca37c835e7cf8"
+  version "20.0.1,9,b4887098932d415489976708ad6d1a4b"
+  sha256 "36f9fa700951cb53373554be69337294ab92269f45ddce66db8c9575fbf94a8f"
 
   url "https://download.oracle.com/otn_software/java/jdk/#{version.csv.first}+#{version.csv.second}/#{version.csv.third}/jdk-#{version.csv.first}_doc-all.zip",
       cookies: {
@@ -12,17 +12,17 @@ cask "oracle-jdk-javadoc" do
 
   livecheck do
     url "https://www.oracle.com/java/technologies/javase-jdk#{version.major}-doc-downloads.html"
-    strategy :page_match do |page|
-      match = page.match(%r{(\d+(?:\.\d+)*)\+(\d+(?:\.\d+)*)/(.+)/jdk-(\d+(?:\.\d+)*)_doc-all\.zip}i)
-      next if match.blank?
-
-      "#{match[1]},#{match[2]},#{match[3]}"
+    regex(%r{/(\d+(?:\.\d+)*)(?:\+|%2B)(\d+(?:\.\d+)*)/(\h+)/jdk[._-]v?(\d+(?:\.\d+)*)_doc-all\.zip}i)
+    strategy :page_match do |page, regex|
+      page.scan(regex).map { |match| "#{match[0]},#{match[1]},#{match[2]}" }
     end
   end
 
   artifact "docs", target: "/Library/Java/JavaVirtualMachines/jdk-#{version.csv.first}.jdk/Contents/Home/docs"
 
   uninstall rmdir: "/Library/Java/JavaVirtualMachines/jdk-#{version.csv.first}.jdk"
+
+  # No zap stanza required
 
   caveats do
     license "https://download.oracle.com/otndocs/jcp/java_se-#{version.major}-final-spec/license.html"

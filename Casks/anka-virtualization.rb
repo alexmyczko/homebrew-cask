@@ -1,6 +1,6 @@
 cask "anka-virtualization" do
-  version "2.5.3.135.5848058"
-  sha256 "8cdbfdb6507e53123ebf7abd52c40ec291de2d79263c6557ae0d529e83cd9e17"
+  version "3.3.2.166"
+  sha256 "2e5d4f8864d37053aa24216a04cf044b2c78f9bc8aad7730699435c7af5ddcba"
 
   url "https://downloads.veertu.com/anka/Anka-#{version}.pkg"
   name "Anka Virtualization"
@@ -9,21 +9,21 @@ cask "anka-virtualization" do
 
   livecheck do
     url "https://veertu.com/downloads/anka-virtualization-latest"
-    strategy :header_match
     regex(/Anka[._-]?v?(\d+(?:\.\d+)+)\.pkg/i)
+    strategy :header_match
   end
 
-  depends_on macos: ">= :yosemite"
+  depends_on macos: ">= :monterey"
 
   pkg "Anka-#{version}.pkg"
 
   uninstall launchctl: [
-    "com.veertu.nlimit",
-    "com.veertu.vlaunch",
-    "com.veertu.anka.lupd",
-    "com.veertu.anka.ankakbd",
-    "com.veertu.anka.ankanetd",
-  ],
+              "com.veertu.anka.ankakbd",
+              "com.veertu.anka.ankanetd",
+              "com.veertu.anka.lupd",
+              "com.veertu.nlimit",
+              "com.veertu.vlaunch",
+            ],
             script:    {
               executable: "/Library/Application Support/Veertu/Anka/tools/uninstall.sh",
               args:       ["-f"],
@@ -31,16 +31,16 @@ cask "anka-virtualization" do
             }
 
   zap trash: [
-    "~/.anka",
-    "~/Library/Application Support/Veertu/Anka",
-    "~/Library/Application Support/CrashReporter/ankahv_*.plist",
-    "~/Library/Logs/Anka",
-    "~/Library/Preferences/com.veertu.ankaview.plist",
-    "/Library/Application Support/Veertu/Anka",
-  ],
+        "/Library/Application Support/Veertu/Anka",
+        "~/.anka",
+        "~/Library/Application Support/CrashReporter/ankahv_*.plist",
+        "~/Library/Application Support/Veertu/Anka",
+        "~/Library/Logs/Anka",
+        "~/Library/Preferences/com.veertu.ankaview.plist",
+      ],
       rmdir: [
-        "~/Library/Application Support/Veertu",
         "/Library/Application Support/Veertu",
+        "~/Library/Application Support/Veertu",
       ]
 
   caveats do

@@ -1,15 +1,16 @@
 cask "lark" do
-  arch = Hardware::CPU.intel? ? "x64" : "arm64"
+  arch arm: "arm64", intel: "x64"
 
-  if Hardware::CPU.intel?
-    version "4.10.14,a89957"
-    sha256 "1df03dc07768e8678cb443aa8aff2b61509b2fdeb9b842c0815d1e01d02bcf17"
-  else
-    version "4.10.14,40a957"
-    sha256 "fb8f06d56ac036a40f7bba037e01f4428fe9a54ae9d6540d0c4639c0a4213dc4"
+  on_arm do
+    version "6.6.9,78249b16"
+    sha256 "02fda4f26a8223c3ec68c828e4873e3ce959ff6fd210dcdc9bd62298b4f2149d"
+  end
+  on_intel do
+    version "6.6.9,4d1b0a6e"
+    sha256 "a2539d7c8adac81f11a527856a7d2d43c1e85d4a169b83b2c1347f45f7ed4507"
   end
 
-  url "https://sf16-va.larksuitecdn.com/obj/lark-artifact-storage/#{version.after_comma}/Lark-darwin_#{arch}-#{version.before_comma}-signed.dmg",
+  url "https://sf16-va.larksuitecdn.com/obj/lark-artifact-storage/#{version.csv.second}/Lark-darwin_#{arch}-#{version.csv.first}-signed.dmg",
       verified: "sf16-va.larksuitecdn.com/obj/lark-artifact-storage/"
   name "Lark"
   desc "Project management software"
@@ -17,11 +18,9 @@ cask "lark" do
 
   livecheck do
     url "https://www.larksuite.com/api/downloads"
-    strategy :page_match do |page|
-      match = page.match(%r{/lark-artifact-storage/(\h+)/Lark-darwin_#{arch}[._-]v?(\d+(?:\.\d+)+)-signed\.dmg}i)
-      next if match.blank?
-
-      "#{match[2]},#{match[1]}"
+    regex(%r{/lark-artifact-storage/(\h+)/Lark-darwin_#{arch}[._-]v?(\d+(?:\.\d+)+)-signed\.dmg}i)
+    strategy :page_match do |page, regex|
+      page.scan(regex).map { |match| "#{match[1]},#{match[0]}" }
     end
   end
 

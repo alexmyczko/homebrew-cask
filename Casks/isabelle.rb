@@ -1,6 +1,6 @@
 cask "isabelle" do
-  version "2021"
-  sha256 "3540cb7e21128696972a0c44f12d39b548cc85f49458ef19f3dddfaaa7a858b0"
+  version "2022"
+  sha256 "28444505089e1e88da5c659b3e9b68cf7a234fb8ad9fa74345beacb352cf042d"
 
   url "https://www.cl.cam.ac.uk/research/hvg/Isabelle/dist/Isabelle#{version}_macos.tar.gz"
   name "Isabelle"
@@ -9,8 +9,7 @@ cask "isabelle" do
 
   livecheck do
     url :homepage
-    strategy :page_match
-    regex(%r{href=.*?/Isabelle(\d+(?:\.\d+)*)_macos\.tar\.gz}i)
+    regex(%r{href=.*?/Isabelle(\d+(?:.\d+)*)_macos\.t}i)
   end
 
   app "Isabelle#{version}.app"

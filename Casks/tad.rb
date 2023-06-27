@@ -1,12 +1,17 @@
 cask "tad" do
-  version "0.9.0"
-  sha256 "55cd0d6557418ba4e072ad4fbcb1619f0df05842c6567ed4cbee37aa3c1d6f9b"
+  version "0.12.0"
+  sha256 "79c1def837a39b5f4ce580b9de908c8dd96f34dedaf5aa193522da82901b6e9b"
 
   url "https://github.com/antonycourtney/tad/releases/download/v#{version}/Tad-#{version}.dmg",
       verified: "github.com/antonycourtney/tad/"
   name "Tad"
   desc "Desktop application for viewing and analyzing tabular data"
   homepage "https://www.tadviewer.com/"
+
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
 
   app "Tad.app"
   binary "#{appdir}/Tad.app/Contents/Resources/tad.sh", target: "tad"

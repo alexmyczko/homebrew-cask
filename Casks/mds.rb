@@ -2,15 +2,15 @@ cask "mds" do
   version "4.0,40106"
   sha256 "29e53a23bb97cb260290c868dc92a31cdba359f98cbf6643742d367204c207f2"
 
-  url "https://twocanoes-software-updates.s3.amazonaws.com/MDS_Build-#{version.after_comma}_Version-#{version.before_comma}.dmg",
-      verified: "https://twocanoes-software-updates.s3.amazonaws.com/"
+  url "https://twocanoes-software-updates.s3.amazonaws.com/MDS_Build-#{version.csv.second}_Version-#{version.csv.first}.dmg",
+      verified: "twocanoes-software-updates.s3.amazonaws.com/"
   name "MDS"
   desc "Deploy Intel and Apple Silicon Macs in Seconds"
   homepage "https://twocanoes.com/products/mac/mac-deploy-stick/"
 
   livecheck do
     url "https://twocanoes.com/products/mac/mac-deploy-stick/history/"
-    regex(/MDS_Build-(\d+)_Version-(\d+(?:[._-]\d+)*)\.dmg/i)
+    regex(%r{/MDS_Build-(\d+)_Version-(\d+(?:[._-]\d+)*)\.dmg}i)
     strategy :page_match do |page, regex|
       match = page.match(regex)
       next if match.blank?

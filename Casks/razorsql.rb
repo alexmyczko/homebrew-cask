@@ -1,14 +1,25 @@
 cask "razorsql" do
-  version "9.2.7"
-  sha256 "683b5124c21166b4747cc6e165ba0a709d932634fa8d881d7a8aca1f3b39b959"
+  arch arm: "_aarch64"
 
-  url "https://s3.dualstack.us-east-1.amazonaws.com/downloads.razorsql.com/downloads/#{version.dots_to_underscores}/razorsql#{version.dots_to_underscores}.dmg",
+  version "10.4.3"
+  sha256 arm:   "45f8fbe36b4a5346a6dab3d03942cba4b65588b7dc8e99e78542cc0d7969d6d2",
+         intel: "77626b32cd76cf34ab73644d9da834cc7039c82d5b27c07a6dda9149609f6e29"
+
+  url "https://s3.dualstack.us-east-1.amazonaws.com/downloads.razorsql.com/downloads/#{version.dots_to_underscores}/razorsql#{version.dots_to_underscores}#{arch}.dmg",
       verified: "s3.dualstack.us-east-1.amazonaws.com/"
-  appcast "https://razorsql.com/updates.html"
   name "RazorSQL"
+  desc "SQL query tool and SQL editor"
   homepage "https://razorsql.com/"
 
-  depends_on macos: ">= :high_sierra"
+  livecheck do
+    url "https://razorsql.com/download_mac.html"
+    regex(/href=.*?razorsql[._-]?v?(\d+(?:[._]\d+)+)#{arch}\.dmg/i)
+    strategy :page_match do |page, regex|
+      page.scan(regex).map { |match| match[0].tr("_", ".") }
+    end
+  end
+
+  depends_on macos: ">= :mojave"
 
   app "RazorSQL.app"
 

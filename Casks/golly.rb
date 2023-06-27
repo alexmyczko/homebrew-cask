@@ -1,10 +1,9 @@
 cask "golly" do
-  version "4.0.1"
-  sha256 "5e4e14c06ac979da93e8b99d0203073c759c8a540ac84ff81b265aa5777937c0"
+  version "4.2"
+  sha256 "ef833166a90f8640f348eee6b614c08f93a5e48ee2070f4f556354f3f3013a7d"
 
-  url "https://downloads.sourceforge.net/golly/golly/golly-#{version.major_minor}/Golly-#{version}-Mac.dmg",
+  url "https://downloads.sourceforge.net/golly/golly/golly-#{version.major_minor}/golly-#{version}-mac.dmg",
       verified: "downloads.sourceforge.net/golly/"
-  appcast "https://sourceforge.net/projects/golly/rss?path=/golly"
   name "Golly"
   desc "Explore Conway's Game of Life and other types of cellular automata"
   homepage "https://golly.sourceforge.io/"

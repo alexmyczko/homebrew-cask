@@ -1,13 +1,15 @@
 cask "katrain" do
-  version "1.10.1"
-  sha256 "6bd26177ca780937901ef9ce6b6e61471624423e8b2579e93712d3290b6ab053"
+  version "1.13.0"
+  sha256 "35db2a4da2c22a431ef27cfe3d3271a9a231695af7fb2ccbfcb9d5c301bb3d86"
 
-  url "https://github.com/sanderland/katrain/releases/download/#{version}/KaTrain.dmg"
+  on_arm do
+    depends_on formula: "katago"
+  end
+
+  url "https://github.com/sanderland/katrain/releases/download/v#{version}/KaTrainOSX.dmg"
   name "KaTrain"
   desc "Tool for analyzing games and playing go with AI feedback from KataGo"
   homepage "https://github.com/sanderland/katrain"
-
-  depends_on formula: "katago" if Hardware::CPU.arm?
 
   app "KaTrain.app"
 

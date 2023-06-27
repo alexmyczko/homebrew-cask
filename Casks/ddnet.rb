@@ -1,16 +1,15 @@
 cask "ddnet" do
-  version "15.7"
-  sha256 "1ebce2c58bbb8329047e68da88da18b29a70ca3116d344271f05dfb2ad54956f"
+  version "17.0.3"
+  sha256 "fccc37eab572d1260d470f189006a7a22a54bdec96e72581d4aa19d9fe4651c2"
 
-  url "https://ddnet.tw/downloads/DDNet-#{version}-osx.dmg"
+  url "https://ddnet.tw/downloads/DDNet-#{version}-macos.dmg"
   name "DDNet"
-  desc "Teeworlds version of DDRace"
+  desc "Cooperative online platform game based on Teeworlds"
   homepage "https://ddnet.tw/"
 
   livecheck do
-    url "https://github.com/ddnet/ddnet/tags"
-    strategy :page_match
-    regex(/(\d+(?:\.\d+)+)\.zip/i)
+    url "https://ddnet.tw/downloads/"
+    regex(/href=.*?DDNet[._-]v?(\d+(?:\.\d+)+)[^"' >]*?\.dmg/i)
   end
 
   auto_updates true

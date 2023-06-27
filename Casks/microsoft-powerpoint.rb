@@ -1,6 +1,28 @@
 cask "microsoft-powerpoint" do
-  version "16.55.21111400"
-  sha256 "8de48979e26a09d317c9367a31e50382fee305b47ebfd1652b85c2bb4c42345d"
+  on_el_capitan :or_older do
+    version "16.16.20101200"
+    sha256 "0c898068408082124f7fe45717e3fb4b4f5647b609b54dc5fa6c90e295f499c3"
+  end
+  on_sierra do
+    version "16.30.19101301"
+    sha256 "d0b16f96bb390a225c52808952a66f0e02bf3f355234cbe733b250d37bb44c72"
+  end
+  on_high_sierra do
+    version "16.43.20110804"
+    sha256 "a89e0aed18e5b1e56293b1f9eaccc3e3f5089eb37a9eec64bb6f3a3fa90587eb"
+  end
+  on_mojave do
+    version "16.54.21101001"
+    sha256 "75a57c82b46d0e2558c454f19610576b7a48baf1ccc5cd1fa61b69cca5bf0bd1"
+  end
+  on_catalina do
+    version "16.66.22101101"
+    sha256 "bea8c4790445f726debd0f64d24fbdac59e3a9b51e95c092fb31da3913164540"
+  end
+  on_big_sur :or_newer do
+    version "16.74.23061100"
+    sha256 "f573a206b85b803a5fcbf513e3bb59b306056f82bcbe582e8305be17caedac43"
+  end
 
   url "https://officecdnmac.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/Microsoft_PowerPoint_#{version}_Installer.pkg",
       verified: "officecdnmac.microsoft.com/"
@@ -14,9 +36,11 @@ cask "microsoft-powerpoint" do
   end
 
   auto_updates true
-  conflicts_with cask: "microsoft-office"
+  conflicts_with cask: [
+    "microsoft-office",
+    "microsoft-office-businesspro",
+  ]
   depends_on cask: "microsoft-auto-update"
-  depends_on macos: ">= :sierra"
 
   pkg "Microsoft_PowerPoint_#{version}_Installer.pkg",
       choices: [
@@ -28,10 +52,12 @@ cask "microsoft-powerpoint" do
       ]
 
   uninstall pkgutil:   [
-    "com.microsoft.package.Microsoft_PowerPoint.app",
-    "com.microsoft.pkg.licensing",
-  ],
-            launchctl: "com.microsoft.office.licensingV2.helper"
+              "com.microsoft.package.Microsoft_PowerPoint.app",
+              "com.microsoft.pkg.licensing",
+            ],
+            delete:    "/Applications/Microsoft PowerPoint.app",
+            launchctl: "com.microsoft.office.licensingV2.helper",
+            quit:      "com.microsoft.autoupdate2"
 
   zap trash: [
     "~/Library/Application Scripts/com.microsoft.Powerpoint",

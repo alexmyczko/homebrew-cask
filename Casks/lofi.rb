@@ -1,11 +1,11 @@
 cask "lofi" do
-  version "1.6.0"
-  sha256 "9b0373b37fc1fd61075963ddd3e109523150b3cc09de8aeef8f83bf3dfa24cf9"
+  version "2.0.0"
+  sha256 "1100407ba583c3c307843aede615844791f5584dafe4b7f202ce9c067fed3a87"
 
   url "https://github.com/dvx/lofi/releases/download/v#{version}/lofi-#{version}.dmg",
       verified: "github.com/dvx/lofi/"
   name "Lofi"
-  desc "Mini Spotify player with WebGL visualizations"
+  desc "Spotify player with WebGL visualizations"
   homepage "https://www.lofi.rocks/"
 
   app "Lofi.app"

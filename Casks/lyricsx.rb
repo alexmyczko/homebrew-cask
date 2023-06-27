@@ -1,19 +1,27 @@
 cask "lyricsx" do
-  version "1.6.1,2341"
-  sha256 "b9a4555f9cb070800eba87ae88df65140d72246f18d9f31517a85276d14308f6"
+  version "1.6.3,2351"
+  sha256 "7566809283aecdedd5275ded9180cedb467ce40c524b3297b411fe7abb479391"
 
-  url "https://github.com/ddddxxx/LyricsX/releases/download/v#{version.before_comma}/LyricsX_#{version.before_comma}+#{version.after_comma}.zip"
+  url "https://github.com/ddddxxx/LyricsX/releases/download/v#{version.csv.first}/LyricsX_#{version.csv.first}+#{version.csv.second}.zip"
   name "LyricsX"
   desc "Lyrics for iTunes, Spotify, Vox and Audirvana Plus"
   homepage "https://github.com/ddddxxx/LyricsX"
 
   livecheck do
     url "https://github.com/ddddxxx/LyricsX/releases/latest"
-    strategy :page_match do |page|
-      match = page.match(%r{href=.*?/LyricsX_(\d+(?:\.\d+)*)\+(\d+)\.zip}i)
-      next if match.blank?
+    regex(%r{href=.*?/LyricsX_(\d+(?:\.\d+)*)\+(\d+)\.zip}i)
+    strategy :header_match do |headers, regex|
+      next if headers["location"].blank?
 
-      "#{match[1]},#{match[2]}"
+      # Identify the latest tag from the response's `location` header
+      latest_tag = File.basename(headers["location"])
+      next if latest_tag.blank?
+
+      # Fetch the assets list HTML for the latest tag and match within it
+      assets_page = Homebrew::Livecheck::Strategy.page_content(
+        @url.sub(%r{/releases/?.+}, "/releases/expanded_assets/#{latest_tag}"),
+      )
+      assets_page[:content]&.scan(regex)&.map { |match| "#{match[0]},#{match[1]}" }
     end
   end
 
@@ -21,5 +29,14 @@ cask "lyricsx" do
 
   app "LyricsX.app"
 
-  zap trash: "~/ddddxxx.LyricsX"
+  zap trash: [
+    "~/ddddxxx.LyricsX",
+    "~/Library/Application Scripts/3665V726AE.group.ddddxxx.LyricsX",
+    "~/Library/Application Scripts/ddddxxx.LyricsX",
+    "~/Library/Application Scripts/ddddxxx.LyricsXHelper",
+    "~/Library/Containers/ddddxxx.LyricsX",
+    "~/Library/Containers/ddddxxx.LyricsXHelper",
+    "~/Library/Group Containers/3665V726AE.group.ddddxxx.LyricsX",
+    "~/Library/Preferences/ddddxxx.LyricsX.plist",
+  ]
 end

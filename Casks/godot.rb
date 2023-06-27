@@ -1,8 +1,8 @@
 cask "godot" do
-  version "3.4"
-  sha256 "f3af37ed0ad844188b9cba6e31decb4605c86fa2a46b65ad6279e8ca5d6eef6e"
+  version "4.0.3"
+  sha256 "b8a0271b16399845bd18705d52ef39237d6cbb81c13aac2c5ab2707e217629ac"
 
-  url "https://downloads.tuxfamily.org/godotengine/#{version}/Godot_v#{version}-stable_osx.universal.zip",
+  url "https://downloads.tuxfamily.org/godotengine/#{version}/Godot_v#{version}-stable_macos.universal.zip",
       verified: "downloads.tuxfamily.org/godotengine/"
   name "Godot Engine"
   desc "Game development engine"
@@ -10,8 +10,10 @@ cask "godot" do
 
   livecheck do
     url "https://github.com/godotengine/godot"
-    regex(/^v?(\d+(?:\.\d+)+)[._-]stable$/)
+    regex(/^v?(\d+(?:\.\d+)+)[._-]stable$/i)
   end
+
+  conflicts_with cask: "homebrew/cask-versions/godot3"
 
   app "Godot.app"
   binary "#{appdir}/Godot.app/Contents/MacOS/Godot", target: "godot"

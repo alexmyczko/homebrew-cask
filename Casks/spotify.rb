@@ -1,13 +1,14 @@
 cask "spotify" do
-  arch = Hardware::CPU.intel? ? "" : "ARM64"
-
-  if Hardware::CPU.intel?
-    version "1.1.73.517,bef50fdb,23"
-  else
-    version "1.1.69.612,b7409abc,13"
-  end
+  arch arm: "ARM64"
 
   sha256 :no_check
+
+  on_arm do
+    version "1.2.14.1149,a3ae422d,1071"
+  end
+  on_intel do
+    version "1.2.14.1149,a3ae422d,1070"
+  end
 
   url "https://download.scdn.co/Spotify#{arch}.dmg",
       verified: "download.scdn.co/"
@@ -26,19 +27,22 @@ cask "spotify" do
   end
 
   auto_updates true
+  depends_on macos: ">= :el_capitan"
 
   app "Spotify.app"
 
-  uninstall launchctl: "com.spotify.webhelper"
+  uninstall quit:      "com.spotify.client",
+            launchctl: "com.spotify.webhelper"
 
   zap trash: [
     "~/Library/Application Support/Spotify",
-    "~/Library/Caches/com.spotify.client",
     "~/Library/Caches/com.spotify.client.helper",
+    "~/Library/Caches/com.spotify.client",
     "~/Library/Cookies/com.spotify.client.binarycookies",
+    "~/Library/HTTPStorages/com.spotify.client",
     "~/Library/Logs/Spotify",
-    "~/Library/Preferences/com.spotify.client.plist",
     "~/Library/Preferences/com.spotify.client.helper.plist",
+    "~/Library/Preferences/com.spotify.client.plist",
     "~/Library/Saved Application State/com.spotify.client.savedState",
   ]
 end

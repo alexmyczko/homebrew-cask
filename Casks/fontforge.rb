@@ -1,8 +1,8 @@
 cask "fontforge" do
-  version "2020-11-07,21ad4a1"
-  sha256 "64e7193485b2047ff497ec43a39793e18593b2702a0724810f8c2c8ca8a34999"
+  version "2023-01-01,a1dad3e"
+  sha256 "b87479dbb8f8f9131ea37983aae63542f016aa182232be5c6a56976350b3ebfd"
 
-  url "https://github.com/fontforge/fontforge/releases/download/#{version.before_comma.no_hyphens}/FontForge-#{version.before_comma}-#{version.after_comma}.app.dmg",
+  url "https://github.com/fontforge/fontforge/releases/download/#{version.csv.first.no_hyphens}/FontForge-#{version.csv.first}-#{version.csv.second}.app.dmg",
       verified: "github.com/fontforge/fontforge/"
   name "FontForge"
   desc "Font editor and converter for outline and bitmap fonts"
@@ -10,15 +10,23 @@ cask "fontforge" do
 
   livecheck do
     url "https://github.com/fontforge/fontforge/releases/latest"
-    strategy :page_match do |page|
-      match = page.match(%r{href=.*?/FontForge-(\d+(?:-\d+)*)-([0-9a-f]+)\.app\.dmg}i)
-      next if match.blank?
+    regex(%r{href=.*?/FontForge-(\d+(?:-\d+)*)-([0-9a-f]+)\.app\.dmg}i)
+    strategy :header_match do |headers, regex|
+      next if headers["location"].blank?
 
-      "#{match[1]},#{match[2]}"
+      # Identify the latest tag from the response's `location` header
+      latest_tag = File.basename(headers["location"])
+      next if latest_tag.blank?
+
+      # Fetch the assets list HTML for the latest tag and match within it
+      assets_page = Homebrew::Livecheck::Strategy.page_content(
+        @url.sub(%r{/releases/?.+}, "/releases/expanded_assets/#{latest_tag}"),
+      )
+      assets_page[:content]&.scan(regex)&.map { |match| "#{match[0]},#{match[1]}" }
     end
   end
 
-  depends_on macos: ">= :yosemite"
+  depends_on macos: ">= :catalina"
 
   app "FontForge.app"
 

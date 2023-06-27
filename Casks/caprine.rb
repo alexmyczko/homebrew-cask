@@ -1,11 +1,16 @@
 cask "caprine" do
-  version "2.55.1"
-  sha256 "60396605141b79366b112370118e9d2fcc44959a2502fb568ef99f5e61d064e3"
+  version "2.57.4"
+  sha256 "9a7f80442bf3c07cd2fb702f91473918c9abb2e4c3b5c909b278d5bf3b4f8cfc"
 
   url "https://github.com/sindresorhus/caprine/releases/download/v#{version}/Caprine-#{version}.dmg"
   name "Caprine"
   desc "Elegant Facebook Messenger desktop app"
   homepage "https://github.com/sindresorhus/caprine"
+
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
 
   auto_updates true
 

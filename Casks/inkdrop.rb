@@ -1,12 +1,22 @@
 cask "inkdrop" do
-  version "5.2.0"
-  sha256 "8bd35c2059e8088c6f856e2cde5b7a900d9d50611608902f1ad4057950804520"
+  arch arm: "arm64", intel: "x64"
 
-  url "https://d3ip0rje8grhnl.cloudfront.net/v#{version}/Inkdrop-#{version}-Mac.zip",
+  version "5.5.3"
+  sha256 arm:   "6fef4312c90014aaf29367abe9fa5e679316b25e88218309a3213feee47c8eb7",
+         intel: "8d88dcdd1bc9968b7b48516f711401044a7eebc3a755b500fbef45545eab4327"
+
+  url "https://d3ip0rje8grhnl.cloudfront.net/v#{version}/Inkdrop-#{version}-#{arch}-Mac.zip",
       verified: "d3ip0rje8grhnl.cloudfront.net/"
-  appcast "https://api.inkdrop.app/update/links"
   name "Inkdrop"
+  desc "Markdown editor"
   homepage "https://www.inkdrop.info/"
+
+  livecheck do
+    url "https://api.inkdrop.app/update/links"
+    strategy :json do |json|
+      json["version"]
+    end
+  end
 
   app "Inkdrop.app"
 

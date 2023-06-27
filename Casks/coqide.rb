@@ -8,6 +8,10 @@ cask "coqide" do
   desc "Formal proof management system"
   homepage "https://coq.inria.fr/"
 
+  livecheck do
+    skip "No reliable way to get version info"
+  end
+
   depends_on macos: ">= :sierra"
 
   app "CoqIDE_#{version.major_minor_patch}.app"

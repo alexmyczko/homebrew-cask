@@ -4,10 +4,10 @@
 
 Homebrew Cask is implemented as part of Homebrew. All Homebrew Cask commands begin with `brew`, which works for both Casks and Formulae. The most frequently-used commands are:
 
-* `install` — installs the given Cask
-* `uninstall` — uninstalls the given Cask
-* `reinstall` — reinstalls the given Cask
-* `list --casks` — lists installed Casks
+* `install` — installs the given Cask.
+* `uninstall` — uninstalls the given Cask.
+* `reinstall` — reinstalls the given Cask.
+* `list --casks` — lists installed Casks.
 
 ## Searching for Casks
 
@@ -45,22 +45,22 @@ This will both uninstall the Cask and remove applications which were moved to `/
 
 ## Other Commands
 
-* `info` — displays information about the given Cask
-* `fetch` — downloads remote application files for the given Cask to the local cache (with `--force`, re-download even if already cached)
-* `--cache` — displays the path to Homebrew's local cache
-* `doctor` — checks for configuration issues
-* `style` — checks Cask style using RuboCop
-* `home` — opens the homepage of the given Cask; or with no arguments, the Homebrew project page
-* `uninstall --zap` — try to remove *all* files associated with a Cask (may include resources shared with other applications)
-* `outdated` — lists all outdated Casks
-* `upgrade` — updates all outdated Casks
+* `info` — displays information about the given Cask.
+* `fetch` — downloads remote application files for the given Cask to the local cache (with `--force`, re-download even if already cached).
+* `--cache` — displays the path to Homebrew's local cache.
+* `doctor` — checks for configuration issues.
+* `style` — checks Cask style using RuboCop.
+* `home` — opens the homepage of the given Cask; or with no arguments, the Homebrew project page.
+* `uninstall --zap` — try to remove *all* files associated with a Cask (may include resources shared with other applications).
+* `outdated` — lists all outdated Casks.
+* `upgrade` — updates all outdated Casks.
 
 The following commands are for Cask authors:
 
-* `audit` — verifies installability of Casks
-* `cat` — dumps the given Cask to the standard output
-* `create --cask` — creates a Cask and opens it in an editor
-* `edit` — edits the given Cask
+* `audit` — verifies installability of Casks.
+* `cat` — dumps the given Cask to the standard output.
+* `create --cask` — creates a Cask and opens it in an editor.
+* `edit` — edits the given Cask.
 
 The following aliases and abbreviations are provided for convenience:
 
@@ -131,7 +131,6 @@ The primary Homebrew Cask Tap includes most of the Casks that a typical user wil
 | -------- | ----------- |
 | [Homebrew/cask-versions](https://github.com/Homebrew/homebrew-cask-versions) | contains alternate versions of Casks (_e.g._ betas, nightly releases, old versions)
 | [Homebrew/cask-fonts](https://github.com/Homebrew/homebrew-cask-fonts)       | contains Casks that install fonts
-| [Homebrew/cask-drivers](https://github.com/Homebrew/homebrew-cask-drivers)   | contains Casks that install drivers for various devices
 
 You can tap any of the above with a `brew tap` command:
 
@@ -151,11 +150,11 @@ $ brew install homebrew/cask-fonts/font-symbola
 
 `brew` accepts a number of options:
 
-* `--version`: print version and exit
-* `--debug`: output debug information
-* `--no-binaries`: skip symlinking executable binaries into `/usr/local/bin`
-* `--require-sha`: abort installation of Cask if no checksum is defined
-* `--no-quarantine`: [disable Apple’s quarantining](https://github.com/Homebrew/homebrew-cask/blob/HEAD/doc/faq/app_cant_be_opened.md) for the specific app
+* `--version`: print version and exit.
+* `--debug`: output debug information.
+* `--no-binaries`: skip symlinking executable binaries into `/usr/local/bin`.
+* `--require-sha`: abort installation of Cask if no checksum is defined.
+* `--no-quarantine`: [disable Apple’s quarantining](https://docs.brew.sh/FAQ#why-cant-i-open-a-mac-app-from-an-unidentified-developer) for the specific app.
 * `--language=<iso-language>[,<iso-language> ... ]`: changes the language of the Cask to be installed. The first matching language is used, otherwise it uses the default language of the Cask.
 
 You can also modify the default installation locations used when issuing `brew install`:
@@ -191,7 +190,7 @@ Most `brew` commands can accept a Cask token as an argument. As described above,
 
 * A path to a Cask file, _e.g._: `/usr/local/Library/Taps/homebrew/homebrew-cask/Casks/google-chrome.rb`.
 * A `curl`-retrievable URI to a Cask file, _e.g._: `https://raw.githubusercontent.com/Homebrew/homebrew-cask/f25b6babcd398abf48e33af3d887b2d00de1d661/Casks/google-chrome.rb`.
-* A file in the current working directory, _e.g._: `my-modfied-google-chrome.rb`. Note that matching Tapped Cask tokens will be preferred over this form when there is a conflict. To force the use of a Cask file in the current directory, specify a pathname with slashes, _e.g._: `./google-chrome.rb`.
+* A file in the current working directory, _e.g._: `my-modified-google-chrome.rb`. Note that matching Tapped Cask tokens will be preferred over this form when there is a conflict. To force the use of a Cask file in the current directory, specify a pathname with slashes, _e.g._: `./google-chrome.rb`.
 
 The last three forms are intended for users who wish to maintain private Casks.
 

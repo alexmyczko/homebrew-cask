@@ -1,6 +1,6 @@
 cask "xonotic" do
-  version "0.8.2"
-  sha256 "a22f7230f486c5825b55cfdadd73399c9b0fae98c9e081dd8ac76eca08359ad5"
+  version "0.8.6"
+  sha256 "50850f8d800e7499722f6ea61e478e96464a375494b5a24da93aa0598cbe964d"
 
   url "https://dl.xonotic.org/xonotic-#{version}.zip"
   name "Xonotic"
@@ -13,4 +13,6 @@ cask "xonotic" do
   end
 
   suite "Xonotic"
+
+  zap trash: "~/Library/Application Support/xonotic"
 end

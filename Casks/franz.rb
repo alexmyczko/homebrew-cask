@@ -1,8 +1,11 @@
 cask "franz" do
-  version "5.7.0"
-  sha256 "197f143c7f3cfae472b1c6a66f6387f948357a94ae12a04977293ed41662a8ff"
+  arch arm: "-arm64"
 
-  url "https://github.com/meetfranz/franz/releases/download/v#{version}/franz-#{version}.dmg",
+  version "5.9.2"
+  sha256 arm:   "700342d6d3a6b532e5e7a3767c8b97d9bcfc9eb0959098f02d3b13462fdcfb7d",
+         intel: "9b6907c132624c645e9d39bc9822a239b0e3a7507d40bcc97bf2be6ca3fc171f"
+
+  url "https://github.com/meetfranz/franz/releases/download/v#{version}/franz-#{version}#{arch}.dmg",
       verified: "github.com/meetfranz/franz/"
   name "Franz"
   desc "Messaging app for WhatsApp, Facebook Messenger, Slack, Telegram and more"
@@ -12,9 +15,7 @@ cask "franz" do
 
   app "Franz.app"
 
-  uninstall signal: [
-    ["QUIT", "com.meetfranz.franz"],
-  ],
+  uninstall signal: ["QUIT", "com.meetfranz.franz"],
             delete: "/Library/Logs/DiagnosticReports/Franz Helper_.*wakeups_resource.diag"
 
   zap trash: [

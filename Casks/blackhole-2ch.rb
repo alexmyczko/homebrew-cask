@@ -1,6 +1,6 @@
 cask "blackhole-2ch" do
-  version "0.2.10"
-  sha256 "5463fe21d07d344d049e391b02083e35275ee74523c5c950ef4cf5a6adb237b0"
+  version "0.5.0"
+  sha256 "f042f31193a66d82e5a39afc429e3c1b8f1683f5996e7d8f9af5b6bb4603bfe6"
 
   url "https://existential.audio/downloads/BlackHole2ch.v#{version}.pkg"
   name "BlackHole 2ch"
@@ -27,4 +27,6 @@ cask "blackhole-2ch" do
 
   uninstall quit:    "com.apple.audio.AudioMIDISetup",
             pkgutil: "audio.existential.BlackHole2ch"
+
+  # No zap stanza required
 end

@@ -1,6 +1,6 @@
 cask "screenflick" do
-  version "3.0.7"
-  sha256 "9f76efcdcc81a6e99e1fe6b56bab3fb46f48b326b09cd22aa434cbb0c91abcfa"
+  version "3.1.9"
+  sha256 "a3254cc088f176820e9524e7165468a26e72e1ba266f1a873aa0da8d9192be11"
 
   url "https://store.araelium.com/screenflick/downloads/versions/Screenflick#{version}.zip"
   name "Screenflick"
@@ -9,7 +9,7 @@ cask "screenflick" do
 
   livecheck do
     url "https://arweb-assets.s3.amazonaws.com/downloads/screenflick/updates.json"
-    regex(%r{/Screenflick(\d+(?:\.\d+)+)\.zip}i)
+    regex(/Screenflick(\d+(?:\.\d+)+)\.zip/i)
   end
 
   depends_on macos: ">= :mojave"

@@ -1,6 +1,6 @@
 cask "kitty" do
-  version "0.23.1"
-  sha256 "a0987a7d00497a2251e7990f7a3128aa96155730abc322c3cd2648bd5a839e0f"
+  version "0.28.1"
+  sha256 "d98e5883714aec797029444da1ee107bf8382215ae57357befadda1f9840d692"
 
   url "https://github.com/kovidgoyal/kitty/releases/download/v#{version}/kitty-#{version}.dmg"
   name "kitty"
@@ -22,8 +22,10 @@ cask "kitty" do
   end
 
   zap trash: [
+    "~/.config/kitty",
     "~/Library/Caches/kitty",
     "~/Library/Preferences/kitty",
+    "~/Library/Preferences/net.kovidgoyal.kitty.plist",
     "~/Library/Saved Application State/net.kovidgoyal.kitty.savedState",
   ]
 end

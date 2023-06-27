@@ -1,16 +1,15 @@
 cask "clockify" do
-  version "2.7.9,343"
+  version "2.9.9"
   sha256 :no_check
 
-  url "https://clockify-resources.s3.eu-central-1.amazonaws.com/downloads/ClockifyDesktop.zip",
-      verified: "clockify-resources.s3.eu-central-1.amazonaws.com/"
+  url "https://clockify.me/downloads/ClockifyDesktop.zip"
   name "Clockify"
   desc "Time tracking tool for agencies and freelancers"
   homepage "https://clockify.me/mac-time-tracking"
 
   livecheck do
-    url "https://clockify-resources.s3.eu-central-1.amazonaws.com/downloads/appcast.xml"
-    strategy :sparkle
+    url "https://clockify.me/downloads/appcast.xml"
+    strategy :sparkle, &:short_version
   end
 
   auto_updates true

@@ -1,8 +1,11 @@
 cask "utools" do
-  version "2.4.1"
-  sha256 "0f5a3e7cb8785f7143f2c71d0e4afe8eb370717204b593491e928d272820e49c"
+  arch arm: "-arm64"
 
-  url "https://publish.u-tools.cn/version2/uTools-#{version}.dmg",
+  version "3.3.0"
+  sha256 arm:   "d69153fb1ba3c5926dbc671cdb78f2deaac75c5abc7521abd50a4c7d0d13e035",
+         intel: "051dcd5e35f42120ba97ba73f40cf54244975565b61c0163d39e5bf0dc0ff14e"
+
+  url "https://publish.u-tools.cn/version2/uTools-#{version}#{arch}.dmg",
       verified: "publish.u-tools.cn/"
   name "uTools"
   desc "Plug-in productivity tool set"
@@ -12,9 +15,6 @@ cask "utools" do
     url :homepage
     regex(/uTools[._-]v?(\d+(?:\.\d+)*)\.dmg/i)
   end
-
-  auto_updates true
-  depends_on macos: ">= :yosemite"
 
   app "uTools.app"
 

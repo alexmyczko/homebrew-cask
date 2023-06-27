@@ -1,24 +1,22 @@
 cask "mattermost" do
-  arch = Hardware::CPU.intel? ? "x64" : "m1"
+  arch arm: "m1", intel: "x64"
 
-  version "5.0.2"
+  version "5.4.0"
+  sha256 arm:   "2bc80e918fde623de5c55dabb43d4465eaa791f23952c45653486ee403af9313",
+         intel: "99f6e53defc9e2e273e64bbd360e4f253dba4f18b417985b1948cd8853d414dd"
 
   url "https://releases.mattermost.com/desktop/#{version}/mattermost-desktop-#{version}-mac-#{arch}.zip"
-  if Hardware::CPU.intel?
-    sha256 "214e9a2246465b2b8d886b8bce2d537580b3036448d3b7133beee5c48abb210c"
-  else
-    sha256 "b6d26d3a711dd88c143420ea46e3c61a66e9ac0dc04a8764211e882feeb11cbe"
-  end
-
   name "Mattermost"
   desc "Open-source, self-hosted Slack-alternative"
-  homepage "https://about.mattermost.com/"
+  homepage "https://mattermost.com/"
 
   livecheck do
-    url "https://docs.mattermost.com/install/desktop-app-install.html#macos-10-9"
-    strategy :page_match
-    regex(%r{href=.*?/mattermost-desktop-(\d+(?:\.\d+)*)-mac-#{arch}\.dmg}i)
+    url "https://github.com/mattermost/desktop/"
+    strategy :github_latest
   end
+
+  auto_updates true
+  depends_on macos: ">= :catalina"
 
   app "Mattermost.app"
 

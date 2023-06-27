@@ -1,6 +1,6 @@
 cask "softraid" do
-  version "6.2"
-  sha256 "44a9f6c203ebb78d8dd203d471f0561da344407aae2cbba4bf1ed921583ca4a9"
+  version "6.3"
+  sha256 "353872dc593d6f5dc6ffe1225c35269a670ea528f6740d52142f934e7f29510e"
 
   url "https://downloads.owc.com/softraid/mac/#{version.major}/SoftRAID%20#{version}.dmg",
       verified: "downloads.owc.com/softraid/"

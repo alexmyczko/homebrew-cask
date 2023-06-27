@@ -1,6 +1,6 @@
 cask "filemaker-pro" do
-  version "19.3.2.206"
-  sha256 "8af484b3825d62e0fe5035ca68b9103c38bfa315e8425cef2eb3a881c0906136"
+  version "20.1.2.204"
+  sha256 "a4728adb13c9898fbee3818fa7f538c6ea21d24322c0bff576414ede86392d28"
 
   url "https://downloads.claris.com/esd/fmp_#{version}.dmg"
   name "FileMaker Pro"
@@ -9,14 +9,24 @@ cask "filemaker-pro" do
 
   livecheck do
     url "https://www.filemaker.com/redirects/ss.txt"
-    strategy :page_match
-    regex(%r{/fmp_(\d+(?:\.\d+)*)\.dmg}i)
+    regex(%r{/fmp[._-]v?(\d+(?:\.\d+)+)\.dmg}i)
   end
 
   auto_updates true
   depends_on macos: ">= :mojave"
 
   app "FileMaker Pro.app"
+
+  zap trash: [
+    "/Users/Shared/FileMaker",
+    "~/Library/Application Support/FileMaker",
+    "~/Library/Caches/FileMaker",
+    "~/Library/Caches/com.filemaker.client.pro12",
+    "~/Library/HTTPStorages/com.filemaker.client.pro12",
+    "~/Library/Preferences/com.filemaker.client.pro12.plist",
+    "~/Library/Saved Application State/com.filemaker.client.pro12.savedState",
+    "~/Library/WebKit/com.filemaker.client.pro12",
+  ]
 
   caveats do
     license "https://www.claris.com/company/legal/docs/eula/filemaker-pro/fmp_eula_en.pdf"

@@ -1,15 +1,20 @@
 cask "avidemux" do
-  if MacOS.version <= :mojave
+  on_big_sur :or_older do
     version "2.7.4"
     sha256 "a5c5028ecc954b6658b4c0e6b04c1c186c42a12530e66a5379f51fe7a3ebfcd8"
 
     url "https://downloads.sourceforge.net/avidemux/avidemux/#{version}/Avidemux_#{version}_Mojava_64Bits_Qt5.dmg",
         verified: "sourceforge.net/avidemux/"
-  else
-    version "2.7.8"
-    sha256 "517b0197d6c9e0dd1e8cf70c235cb1af3d11af9168569693362781c61eb07338"
 
-    url "https://downloads.sourceforge.net/avidemux/avidemux/#{version}/Avidemux_#{version}_Catalina_64Bits_Qt5.dmg",
+    livecheck do
+      skip "Legacy version for Big Sur and earlier"
+    end
+  end
+  on_monterey :or_newer do
+    version "2.8.1"
+    sha256 "b0b8890114172d531d138f6c1413f0393c0e5a87530168106a12d6b11ae44833"
+
+    url "https://downloads.sourceforge.net/avidemux/avidemux/#{version}/Avidemux_#{version}v2_Monterey_Qt6.dmg",
         verified: "sourceforge.net/avidemux/"
   end
 
@@ -20,4 +25,9 @@ cask "avidemux" do
   app "Avidemux_#{version}.app"
   binary "#{appdir}/Avidemux_#{version}.app/Contents/MacOS/avidemux_cli", target: "avidemux"
   binary "#{appdir}/Avidemux_#{version}.app/Contents/MacOS/avidemux_jobs"
+
+  zap trash: [
+    "~/.avidemux6",
+    "~/Library/Saved Application State/Avidemux.org.savedState",
+  ]
 end

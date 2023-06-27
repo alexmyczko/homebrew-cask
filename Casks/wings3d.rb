@@ -1,6 +1,6 @@
 cask "wings3d" do
-  version "2.2.7"
-  sha256 "d0c5e140a6a2a5fddd64ba12a66dc5a272302444a8ebf80f6df70ba332a0daca"
+  version "2.2.9"
+  sha256 "3f500da89a2a6f7b9e8dcd483821b7d41121ad63cc5cec121db626bce516b9b6"
 
   url "https://downloads.sourceforge.net/wings/wings-#{version}-macosx.dmg",
       verified: "sourceforge.net/wings/"

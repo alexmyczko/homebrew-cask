@@ -1,8 +1,8 @@
 cask "todoist" do
-  version "8.0.2"
-  sha256 "216c335efcf347dd347ba3affc5ffebc981568e62e6bbdabb953d465025e369b"
+  version "8.4.1"
+  sha256 "99141e5d501cab40902644d15f5ba829f4d89302416e7a0221c1447215c799b1"
 
-  url "https://electron-dl.todoist.com/mac/Todoist-#{version}.dmg"
+  url "https://electron-dl.todoist.com/mac/Todoist-darwin-universal-#{version}.dmg"
   name "Todoist"
   desc "To-do list"
   homepage "https://todoist.com/home"
@@ -13,6 +13,7 @@ cask "todoist" do
   end
 
   auto_updates true
+  depends_on macos: ">= :el_capitan"
 
   app "Todoist.app"
 

@@ -1,5 +1,5 @@
 cask "unclutter" do
-  version "2.1.24d,2.1.2400"
+  version "2.1.25d"
   sha256 :no_check
 
   url "https://unclutterapp.com/files/Unclutter.zip"
@@ -9,10 +9,8 @@ cask "unclutter" do
 
   livecheck do
     url "https://unclutterapp.com/updates/"
-    strategy :sparkle
+    strategy :sparkle, &:short_version
   end
-
-  depends_on macos: ">= :yosemite"
 
   app "Unclutter.app"
 

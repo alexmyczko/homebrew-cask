@@ -1,6 +1,6 @@
 cask "textadept" do
-  version "11.2"
-  sha256 "cc7e782885c16dfedc97ba6545cfc7ba51e5b9db9f8cf86d94f6def89414da67"
+  version "11.4"
+  sha256 "b92daef1e4eb6223941a12594364a774d2627f96b7ce8ae319c43760e2c53643"
 
   url "https://github.com/orbitalquark/textadept/releases/download/textadept_#{version}/textadept_#{version}.macOS.zip",
       verified: "github.com/orbitalquark/textadept/"
@@ -10,8 +10,7 @@ cask "textadept" do
 
   livecheck do
     url :url
-    strategy :git
-    regex(/^textadept_(\d+(?:\.\d+)*)$/i)
+    regex(/^textadept[._-]v?(\d+(?:\.\d+)+)$/i)
   end
 
   app "textadept_#{version}.macOS/Textadept.app"

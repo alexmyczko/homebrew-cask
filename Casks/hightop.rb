@@ -1,6 +1,6 @@
 cask "hightop" do
-  version "1.2.11"
-  sha256 "822582bedee41da9f7ab7e45a838b30d641b4459970a917c72e501edcfee20f3"
+  version "1.3.4"
+  sha256 "e0fcac1834a7e744730159ec75e00790046b3815234981b6dfc7cb9659ed63e5"
 
   url "https://hightop.app/downloads/HighTop#{version}.dmg"
   name "HighTop"
@@ -12,15 +12,21 @@ cask "hightop" do
     strategy :sparkle, &:short_version
   end
 
+  auto_updates true
   depends_on macos: ">= :sierra"
 
   app "HighTop.app"
+
+  uninstall quit: "com.knollsoft.HighTop"
 
   zap trash: [
     "~/Library/Application Scripts/com.knollsoft.HighTopLauncher",
     "~/Library/Application Support/HighTop+",
     "~/Library/Caches/com.knollsoft.HighTop",
     "~/Library/Containers/com.knollsoft.HighTopLauncher",
+    "~/Library/Cookies/com.knollsoft.HighTop.binarycookies",
+    "~/Library/HTTPStorages/com.knollsoft.HighTop",
+    "~/Library/HTTPStorages/com.knollsoft.HighTop.binarycookies",
     "~/Library/Preferences/com.knollsoft.HighTop.plist",
     "~/Library/Saved Application State/com.knollsoft.HighTop.savedState",
   ]

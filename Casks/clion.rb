@@ -1,23 +1,19 @@
 cask "clion" do
-  arch = Hardware::CPU.intel? ? "" : "-aarch64"
+  arch arm: "-aarch64"
 
-  version "2021.3,213.5744.254"
+  version "2023.1.4,231.9161.40"
+  sha256 arm:   "f3aa638dbf08df9763d557c02c5408be864442af25c7e4b0dce7889a800f3a49",
+         intel: "fdb801c7c42e87fa0db94b68192e09319583118461385e4133ce9cd01125cb41"
 
-  url "https://download.jetbrains.com/cpp/CLion-#{version.before_comma}#{arch}.dmg"
-  if Hardware::CPU.intel?
-    sha256 "f81e3bf5067663e26b1bf947573129e131fec920c1cab77dfafb57e77d5dd11c"
-  else
-    sha256 "bb35b4dc5656d0319c72d40adbead4302700482046b2b13ad52be910f52c672d"
-  end
-
+  url "https://download.jetbrains.com/cpp/CLion-#{version.csv.first}#{arch}.dmg"
   name "CLion"
   desc "C and C++ IDE"
   homepage "https://www.jetbrains.com/clion/"
 
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=CL&latest=true&type=release"
-    strategy :page_match do |page|
-      JSON.parse(page)["CL"].map do |release|
+    strategy :json do |json|
+      json["CL"].map do |release|
         "#{release["version"]},#{release["build"]}"
       end
     end
@@ -30,7 +26,7 @@ cask "clion" do
 
   uninstall_postflight do
     ENV["PATH"].split(File::PATH_SEPARATOR).map { |path| File.join(path, "clion") }.each do |path|
-      if File.exist?(path) &&
+      if File.readable?(path) &&
          File.readlines(path).grep(/# see com.intellij.idea.SocketLock for the server side of this interface/).any?
         File.delete(path)
       end

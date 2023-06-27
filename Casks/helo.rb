@@ -1,16 +1,19 @@
 cask "helo" do
-  version "1.6.2"
-  sha256 "a22704a4b8f5bc13a9f1c8f6e893657576c20308fe7372ae87306d58d70dca48"
+  arch arm: "-arm64"
 
-  url "https://helo.fra1.digitaloceanspaces.com/helo/HELO-#{version}.dmg",
-      verified: "helo.fra1.digitaloceanspaces.com"
+  version "1.6.2"
+  sha256 arm:   "b1ef0c2c300d7c644f91cfc664bb28b3066b86257984b0407b52dd0e7ed59d0d",
+         intel: "a22704a4b8f5bc13a9f1c8f6e893657576c20308fe7372ae87306d58d70dca48"
+
+  url "https://helo.fra1.digitaloceanspaces.com/helo/HELO-#{version}#{arch}.dmg",
+      verified: "helo.fra1.digitaloceanspaces.com/helo/"
   name "HELO"
   desc "Email tester and debugger"
   homepage "https://usehelo.com/"
 
   livecheck do
-    url "https://usehelo.com/download/latest/mac"
-    strategy :header_match
+    url "https://helo.fra1.digitaloceanspaces.com/helo/latest-mac.yml"
+    strategy :electron_builder
   end
 
   auto_updates true

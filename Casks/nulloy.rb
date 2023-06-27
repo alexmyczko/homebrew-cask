@@ -1,6 +1,6 @@
 cask "nulloy" do
-  version "0.8.2"
-  sha256 "67acc5ada9b5245cda7da04456bc18ad6e9b49dbdcb1e2752ce988d4d3607b35"
+  version "0.9.5"
+  sha256 "386d2935b427460e44bcd46b0b2e6ca1015f066b7d5e65097815d86bf4aee0ac"
 
   url "https://github.com/nulloy/nulloy/releases/download/#{version}/Nulloy-#{version}-x86_64.dmg",
       verified: "github.com/nulloy/nulloy/"

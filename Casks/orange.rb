@@ -1,15 +1,16 @@
 cask "orange" do
-  version "3.30.2"
-  sha256 "8e2734fb02f32a9e5b2f85b585f3146b967cb0a8ade09ebf2648c1f38e3e24e4"
+  version "3.35.0"
+  sha256 "053bfb5b3d377eaa11d4b29eaf3a870f759f4de8890f0e2a78d96c6f41b4abc1"
 
-  url "https://download.biolab.si/download/files/Orange#{version.major}-#{version}-Python3.8.8.dmg"
+  url "https://download.biolab.si/download/files/Orange#{version.major}-#{version}-Python3.9.12.dmg",
+      verified: "download.biolab.si/download/"
   name "Orange"
   desc "Component-based data mining software"
-  homepage "https://orange.biolab.si/"
+  homepage "https://orangedatamining.com/"
 
   livecheck do
-    url "https://download.biolab.si/download/files/"
-    regex(/Orange3[._-]v?(\d+(?:\.\d+)+)\.zip/i)
+    url "https://orangedatamining.com/download/#macos"
+    regex(/Orange#{version.major}[._-]v?(\d+(?:\.\d+)+)\.zip/i)
   end
 
   app "Orange#{version.major}.app"

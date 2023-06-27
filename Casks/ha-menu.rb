@@ -1,6 +1,6 @@
 cask "ha-menu" do
-  version "2.5.1"
-  sha256 "f68f6fc1566f4ca6f7b9551bfa948d0464a55cbf29d845f79a9f55e60192faa4"
+  version "2.7.0"
+  sha256 "eeca3cfea1545f1ff53281ccf801ace17d70773d37d6ea6e97fe0d0c0a8e584f"
 
   url "https://github.com/codechimp-org/ha-menu/releases/download/#{version}/HA.Menu.zip"
   name "HA Menu"
@@ -10,4 +10,14 @@ cask "ha-menu" do
   depends_on macos: ">= :high_sierra"
 
   app "HA Menu.app"
+
+  uninstall launchctl: "org.codechimp.HA-Menu",
+            quit:      "org.codechimp.HA-Menu"
+
+  zap trash: [
+    "~/Library/Application Scripts/org.codechimp.HA-Menu",
+    "~/Library/Application Scripts/org.codechimp.HA-Menu-Launcher",
+    "~/Library/Containers/org.codechimp.HA-Menu",
+    "~/Library/Containers/org.codechimp.HA-Menu-Launcher",
+  ]
 end

@@ -1,5 +1,5 @@
 cask "ff-works" do
-  version "2.6.2"
+  version "3.5"
   sha256 :no_check
 
   url "https://www.ffworks.net/ffWorks.dmg"
@@ -12,12 +12,12 @@ cask "ff-works" do
     regex(/version\s*(\d+(?:\.\d+)+)/i)
   end
 
-  depends_on macos: ">= :yosemite"
+  depends_on macos: ">= :el_capitan"
 
   app "ff·Works.app"
 
   zap trash: [
-    "~/Library/WebKit/com.osbytes.ffworks2",
     "~/Library/Application Support/ffWorks",
+    "~/Library/WebKit/com.osbytes.ffworks#{version.major}",
   ]
 end

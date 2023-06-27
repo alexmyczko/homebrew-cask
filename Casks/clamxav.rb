@@ -1,8 +1,8 @@
 cask "clamxav" do
-  version "3.3,8974"
-  sha256 "4841b0d3c7c09a351f2183ea9c349224155709d435bda061faf28b4b3b50233c"
+  version "3.5.5,9759"
+  sha256 "cecbd118fadaa1605f8f6497e1ff15c87a2acca66b1812314c9ef5db8ede95d7"
 
-  url "https://cdn.clamxav.com/ClamXAVdownloads/ClamXAV_#{version.before_comma}_#{version.after_comma}.zip"
+  url "https://cdn.clamxav.com/ClamXAVdownloads/ClamXAV_#{version.csv.first}_#{version.csv.second}.zip"
   name "ClamXAV"
   desc "Anti-virus and malware scanner"
   homepage "https://www.clamxav.com/"
@@ -12,10 +12,14 @@ cask "clamxav" do
     strategy :sparkle
   end
 
+  auto_updates true
+
   app "ClamXAV.app"
 
   zap trash: [
     "~/Library/Caches/uk.co.markallan.clamxav",
+    "~/Library/Logs/ClamXAV-Console.log",
+    "~/Library/Logs/ClamXAV-UI-Helper-Console.log",
     "~/Library/Logs/clamXav-scan.*",
   ]
 

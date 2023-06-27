@@ -1,17 +1,13 @@
 cask "cron" do
-  arch = Hardware::CPU.intel? ? "x64" : "arm64"
+  arch arm: "arm64", intel: "x64"
 
-  version "1.107.0"
-
-  if Hardware::CPU.intel?
-    sha256 "3f2335578382db0b1201d1b98e07960d4667e32c9293ea795111b55cf6da6cfd"
-  else
-    sha256 "ac49a33af84549d1dbef88201182b94e9a5b0dc4326a1178e5fe806540598282"
-  end
+  version "1.113.0"
+  sha256 arm:   "fceb1825d5bc0a734b6f46371ed730050241bac0050f36d5fb7092b5093a8775",
+         intel: "46a93ec8c570a360ef379ead2ac1b7c212577c2e104d48ddfd8c425438c3a751"
 
   url "https://download.todesktop.com/210303leazlircz/Cron%20#{version}-#{arch}-mac.zip",
       verified: "download.todesktop.com/210303leazlircz/"
-  name "cron"
+  name "Cron Calendar"
   desc "Calendar for professionals and teams"
   homepage "https://cron.com/"
 
@@ -19,6 +15,8 @@ cask "cron" do
     url "https://download.todesktop.com/210303leazlircz/latest-mac.yml"
     strategy :electron_builder
   end
+
+  auto_updates true
 
   app "Cron.app"
 

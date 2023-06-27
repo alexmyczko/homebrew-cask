@@ -1,6 +1,6 @@
 cask "fastrawviewer" do
-  version "2.0.1.1862"
-  sha256 "086845496a98f9a55a631d1f7ee1c61b9c3c6545d81956318a2fbcdeb24dac91"
+  version "2.0.6.1971"
+  sha256 "1817cd6e85d2339fd0222355d6c672ca5bb3e55aff3dde9868c528b2d6dd40d8"
 
   url "https://updates.fastrawviewer.com/data/FastRawViewer-#{version}.dmg"
   name "FastRawViewer"
@@ -15,4 +15,6 @@ cask "fastrawviewer" do
   depends_on macos: ">= :sierra"
 
   app "FastRawViewer.app"
+
+  zap trash: "~/Library/Preferences/com.libraw-llc.FastRawViewer.plist"
 end

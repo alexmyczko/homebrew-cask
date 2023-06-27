@@ -9,9 +9,7 @@ cask "thonny-xxl" do
   homepage "https://thonny.org/"
 
   livecheck do
-    url "https://github.com/thonny/thonny/releases/"
-    strategy :page_match
-    regex(/thonny[._-]?xxl[._-]?(\d+(?:\.\d+)*)\.pkg/i)
+    skip "No reliable way to get version info"
   end
 
   conflicts_with cask: "thonny"

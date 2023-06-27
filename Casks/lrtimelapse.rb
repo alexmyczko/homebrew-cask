@@ -1,8 +1,8 @@
 cask "lrtimelapse" do
-  version "5.7.1"
-  sha256 "bc4ca77627745557cbc927518508ec044156fc03574a117fe3ddb27af66959af"
+  version "6.5.1"
+  sha256 "59922aecb27b5f292247fb63e204293f0171e539e8d9bb574e9aafb63ddc5120"
 
-  url "https://lrtimelapse.com/files/lrtimelapse-#{version.major}-mac/?version=#{version.dots_to_hyphens}"
+  url "https://lrtimelapse.com/files/lrtimelapse-#{version.major}-mac-universal/?version=#{version}"
   name "LRTimelapse"
   desc "Time lapse editing, keyframing, grading and rendering"
   homepage "https://lrtimelapse.com/"
@@ -15,15 +15,17 @@ cask "lrtimelapse" do
   pkg "LRTimelapse #{version} Installer.pkg"
 
   uninstall script:  {
-    executable: "/usr/local/LRTimelapse/uninstall.sh",
-    input:      "\n",
-    sudo:       true,
-  },
+              executable: "/usr/local/LRTimelapse/uninstall.sh",
+              input:      "\n",
+              sudo:       true,
+            },
             pkgutil: [
               "com.lrtimelapse.LRAddons",
               "com.lrtimelapse.LRTimelapse#{version.major}",
               "com.lrttimelapse.LRTTools",
             ]
+
+  zap trash: "~/Library/Application Support/LRTimelapse"
 
   caveats do
     files_in_usr_local

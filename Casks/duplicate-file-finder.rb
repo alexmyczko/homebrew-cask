@@ -1,8 +1,8 @@
 cask "duplicate-file-finder" do
-  version "6.14.5,541"
-  sha256 "46d14bfecc0ce6e0bed8f6d2181645f5dc3a62a1c58d9f4c7e21c6b9a873785c"
+  version "6.17.3,588"
+  sha256 "27a1aa5c6d4ebe8ef54b8baabb79041550ad460a366f89282f68bf5c3001d9a8"
 
-  url "https://nektony.com/pro-support/duplicates-finder-site/update/DFFS_v#{version.before_comma}b#{version.after_comma}.zip"
+  url "https://download.nektony.com/pro-support/duplicates-finder-site/update/dffs_v#{version.csv.first}b#{version.csv.second}.zip"
   name "Duplicate File Finder"
   desc "Find and remove unwanted duplicate files and folders"
   homepage "https://nektony.com/duplicate-finder-free"
@@ -12,7 +12,7 @@ cask "duplicate-file-finder" do
     strategy :sparkle
   end
 
-  depends_on macos: ">= :yosemite"
+  depends_on macos: ">= :sierra"
 
   app "Duplicate File Finder #{version.major}.app"
 

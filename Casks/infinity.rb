@@ -7,13 +7,14 @@ cask "infinity" do
   desc "Customizable work management platform"
   homepage "https://startinfinity.com/"
 
-  depends_on macos: ">= :yosemite"
+  livecheck do
+    url :url
+    strategy :extract_plist
+  end
 
   app "Infinity.app"
 
-  uninstall quit: [
-    "com.electron.infinity",
-  ]
+  uninstall quit: "com.electron.infinity"
 
   zap trash: [
     "~/Library/Application Support/Infinity",

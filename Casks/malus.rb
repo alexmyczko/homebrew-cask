@@ -1,8 +1,8 @@
 cask "malus" do
-  version "3.0.0"
-  sha256 "8cae0a7abdbf207741d21f7a9937fe87dfc9a1798c9c29c34098eacef8358eda"
+  version "5.0.1"
+  sha256 "44214970721df28f482a0ccde1d325addde7a1065a4e371c7694a7803e9a26d1"
 
-  url "https://download.getmalus.com/uploads/malus-mac-#{version.dots_to_underscores}.dmg"
+  url "https://download.getmalus.com/uploads/Malus#{version.dots_to_underscores}.dmg"
   name "Malus"
   desc "Proxy to help accessing various online media resources/services"
   homepage "https://getmalus.com/"
@@ -20,10 +20,10 @@ cask "malus" do
   uninstall rmdir: "/Library/Application Support/Malus"
 
   zap trash: [
-    "~/Library/Application Support/Malus",
     "~/Library/Application Support/com.getmalus.malus",
-    "~/Library/Logs/com.getmalus.malus",
+    "~/Library/Application Support/Malus",
     "~/Library/Caches/com.getmalus.malus",
+    "~/Library/Logs/com.getmalus.malus",
     "~/Library/Preferences/com.getmalus.malus.plist",
     "~/Library/Saved Application State/com.getmalus.malus.savedState",
   ]

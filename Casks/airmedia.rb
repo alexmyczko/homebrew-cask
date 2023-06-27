@@ -1,6 +1,6 @@
 cask "airmedia" do
-  version "4.1.4"
-  sha256 "be04bd4cf0e08d39c6a2fe70f74fc6fb6216a658f658711f68a728b247dcae4e"
+  version "4.1.14"
+  sha256 "d082c5d2385ddfbc47c6da35e2130234fe18128cb658f1265c378b19fb6e8652"
 
   url "https://www.crestron.com/software_files_public/am-100/airmedia_osx_#{version}_guest.dmg"
   name "Crestron AirMedia"
@@ -9,9 +9,9 @@ cask "airmedia" do
 
   livecheck do
     url "https://www.crestron.com/Products/Featured-Solutions/AirMedia/Airmedia-Apps"
-    strategy :page_match do |page|
-      v = page[/airmedia_osx_(\d+(?:_\d+)+)_guest/i, 1]
-      v&.tr("_", ".")
+    regex(%r{AirMedia[._-]OSx[._-]Guest[._-]Application/v?(\d+(?:-\d+)+)}i)
+    strategy :page_match do |page, regex|
+      page.scan(regex)&.map { |match| match[0].tr("-", ".") }
     end
   end
 

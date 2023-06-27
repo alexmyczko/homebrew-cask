@@ -1,13 +1,12 @@
 cask "locationsimulator" do
-  version "0.1.7"
-  sha256 "f932fd797bcea1562816550b4b6965e82d5d85f119f389c36a449a71cff76f77"
+  version "0.2.2"
+  sha256 "867941213a23e23c22a3e868e0fa5fec443d1e597e912eca8a1e97f68e7dbb08"
 
-  url "https://github.com/Schlaubischlump/LocationSimulator/releases/download/v#{version}/LocationSimulator_without_dependencies.app.zip"
+  url "https://github.com/Schlaubischlump/LocationSimulator/releases/download/v#{version}/LocationSimulator.app.zip"
   name "LocationSimulator"
-  desc "Application to spoof your iOS / iPadOS device location"
+  desc "Application to spoof your iOS, iPadOS or iPhoneSimulator device location"
   homepage "https://github.com/Schlaubischlump/LocationSimulator"
 
-  depends_on formula: "libimobiledevice"
   depends_on macos: ">= :catalina"
 
   app "LocationSimulator.app"

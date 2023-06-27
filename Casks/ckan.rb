@@ -1,6 +1,6 @@
 cask "ckan" do
-  version "1.30.4"
-  sha256 "2b81d18259dc11a3043c165b1d6e95b1290103eb56f67b2b5d1f1dee1ca3fc9a"
+  version "1.32.0"
+  sha256 "2bbef450a5b0f96dc587fbfa2f3035e4c21bd93455e8f82d9d26bb84b29f7b5a"
 
   url "https://github.com/KSP-CKAN/CKAN/releases/download/v#{version}/CKAN.dmg"
   name "Comprehensive Kerbal Archive Network"
@@ -9,10 +9,12 @@ cask "ckan" do
 
   livecheck do
     url :url
-    regex(/^v?(\d+(?:\.\d+)+)$/i)
+    strategy :github_latest
   end
 
   depends_on cask: "mono-mdk"
 
   app "CKAN.app"
+
+  zap trash: "~/.local/share/CKAN"
 end

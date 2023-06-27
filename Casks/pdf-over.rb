@@ -1,11 +1,16 @@
 cask "pdf-over" do
-  version "4.1.3,1"
+  version "4.4.5"
   sha256 :no_check
 
-  url "https://webstart.buergerkarte.at/pdf-over/PDF-Over.dmg"
+  url "https://technology.a-sit.at/technology/download/pdf-over-mac/"
   name "PDF-Over"
-  desc "Digitally sign PDFs with the Austrian Buergerkarte"
-  homepage "https://webstart.buergerkarte.at/pdf-over/"
+  desc "Digitally sign PDFs with the Austrian Buergerkarte or ID Austria"
+  homepage "https://technology.a-sit.at/pdf-over/"
+
+  livecheck do
+    url :url
+    strategy :extract_plist
+  end
 
   app "PDF-Over.app"
 

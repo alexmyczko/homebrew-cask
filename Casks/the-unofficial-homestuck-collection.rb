@@ -1,12 +1,17 @@
 cask "the-unofficial-homestuck-collection" do
-  version "1.1.0"
-  sha256 "54b8216145cacea7ccf833ca8c52db60bc5606f78985d39b0d9aff2c24d855d7"
+  version "2.0.7"
+  sha256 "dd29899a8aec948da21b6318d5ec51b3c9b74e141fbfe28056cdbe1f1a75b12c"
 
-  url "https://github.com/Bambosh/unofficial-homestuck-collection/releases/download/V#{version}/The.Unofficial.Homestuck.Collection-#{version}.dmg",
+  url "https://github.com/Bambosh/unofficial-homestuck-collection/releases/download/v#{version}/The-Unofficial-Homestuck-Collection-#{version}.dmg",
       verified: "github.com/Bambosh/unofficial-homestuck-collection/"
   name "The Unofficial Homestuck Collection"
   desc "Offline viewer for the webcomic Homestuck"
   homepage "https://bambosh.github.io/unofficial-homestuck-collection/"
+
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
 
   app "The Unofficial Homestuck Collection.app"
 

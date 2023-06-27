@@ -1,27 +1,24 @@
 cask "idafree" do
-  arch = Hardware::CPU.intel? ? "idafree" : "arm_idafree"
+  arch arm: "arm_"
 
-  version "7.6"
+  version "8.3"
+  sha256 arm:   "a3407687ebd4cf9a17c9002565b751e23b17a700383623cd122353a21dde7ce6",
+         intel: "e1c679dbf6518c4b25d86d84572aa215c998281d4f61b99affa65a9583c0ee11"
 
-  url "https://out7.hex-rays.com/files/#{arch}#{version.no_dots}_mac.app.zip",
-      verified: ""
-  if Hardware::CPU.intel?
-    sha256 "d56949e39ec988dfd4a5793cbb0bc90341fb50a39d4b304e3c197629496d541b"
-  else
-    sha256 "5ab07c6a2edc257717c4c8d26eaa9b4655a14d322c8360216ef8b18ec9b04b7e"
-  end
-
+  url "https://out7.hex-rays.com/files/#{arch}idafree#{version.no_dots}_mac.app.zip"
   name "IDA Free"
   desc "Binary code analysis tool"
   homepage "https://hex-rays.com/ida-free/"
 
   livecheck do
-    url "https://hex-rays.com/download-center/"
-    regex(/>\s*IDA\s*v?(\d+(?:\.\d+)+)\s+Free\s*</i)
+    url :homepage
+    regex(/>.*?IDA\s*v?(\d+(?:\.\d+)+).*?</i)
   end
 
+  depends_on macos: ">= :catalina"
+
   installer script: {
-    executable: "#{arch}#{version.no_dots}_mac.app/Contents/MacOS/installbuilder.sh",
+    executable: "#{arch}idafree#{version.no_dots}_mac.app/Contents/MacOS/installbuilder.sh",
     args:       ["--mode", "unattended", "--installpassword", ""],
   }
 
@@ -30,4 +27,6 @@ cask "idafree" do
     args:       ["--mode", "unattended"],
     sudo:       true,
   }
+
+  zap trash: "~/Library/Saved Application State/com.hexrays.ida64.savedState"
 end

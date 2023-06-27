@@ -1,18 +1,18 @@
 cask "profind" do
-  version "1.9.3,1930"
-  sha256 "37e53e1f371c165c8e10ad719f95ccb837b6b7ce6015ea610c5ea1d4d06ea3a0"
+  version "1.24"
+  sha256 "7ccbdcffda081b3ae6350dd1b837513035935d9f88837dee04cbf3baf1d516a0"
 
-  url "https://www.zeroonetwenty.com/profind/downloads/ProFind#{version.csv.first.no_dots}.dmg"
+  url "https://www.zeroonetwenty.com/profind/downloads/ProFind#{version.major_minor.no_dots}.dmg"
   name "ProFind"
   desc "File search app"
   homepage "https://www.zeroonetwenty.com/profind/"
 
   livecheck do
     url "https://www.zeroonetwenty.com/profind/downloads/ProFindVersionInfo.xml"
-    strategy :sparkle
+    strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :catalina"
 
   app "ProFind.app"
 

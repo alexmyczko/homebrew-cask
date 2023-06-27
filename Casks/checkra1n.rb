@@ -8,8 +8,7 @@ cask "checkra1n" do
   homepage "https://checkra.in/"
 
   livecheck do
-    url "https://checkra.in/"
-    strategy :page_match
+    url :homepage
     regex(%r{href=.*?/checkra1n%20beta%20(\d+(?:\.\d+)+)\.dmg}i)
   end
 

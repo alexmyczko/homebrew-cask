@@ -1,6 +1,6 @@
 cask "squirrel" do
-  version "0.15.2"
-  sha256 "91c3c7506e7225d793b8d1d77d65713f81ead65153bb3f1bdd69f9445c0ac9f6"
+  version "0.16.2"
+  sha256 "e08d28fd72445bccbdbccc06b16a9e300c07371f67d576cd4ed35731be9d4ad6"
 
   url "https://github.com/rime/squirrel/releases/download/#{version}/Squirrel-#{version}.zip",
       verified: "github.com/rime/squirrel/"
@@ -13,9 +13,9 @@ cask "squirrel" do
   pkg "Squirrel.pkg"
 
   uninstall pkgutil: [
-    "im.rime.inputmethod.Squirrel",
-    "com.googlecode.rimeime.Squirrel.pkg", # Package name of older versions (< 0.10.0)
-  ],
+              "im.rime.inputmethod.Squirrel",
+              "com.googlecode.rimeime.Squirrel.pkg", # Package name of older versions (< 0.10.0)
+            ],
             delete:  "/Library/Input Methods/Squirrel.app"
 
   zap trash: [

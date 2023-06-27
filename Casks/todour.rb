@@ -1,6 +1,6 @@
 cask "todour" do
-  version "2.20"
-  sha256 "8e53cdf8533e490614d9c8da82a67eaf588839eded39667de695682f5d5dccba"
+  version "2.22"
+  sha256 "060e5a84e9179e2eefadeddaf110ac5720b3a2064e39d470d84391a36ab70318"
 
   url "https://nerdur.com/Todour-v#{version}.dmg"
   name "Todour"
@@ -13,4 +13,6 @@ cask "todour" do
   end
 
   app "Todour.app"
+
+  zap trash: "~/Library/Preferences/com.nerdur.Todour.plist"
 end

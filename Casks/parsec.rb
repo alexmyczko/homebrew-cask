@@ -1,11 +1,16 @@
 cask "parsec" do
-  version "2.0.0"
+  version "150.86.8"
   sha256 :no_check
 
-  url "https://s3.dualstack.us-east-1.amazonaws.com/parsec-build/package/parsec-macos.pkg",
-      verified: "s3.dualstack.us-east-1.amazonaws.com/parsec-build/"
+  url "https://builds.parsec.app/package/parsec-macos.pkg"
   name "Parsec"
-  homepage "https://parsecgaming.com/"
+  desc "Remote desktop"
+  homepage "https://parsec.app/"
+
+  livecheck do
+    url :url
+    strategy :extract_plist
+  end
 
   pkg "parsec-macos.pkg"
 

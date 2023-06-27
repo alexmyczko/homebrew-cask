@@ -8,7 +8,14 @@ cask "nosleep" do
   desc "Kernel extension that prevents sleep when the lid is closed"
   homepage "https://integralpro.github.io/nosleep/"
 
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
+
   depends_on macos: ">= :high_sierra"
 
   app "NoSleep.app"
+
+  # No zap stanza required
 end

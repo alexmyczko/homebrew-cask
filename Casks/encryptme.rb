@@ -1,8 +1,8 @@
 cask "encryptme" do
-  version "4.3.0,52218"
-  sha256 "5450d69384d6f18fb61166938442301aa6e98eb51d049d9f21958da429b80797"
+  version "4.4.0"
+  sha256 "3dda64ebde80fea167184e18647b0a42ff8d190c6119197e58e3883245ebf477"
 
-  url "https://static.encrypt.me/downloads/osx/updates/Release/EncryptMe-#{version.before_comma}.dmg"
+  url "https://static.encrypt.me/downloads/osx/updates/Release/EncryptMe-#{version}.dmg"
   name "EncryptMe"
   name "Cloak"
   desc "VPN and encryption software"
@@ -10,7 +10,7 @@ cask "encryptme" do
 
   livecheck do
     url "https://www.getcloak.com/updates/osx/public/"
-    strategy :sparkle
+    strategy :sparkle, &:short_version
   end
 
   auto_updates true

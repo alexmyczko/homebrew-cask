@@ -1,5 +1,5 @@
 cask "audio-hijack" do
-  version "3.8.8"
+  version "4.2.0"
   sha256 :no_check
 
   url "https://rogueamoeba.com/audiohijack/download/AudioHijack.zip"
@@ -8,12 +8,12 @@ cask "audio-hijack" do
   homepage "https://www.rogueamoeba.com/audiohijack/"
 
   livecheck do
-    url "https://www.rogueamoeba.com/audiohijack/releasenotes.php"
-    regex(/ra-version="(\d+(?:\.\d+)+)"/i)
+    url "https://rogueamoeba.net/ping/versionCheck.cgi?format=sparkle&system=1231&bundleid=com.rogueamoeba.audiohijack&platform=osx&version=#{version.no_dots}8000"
+    strategy :sparkle
   end
 
   auto_updates true
-  depends_on macos: ">= :mojave"
+  depends_on macos: ">= :catalina"
 
   app "Audio Hijack.app"
 

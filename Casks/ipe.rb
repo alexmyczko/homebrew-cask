@@ -1,6 +1,6 @@
 cask "ipe" do
-  version "7.2.24"
-  sha256 "af72be083497359d9ee61b716a7b8d718fa773383f44227d334323c4ab33275f"
+  version "7.2.27"
+  sha256 "aff73ce137393886903f27b0c7aec082cfcb7c8b1b107b22e8fe2e761a2b6702"
 
   url "https://github.com/otfried/ipe/releases/download/v#{version}/ipe-#{version}-mac.dmg",
       verified: "github.com/otfried/ipe/"
@@ -8,7 +8,10 @@ cask "ipe" do
   desc "Drawing editor for creating figures in PDF format"
   homepage "https://ipe.otfried.org/"
 
-  depends_on macos: ">= :yosemite"
+  livecheck do
+    url :homepage
+    regex(/href=.*?ipe[._-](\d+(?:\.\d+)+)[._-]mac\.dmg/i)
+  end
 
   app "Ipe.app"
 
@@ -19,4 +22,8 @@ cask "ipe" do
     "~/Library/Preferences/org.otfried.ipe.Ipe.plist",
     "~/Library/Saved Application State/org.otfried.ipe.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

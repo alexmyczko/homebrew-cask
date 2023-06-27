@@ -1,8 +1,8 @@
 cask "ticktick" do
-  version "4.0.50,202"
-  sha256 "ed2d3f872210d7aedc2b6314da714add00a8bfd55f3935dea525ceba306c2acd"
+  version "4.5.50,258"
+  sha256 "87363da50ddf110ac57ebd4fed6144964de4582c581669ad185ef5e92e5ca796"
 
-  url "https://appest-public.s3.amazonaws.com/download/mac/TickTick_#{version.before_comma}_#{version.after_comma}.dmg",
+  url "https://appest-public.s3.amazonaws.com/download/mac/TickTick_#{version.csv.first}_#{version.csv.second}.dmg",
       verified: "appest-public.s3.amazonaws.com/"
   name "TickTick"
   desc "To-do & task list manager"

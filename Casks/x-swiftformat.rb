@@ -1,6 +1,6 @@
 cask "x-swiftformat" do
-  version "1.1.2"
-  sha256 "aeb6a67df929a83da3f632599562e0687c2f935fc6e116091a3cde627c73543c"
+  version "1.3"
+  sha256 "2e7d203e862a5ebb78b934bbf20949cfdceedab9db200edde04f328eefff2d6e"
 
   url "https://github.com/ruiaureliano/X-SwiftFormat/releases/download/#{version}/x-swiftformat_#{version}.zip"
   name "X-SwiftFormat"

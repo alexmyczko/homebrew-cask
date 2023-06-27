@@ -1,5 +1,5 @@
 cask "zenbeats" do
-  version "2.1.2,8377"
+  version "3.1.5,9357"
   sha256 :no_check
 
   url "https://static.roland.com/assets/media/pkg/Zenbeats_Installer.pkg"
@@ -8,12 +8,13 @@ cask "zenbeats" do
   homepage "https://www.roland.com/us/products/zenbeats/"
 
   livecheck do
-    skip "unversioned URL"
+    url :url
+    strategy :extract_plist
   end
 
   pkg "Zenbeats_Installer.pkg"
 
-  uninstall pkgutil: "“jp.co.roland.zenbeats”"
+  uninstall pkgutil: "jp.co.roland.zenbeats"
 
   zap trash: [
     "~/Library/Caches/com.juce.locks/juceAppLock_Roland Zenbeats",

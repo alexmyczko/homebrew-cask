@@ -1,6 +1,6 @@
 cask "deezer" do
-  version "5.30.110"
-  sha256 "d8bf2aef3389bf18075039971bb9d4bb62f92df59552ee1c861148338dd7d372"
+  version "5.30.570"
+  sha256 "d72e49a264ea5d76b2f8bac38c808048aa189ccbf66aafd3ff1fb340286e32f8"
 
   url "https://www.deezer.com/desktop/download/artifact/darwin/x64/#{version}"
   name "Deezer"
@@ -13,7 +13,7 @@ cask "deezer" do
   end
 
   auto_updates true
-  depends_on macos: ">= :yosemite"
+  depends_on macos: ">= :high_sierra"
 
   app "Deezer.app"
 

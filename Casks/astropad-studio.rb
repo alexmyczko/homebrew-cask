@@ -1,9 +1,8 @@
 cask "astropad-studio" do
-  version "3.7.0,3219"
-  sha256 "f11c1f8c5cef55d35678fea3a08882c6cf6bac0e3493ec30d35a476783e15a47"
+  version "5.2.1,4459"
+  sha256 "4641d148065a55982339bfdc648861ffc8fc30ff2c043ed9a40c8911baeb9aae"
 
-  url "https://s3.amazonaws.com/astropad.com/downloads/AstropadStudio-#{version.before_comma}.dmg",
-      verified: "s3.amazonaws.com/astropad.com/"
+  url "https://downloads.astropad.com/studio/mac/AstropadStudio-#{version.major_minor_patch}.#{version.csv.second}.dmg"
   name "Astropad Studio"
   desc "Turn your iPad into a professional drawing tablet"
   homepage "https://astropad.com/"

@@ -1,5 +1,5 @@
 cask "chrome-remote-desktop-host" do
-  version "89.0.4389.25"
+  version "115.0.5790.10"
   sha256 :no_check
 
   url "https://dl.google.com/chrome-remote-desktop/chromeremotedesktop.dmg"
@@ -8,21 +8,24 @@ cask "chrome-remote-desktop-host" do
   homepage "https://chrome.google.com/webstore/detail/chrome-remote-desktop/inomeogfingihgjfjlpeplalcfajhgai"
 
   livecheck do
-    skip "unversioned URL"
+    url :url
+    strategy :extract_plist
   end
 
   pkg "Chrome Remote Desktop Host.pkg"
 
   uninstall script:  {
-    executable: "/Applications/Chrome Remote Desktop Host Uninstaller.app/Contents/MacOS/remoting_host_uninstaller",
-    args:       ["--no-ui"],
-    sudo:       true,
-  },
+              executable: "/Applications/Chrome Remote Desktop Host Uninstaller.app/Contents/MacOS/remoting_host_uninstaller",
+              args:       ["--no-ui"],
+              sudo:       true,
+            },
             pkgutil: [
               "com.google.pkg.ChromeRemoteDesktopHost",
               "com.google.pkg.ChromeRemoteDesktopHostService",
               "com.google.pkg.ChromeRemoteDesktopHostUninstaller",
             ]
+
+  zap trash: "~/Library/Saved Application State/com.google.chromeremotedesktop.me2me-host-uninstaller.savedState/"
 
   caveats do
     logout

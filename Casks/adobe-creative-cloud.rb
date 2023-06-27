@@ -1,22 +1,18 @@
 cask "adobe-creative-cloud" do
-  arch = Hardware::CPU.intel? ? "osx10" : "macarm64"
+  arch arm: "macarm64", intel: "osx10"
 
-  version "5.6.0.788"
+  version "5.10.0.573"
+  sha256 arm:   "5edc0320a10dfca0c122105fa2461adafe9c2be68d91c4006ae4868b8d81d75f",
+         intel: "aeb39b1fddd42f1c05688ff0fa66dd511382c2efb0c698cff2ed61c92fdaa303"
 
   url "https://ccmdl.adobe.com/AdobeProducts/KCCC/CCD/#{version.major_minor_patch.dots_to_underscores}/#{arch}/ACCCx#{version.dots_to_underscores}.dmg"
-  if Hardware::CPU.intel?
-    sha256 "bda1f1dce2c3b79c4770e6fa8370515af360ae51f36287d32ef4717fe9d0021a"
-  else
-    sha256 "62c18662eb2800dd8915de7c180cc81733fd9020447c173e0978386a1bc16341"
-  end
-
   name "Adobe Creative Cloud"
   desc "Collection of apps and services for photography, design, video, web, and UX"
   homepage "https://www.adobe.com/creativecloud.html"
 
   livecheck do
-    url "https://helpx.adobe.com/creative-cloud/release-note/cc-release-notes.html"
-    regex(/Version\s*(\d+(?:\.\d+)+),?\s+(?:(?:was\s+)?released|for\s+macOS)/i)
+    url "https://ffc-static-cdn.oobesaas.adobe.com/features/v3/#{arch}/ccdConfig.xml"
+    regex(/ccd\.fw\.update\.greenline\.latest.*?"version".*?"(\d+(?:\.\d+)+)"/i)
   end
 
   auto_updates true
@@ -39,13 +35,13 @@ cask "adobe-creative-cloud" do
   end
 
   uninstall early_script: {
-    executable:   "/usr/bin/pluginkit",
-    args:         [
-      "-r", "/Applications/Utilities/Adobe Sync/CoreSync/Core Sync.app/Contents/PlugIns/ACCFinderSync.appex"
-    ],
-    must_succeed: false,
-    print_stderr: false,
-  },
+              executable:   "/usr/bin/pluginkit",
+              args:         [
+                "-r", "/Applications/Utilities/Adobe Sync/CoreSync/Core Sync.app/Contents/PlugIns/ACCFinderSync.appex"
+              ],
+              must_succeed: false,
+              print_stderr: false,
+            },
             launchctl:    [
               "Adobe_Genuine_Software_Integrity_Service",
               "com.adobe.AdobeCreativeCloud",
@@ -54,7 +50,7 @@ cask "adobe-creative-cloud" do
               "com.adobe.ccxprocess",
             ],
             quit:         "com.adobe.acc.AdobeCreativeCloud",
-            signal:       [["QUIT", "com.adobe.accmac"]],
+            signal:       ["QUIT", "com.adobe.accmac"],
             script:       {
               executable:   "/usr/bin/pkill",
               args:         ["Adobe Desktop Service", "AdobeIPCBroker", "AdobeCRDaemon"],
@@ -62,75 +58,80 @@ cask "adobe-creative-cloud" do
             },
             delete:       [
               "#{appdir}/Adobe Creative Cloud/*Adobe Creative Cloud",
-              "#{appdir}/Adobe Creative Cloud/Icon?",
               "#{appdir}/Adobe Creative Cloud/.Uninstall*",
-              "/Applications/Utilities/Adobe Creative Cloud*",
+              "#{appdir}/Adobe Creative Cloud/Icon?",
               "/Applications/Utilities/Adobe Application Manager",
-              "/Applications/Utilities/Adobe Sync",
-              "/Applications/Utilities/Adobe Installers/Uninstall Adobe Creative Cloud",
+              "/Applications/Utilities/Adobe Creative Cloud*",
               "/Applications/Utilities/Adobe Installers/.Uninstall*",
-              "/Library/Application Support/Adobe/CEP/extensions/CC_*",
-              "/Library/Application Support/Adobe/CEP/extensions/com.adobe.ccx.*",
-              "/Library/Application Support/Adobe/Adobe Desktop Common",
-              "/Library/Application Support/Adobe/AdobeApplicationManager",
-              "/Library/Application Support/Adobe/AdobeGC*",
-              "/Library/Application Support/Adobe/*[Ii]nstall*",
-              "/Library/Application Support/Adobe/ADCRefs",
-              "/Library/Application Support/Adobe/caps",
-              "/Library/Application Support/Adobe/OOBE",
-              "/Library/Application Support/Adobe/PCF",
-              "/Library/Application Support/Adobe/SL*",
-              "/Library/Application Support/Adobe/Vulcan",
-              "/Library/Application Support/regid.*.com.adobe",
-              "~/Library/Application Support/Adobe/AAMUpdater",
-              "~/Library/Application Support/Adobe/ExtensibilityLibrary",
-              "~/Library/Application Support/Adobe/FloodGate",
-              "~/Library/Application Support/Adobe/.adobelicnotification",
-              "~/Library/Application Support/CrashReporter/AdobeCRDaemon_*.plist",
-              "~/Library/Application Scripts/com.adobe.accmac.ACCFinderSync",
-              "~/Library/*/Adobe/CoreSync",
-              "/Library/*/com.adobe.acc*",
-              "~/Library/*/com.adobe.acc*",
-              "/Library/Preferences/com.adobe.headlights*.plist",
-              "~/Library/Preferences/com.adobe.crashreporter.plist",
-              "~/Library/Preferences/Adobe/.[A-Z0-9]???????????",
-              "/Library/LaunchDaemons/com.adobe.agsservice.plist",
-              "~/Library/LaunchAgents/com.adobe.ccxprocess.plist",
-              "~/Library/Group Containers/Adobe-Hub-App",
+              "/Applications/Utilities/Adobe Installers/Uninstall Adobe Creative Cloud",
+              "/Applications/Utilities/Adobe Sync",
               "/Library/Internet Plug-Ins/AdobeAAMDetect.plugin",
-              "~/Creative Cloud Files/Icon?",
-              "/Users/Shared/Adobe/Installer",
-              "/Users/Shared/Adobe/OOBE",
+              "/Library/LaunchDaemons/com.adobe.agsservice.plist",
             ],
             rmdir:        [
               "#{appdir}/Adobe Creative Cloud",
               "/Applications/Utilities/Adobe Installers",
-              "/Library/Application Support/Adobe{/CEP{/extensions,},}",
               "/Library/*/Adobe",
-              "~/Library/*/Adobe",
-              "~/Creative Cloud Files",
-              "/Users/Shared/Adobe",
+              "/Library/Application Support/Adobe",
+              "/Library/Application Support/Adobe{/CEP{/extensions,},}",
+              "/Library/Logs/Adobe",
             ]
 
   zap trash: [
-    "/Library/Application Support/Adobe/Extension Manager CC",
-    "~/Library/Application Support/Adobe/Extension Manager CC",
-    "~/Library/Application Support/Adobe/OOBE",
-    "/Library/Application Support/Adobe/Creative Cloud Libraries",
-    "/Library/Application Support/Adobe/Adobe PCD",
-    "/Library/Logs/CreativeCloud",
-    "~/Library/Logs/CreativeCloud",
-    "~/Library/Logs/ACC*.log",
-    "~/Library/Logs/PDApp*.log",
-    "~/Library/Logs/AdobeDownload.log",
-    "~/Library/Logs/AdobeIPCBroker*.log",
-    "~/Library/Logs/CoreSyncInstall.log",
-    "~/Creative Cloud Files",
-  ],
+        "/Users/Shared/Adobe/Installer",
+        "/Users/Shared/Adobe/OOBE",
+        "/Library/*/com.adobe.acc*",
+        "/Library/Application Support/Adobe/*[Ii]nstall*",
+        "/Library/Application Support/Adobe/ADCRefs",
+        "/Library/Application Support/Adobe/Adobe Desktop Common",
+        "/Library/Application Support/Adobe/Adobe PCD",
+        "/Library/Application Support/Adobe/AdobeApplicationManager",
+        "/Library/Application Support/Adobe/AdobeGC*",
+        "/Library/Application Support/Adobe/CEP/extensions/CC_*",
+        "/Library/Application Support/Adobe/CEP/extensions/com.adobe.ccx.*",
+        "/Library/Application Support/Adobe/Creative Cloud Libraries",
+        "/Library/Application Support/Adobe/Extension Manager CC",
+        "/Library/Application Support/Adobe/OOBE",
+        "/Library/Application Support/Adobe/PCF",
+        "/Library/Application Support/Adobe/SL*",
+        "/Library/Application Support/Adobe/Vulcan",
+        "/Library/Application Support/Adobe/caps",
+        "/Library/Application Support/regid.*.com.adobe",
+        "/Library/Logs/CreativeCloud",
+        "/Library/Preferences/com.adobe.headlights*.plist",
+        "~/Creative Cloud Files",
+        "~/Creative Cloud Files/Icon?",
+        "~/Library/*/Adobe/CoreSync",
+        "~/Library/*/com.adobe.acc*",
+        "~/Library/Application Scripts/com.adobe.accmac.ACCFinderSync",
+        "~/Library/Application Support/Adobe/.adobelicnotification",
+        "~/Library/Application Support/Adobe/AAMUpdater",
+        "~/Library/Application Support/Adobe/ExtensibilityLibrary",
+        "~/Library/Application Support/Adobe/Extension Manager CC",
+        "~/Library/Application Support/Adobe/FloodGate",
+        "~/Library/Application Support/Adobe/OOBE",
+        "~/Library/Application Support/CrashReporter/AdobeCRDaemon_*.plist",
+        "~/Library/Group Containers/Adobe-Hub-App",
+        "~/Library/LaunchAgents/com.adobe.ccxprocess.plist",
+        "~/Library/Logs/ACC*.log",
+        "~/Library/Logs/AdobeDownload.log",
+        "~/Library/Logs/AdobeIPCBroker*.log",
+        "~/Library/Logs/CoreSyncInstall.log",
+        "~/Library/Logs/CreativeCloud",
+        "~/Library/Logs/PDApp*.log",
+        "~/Library/Preferences/Adobe/.[A-Z0-9]???????????",
+        "~/Library/Preferences/com.adobe.crashreporter.plist",
+
+      ],
       rmdir: [
-        "/Library/Application Support/Adobe",
+        "/Users/Shared/Adobe",
+        "~/Creative Cloud Files",
+        "~/Library/*/Adobe",
         "~/Library/Application Support/Adobe",
-        "/Library/Logs/Adobe",
         "~/Library/Logs/Adobe",
       ]
+
+  caveats do
+    requires_rosetta
+  end
 end

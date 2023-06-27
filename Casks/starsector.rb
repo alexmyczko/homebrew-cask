@@ -1,6 +1,6 @@
 cask "starsector" do
-  version "0.95a-RC15"
-  sha256 "355c36a6bd7f027c6b719429c985074ce347c3daddeee1ecf6eabb69a5937ae6"
+  version "0.96a-RC10"
+  sha256 "1c31651c3bc62c5fbf3dbc0619659588ab620278e9fa2107d8cbfba12d2ae810"
 
   url "https://s3.amazonaws.com/fractalsoftworks/starsector/starsector_mac-#{version}.zip",
       verified: "s3.amazonaws.com/fractalsoftworks/"
@@ -10,9 +10,10 @@ cask "starsector" do
 
   livecheck do
     url "https://fractalsoftworks.com/preorder/"
-    strategy :page_match
-    regex(%r{href=.*?/starsector_mac-(\d+(?:\.\d+)*a-RC\d+)\.zip}i)
+    regex(/href=.*?starsector_mac[._-]v?(\d+(?:\.\d+)+[\w._-]+)\.zip/i)
   end
 
   app "Starsector.app"
+
+  # No zap stanza required
 end

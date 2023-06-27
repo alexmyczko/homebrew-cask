@@ -1,21 +1,21 @@
 cask "thunder" do
-  version "4.1.2.65083"
-  sha256 "109dab51d234138d6069d43098727566e93fb974748b459303c7d2cc39c83214"
+  version "5.0.9.65900"
+  sha256 "7bcf22b8abe26c462b48a856707bbef73494e3b4e6cab9b8ba79a6b7f386d22a"
 
   url "https://down.sandai.net/mac/thunder_#{version}.dmg",
-      verified: "down.sandai.net/"
+      verified: "down.sandai.net/mac/"
   name "Thunder"
   name "迅雷"
   desc "VPN and WiFi proxy"
   homepage "https://www.xunlei.com/"
 
   livecheck do
-    url "https://static-xl9-ssl.xunlei.com/json/mac_preferences.json"
-    regex(/appcast[._-]v?(\d+(?:\.\d+)+)\.xml/i)
+    url "https://dl.xunlei.com"
+    regex(/thunder[._-](\d+(?:\.\d+)+)\.dmg/i)
   end
 
   auto_updates true
-  depends_on macos: ">= :yosemite"
+  depends_on macos: ">= :high_sierra"
 
   app "Thunder.app"
 

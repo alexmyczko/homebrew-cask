@@ -9,11 +9,8 @@ cask "bluegriffon" do
 
   livecheck do
     url "http://bluegriffon.org/freshmeat/?C=M;O=D"
-    strategy :page_match
     regex(%r{href=['"]?(\d+(?:\.\d+)+)/}i)
   end
-
-  depends_on macos: ">= :yosemite"
 
   app "BlueGriffon.app"
 end

@@ -1,26 +1,38 @@
 cask "kaleidoscope" do
-  version "3.1.2,2022"
-  sha256 "304a779895019867d33cd530058022f5382c483c019d544203ded953ae9cef8a"
+  version "4.0.4,3872"
+  sha256 "a941ae7354c5ad0c62cc2a33dfc0e281d4f03af86b3a740a45901cc2afeac657"
 
-  url "https://updates.kaleidoscope.app/v#{version.major}/prod/Kaleidoscope-#{version.before_comma}-#{version.after_comma}.app.zip"
+  url "https://updates.kaleidoscope.app/v#{version.major}/prod/Kaleidoscope-#{version.csv.first}-#{version.csv.second}.app.zip"
   name "Kaleidoscope"
   desc "Spot and merge differences in text and image files or folders"
-  homepage "https://www.kaleidoscope.app/"
+  homepage "https://kaleidoscope.app/"
 
   livecheck do
     url "https://updates.kaleidoscope.app/v#{version.major}/prod/appcast"
-    regex(/Kaleidoscope-(\d+(?:\.\d+)+)-(\d+)\.app\.zip/i)
+    regex(/Kaleidoscope[._-]v?(\d+(?:\.\d+)+)[._-](\d+)\.app\.zip/i)
     strategy :page_match do |page, regex|
       page.scan(regex).map { |match| "#{match[0]},#{match[1]}" }
     end
   end
 
   auto_updates true
-  conflicts_with cask: "homebrew/cask-versions/kaleidoscope2"
+  conflicts_with cask: [
+    "ksdiff",
+    "homebrew/cask-versions/kaleidoscope2",
+    "homebrew/cask-versions/ksdiff2",
+  ]
   depends_on macos: ">= :big_sur"
 
   app "Kaleidoscope.app"
-  binary "#{appdir}/Kaleidoscope.app/Contents/Resources/bin/ksdiff"
+
+  postflight do
+    contents = "#{appdir}/Kaleidoscope.app/Contents"
+    system_command "#{contents}/Resources/Integration/scripts/install_ksdiff",
+                   args: ["#{contents}/MacOS", "#{HOMEBREW_PREFIX}/bin"]
+  end
+
+  uninstall quit:    "app.kaleidoscope.v#{version.major}",
+            pkgutil: "app.kaleidoscope.uninstall_ksdiff"
 
   zap trash: [
     "~/Library/Application Support/app.kaleidoscope.v*",

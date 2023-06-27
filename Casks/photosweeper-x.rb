@@ -1,5 +1,5 @@
 cask "photosweeper-x" do
-  version "4.2.0,4200"
+  version "4.8.2"
   sha256 :no_check
 
   url "https://overmacs.com/downloads/PhotoSweeper_X.dmg"
@@ -9,10 +9,10 @@ cask "photosweeper-x" do
 
   livecheck do
     url "https://overmacs.com/feeds/photosweeper_update.xml"
-    strategy :sparkle
+    strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :sierra"
+  depends_on macos: ">= :high_sierra"
 
   app "PhotoSweeper X.app"
 

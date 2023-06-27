@@ -6,19 +6,20 @@ cask "colorchecker-camera-calibration" do
       verified: "downloads.xrite.com/downloads/software/ColorCheckerPassport/Mac/"
   name "ColorChecker Camera Calibration"
   desc "Software to build custom camera profiles"
-  homepage "https://xritephoto.com/ph_product_overview.aspx?ID=2632&action=overview"
+  homepage "https://calibrite.com/photo-target"
 
   livecheck do
-    url :homepage
-    regex(/>\s*v?(\d+(?:\.\d+)+)\s*</i)
+    url "https://my.xrite.com/downloader.aspx?FileID=2324&Type=M"
+    strategy :header_match
   end
 
   pkg "ColorCheckerCameraCalibration.pkg"
 
-  uninstall pkgutil: [
-    "com.xrite.colorcheckercameracalibration.colorcheckercameracalibration.XRiteColorCheckerCameraCalibration.pkg",
-    "com.xrite.colorcheckercameracalibration.colorcheckercameracalibration.Help.pkg",
-    "com.xrite.colorcheckercameracalibration.colorcheckercameracalibration.mac.pkg",
-  ],
-            delete:  "/System/Applications/ColorChecker Camera Calibration.app"
+  uninstall \
+    pkgutil: [
+      "com.xrite.colorcheckercameracalibration.colorcheckercameracalibration.XRiteColorCheckerCameraCalibration.pkg",
+      "com.xrite.colorcheckercameracalibration.colorcheckercameracalibration.Help.pkg",
+      "com.xrite.colorcheckercameracalibration.colorcheckercameracalibration.mac.pkg",
+    ],
+    delete:  "/System/Applications/ColorChecker Camera Calibration.app"
 end

@@ -1,6 +1,6 @@
 cask "toinane-colorpicker" do
-  version "2.0.5"
-  sha256 "6459d542b4a0786cb9a81e3bec824fe42c3dbdcff48874e7a02a52e143d4a9e8"
+  version "2.2.0"
+  sha256 "9fbe263bb81b9814ff583515195adf94bab926c76141a119b173c0fffc8588b4"
 
   url "https://github.com/toinane/colorpicker/releases/download/#{version}/Colorpicker-#{version}.dmg",
       verified: "github.com/toinane/colorpicker/"

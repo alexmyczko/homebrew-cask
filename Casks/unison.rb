@@ -1,27 +1,22 @@
 cask "unison" do
-  if MacOS.version <= :yosemite
-    version "2.48.3"
-    sha256 "d578196d8b38f35c1e0410a1c86ff4e115a91f7eb211201db7a940a3a3e0f099"
+  version "2.53.3"
+  sha256 "c389e23927e43117851dd01b6fe681c8fa2f8c21bad599c24e2dfb8639f4100b"
 
-    url "https://github.com/bcpierce00/unison/releases/download/#{version}/Unison-OS-X-#{version}.zip",
-        verified: "github.com/bcpierce00/unison/"
-  else
-    version "2.51.4,4.12.0"
-    sha256 "16edf291a9b697794ebb00860317ed40e91b1db8fbebc72a79d3278de6a8cb5f"
-
-    url "https://github.com/bcpierce00/unison/releases/download/v#{version.before_comma}/Unison-v#{version.before_comma}.ocaml-#{version.after_comma}.macos-10.15.app.tar.gz",
-        verified: "github.com/bcpierce00/unison/"
-  end
-
+  url "https://github.com/bcpierce00/unison/releases/download/v#{version}/Unison-#{version}-macos.app.tar.gz",
+      verified: "github.com/bcpierce00/unison/"
   name "Unison"
   desc "File synchronizer"
   homepage "https://www.cis.upenn.edu/~bcpierce/unison/"
 
   livecheck do
     url :url
-    strategy :github_latest do |page|
-      page.scan(/href=.*?Unison[._-]v?(\d+(?:\.\d+)+)[._-]ocaml[._-]v?(\d+(?:\.\d+)+)[._-]macos/i).map do |match|
-        "#{match[0]},#{match[1]}"
+    regex(/^Unison[._-]v?(\d+(?:\.\d+)+).*?(\d+(?:\.\d+)+)?[._-]macos.*?[._-]app/i)
+    strategy :github_latest do |json, regex|
+      json["assets"]&.map do |asset|
+        match = asset["name"]&.match(regex)
+        next if match.blank?
+
+        match[2].present? ? "#{match[1]},#{match[2]}" : match[1]
       end
     end
   end
@@ -34,4 +29,9 @@ cask "unison" do
   postflight do
     system_command "/usr/bin/defaults", args: ["write", "edu.upenn.cis.Unison", "CheckCltool", "-bool", "false"]
   end
+
+  zap trash: [
+    "~/Library/Application Support/Unison",
+    "~/Library/Preferences/edu.upenn.cis.Unison.plist",
+  ]
 end

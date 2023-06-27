@@ -1,6 +1,6 @@
 cask "launchbar" do
-  version "6.14.1"
-  sha256 "0d985ae5194851981383e52c6f88e9176e43a1850bb129f5cc62fdb0f4b7ab54"
+  version "6.17"
+  sha256 "146c2bcaabb0924f1a69bfb73bb313a5cf7012647ded97eb38e7e7373d3e41f8"
 
   url "https://www.obdev.at/downloads/launchbar/LaunchBar-#{version}.dmg"
   name "LaunchBar"
@@ -9,8 +9,7 @@ cask "launchbar" do
 
   livecheck do
     url "https://www.obdev.at/products/launchbar/download.html"
-    strategy :page_match
-    regex(%r{href=.*?/LaunchBar-(\d+(?:\.\d+)*)\.dmg}i)
+    regex(%r{href=.*?/LaunchBar-(\d+(?:\.\d+)+)\.dmg}i)
   end
 
   auto_updates true

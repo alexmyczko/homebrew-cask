@@ -1,8 +1,11 @@
 cask "vagrant" do
-  version "2.2.19"
-  sha256 "6307be217813a11c9e106448bf232803031e434a08c8b2df8c62fdc9e8543845"
+  arch arm: "arm64", intel: "amd64"
 
-  url "https://releases.hashicorp.com/vagrant/#{version}/vagrant_#{version}_x86_64.dmg",
+  version "2.3.7"
+  sha256 arm:   "ee4e95d00d7dae805bf97ad74f1d6c474c0019ab5632fd0a5c32f18b62d8db95",
+         intel: "ee4e95d00d7dae805bf97ad74f1d6c474c0019ab5632fd0a5c32f18b62d8db95"
+
+  url "https://releases.hashicorp.com/vagrant/#{version}/vagrant_#{version}_darwin_#{arch}.dmg",
       verified: "hashicorp.com/vagrant/"
   name "Vagrant"
   desc "Development environment"
@@ -10,16 +13,16 @@ cask "vagrant" do
 
   livecheck do
     url "https://github.com/hashicorp/vagrant"
-    strategy :git
+    strategy :github_latest
   end
 
   pkg "vagrant.pkg"
 
   uninstall script:  {
-    executable: "uninstall.tool",
-    input:      ["Yes"],
-    sudo:       true,
-  },
+              executable: "uninstall.tool",
+              input:      ["Yes"],
+              sudo:       true,
+            },
             pkgutil: "com.vagrant.vagrant"
 
   zap trash: "~/.vagrant.d"

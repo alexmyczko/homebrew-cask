@@ -1,6 +1,6 @@
 cask "electron-cash" do
-  version "4.2.5"
-  sha256 "d75bb773abb7022884c44b5bc4e36e6cd40fa86f7fd9f7baa8ab75ff1c661054"
+  version "4.3.1"
+  sha256 "fef55bf2d3bdc4dad2379c02197ba45157c020e69d21d58de01936ac005c677a"
 
   url "https://electroncash.org/downloads/#{version.major_minor_patch}/mac/Electron-Cash-#{version}-macosx.dmg"
   name "Electron Cash"
@@ -9,7 +9,7 @@ cask "electron-cash" do
 
   livecheck do
     url :homepage
-    regex(%r{href=.*?/Electron[._-]Cash[._-]v?(\d+(?:\.\d+)+)[._-]macosx\.dmg}i)
+    regex(/href=.*?Electron[._-]Cash[._-]v?(\d+(?:\.\d+)+)[._-]macosx\.dmg/i)
   end
 
   app "Electron-Cash.app"

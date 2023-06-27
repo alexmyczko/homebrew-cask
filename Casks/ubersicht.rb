@@ -1,6 +1,6 @@
 cask "ubersicht" do
-  version "1.6.69"
-  sha256 "caa7507d372ee9650d14ec50b4d09378e66209549faad40ce0f4917eb620f04b"
+  version "1.6.72"
+  sha256 "060464069fe9d744d0f36b11950f9c918aab1a01232a53977380ae3beb4c0b8e"
 
   url "https://tracesof.net/uebersicht/releases/Uebersicht-#{version}.app.zip"
   name "Übersicht"
@@ -9,12 +9,11 @@ cask "ubersicht" do
 
   livecheck do
     url :homepage
-    strategy :page_match
-    regex(%r{href=.*?/Uebersicht-(\d+(?:\.\d+)*)\.app\.zip}i)
+    regex(%r{href=.*?/Uebersicht[._-]v?(\d+(?:\.\d+)+)\.app\.zip}i)
   end
 
   auto_updates true
-  depends_on macos: ">= :yosemite"
+  depends_on macos: ">= :el_capitan"
 
   app "Übersicht.app"
 

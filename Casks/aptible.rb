@@ -1,12 +1,12 @@
 cask "aptible" do
-  version "0.19.1,20210802230457,251"
-  sha256 "693e38e36edcd5289df8c0456ecfd7e812c668fc368b32ca9cc54fe90698530a"
+  version "0.19.6,20220928212813,384"
+  sha256 "b655a668c43daaff11339c2c55d2f2e9e7df25d0f656eb9e20b285da3bb6ce3d"
 
-  url "https://omnibus-aptible-toolbelt.s3.amazonaws.com/aptible/omnibus-aptible-toolbelt/master/#{version.csv.third}/pkg/aptible-toolbelt-#{version.csv.first}%2B#{version.csv.second}-mac-os-x.10.11.6-1.pkg",
+  url "https://omnibus-aptible-toolbelt.s3.amazonaws.com/aptible/omnibus-aptible-toolbelt/master/#{version.csv.third}/pkg/aptible-toolbelt-#{version.csv.first}%2B#{version.csv.second}-mac-os-x.10.15.7-1.pkg",
       verified: "omnibus-aptible-toolbelt.s3.amazonaws.com/"
   name "Aptible Toolbelt"
   desc "Command-line tool for Aptible Deploy, an audit-ready App Deployment Platform"
-  homepage "https://www.aptible.com/documentation/deploy/cli.html"
+  homepage "https://www.aptible.com/docs/cli"
 
   livecheck do
     url :homepage
@@ -16,9 +16,11 @@ cask "aptible" do
     end
   end
 
-  depends_on formula: "libu2f-host"
+  depends_on formula: "libfido2"
 
-  pkg "aptible-toolbelt-#{version.csv.first}+#{version.csv.second}-mac-os-x.10.11.6-1.pkg"
+  pkg "aptible-toolbelt-#{version.csv.first}+#{version.csv.second}-mac-os-x.10.15.7-1.pkg"
 
   uninstall pkgutil: "com.aptible.toolbelt"
+
+  zap trash: "/usr/local/bin/aptible"
 end

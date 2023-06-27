@@ -1,18 +1,28 @@
 cask "phoenix" do
-  version "2.6.8"
-  sha256 "b779791ae673d676d9084d88d2c075d6a8cdd5b11e97d6ac8287dfa6df5c7f55"
+  version "4.0.0"
+  sha256 "174ebec4c7860d014d02441867721a14342521c0a9482a0fa8605f644b3a40b2"
 
   url "https://github.com/kasper/phoenix/releases/download/#{version}/phoenix-#{version}.tar.gz"
   name "Phoenix"
   desc "Window and app manager scriptable with JavaScript"
   homepage "https://github.com/kasper/phoenix/"
 
-  depends_on macos: ">= :yosemite"
+  auto_updates true
+  depends_on macos: ">= :mojave"
 
   app "Phoenix.app"
 
+  uninstall login_item: "Phoenix",
+            quit:       [
+              "org.khirviko.Phoenix",
+              "org.khirviko.Phoenix.Launcher",
+            ]
+
   zap trash: [
-    "~/.phoenix.js",
-    "~/Library/Application Support/Phoenix/storage.json",
+    "~/Library/Application Scripts/org.khirviko.Phoenix.Launcher",
+    "~/Library/Caches/org.khirviko.Phoenix",
+    "~/Library/Containers/org.khirviko.Phoenix.Launcher",
+    "~/Library/HTTPStorages/org.khirviko.Phoenix",
+    "~/Library/WebKit/org.khirviko.Phoenix",
   ]
 end

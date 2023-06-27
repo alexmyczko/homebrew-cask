@@ -1,14 +1,10 @@
 cask "zulufx" do
-  arch = Hardware::CPU.intel? ? "x64" : "aarch64"
-  choice = Hardware::CPU.intel? ? "x86" : "arm"
+  arch arm: "aarch64", intel: "x64"
+  choice = on_arch_conditional arm: "arm", intel: "x86"
 
-  version "15.0.5,15.36.51-ca"
-
-  if Hardware::CPU.intel?
-    sha256 "9eb251eaa348cbfaaa40d7258a375e03330789c07631af2d097951b6a2a8fcfb"
-  else
-    sha256 "3412519566e589d25233468d10173daca6a25ec3cdb03e78bc8a3c58842d7e40"
-  end
+  version "20.0.1,20.30.11-ca"
+  sha256 arm:   "4ae72d8cfc351035d0755ff3def88fbbd918d2af9eff8c811390631ee39d039e",
+         intel: "36673603f1de6ceb36f1371152c83d7c7274f4249c6cd30ffd164025e9c4d489"
 
   url "https://cdn.azul.com/zulu/bin/zulu#{version.csv.second}-fx-jdk#{version.csv.first}-macosx_#{arch}.dmg",
       referer: "https://www.azul.com/downloads/"
@@ -26,9 +22,11 @@ cask "zulufx" do
     end
   end
 
-  depends_on macos: ">= :sierra"
+  depends_on macos: ">= :mojave"
 
   pkg "Double-Click to Install Azul Zulu JDK #{version.major}.pkg"
 
   uninstall pkgutil: "com.azulsystems.zulu.#{version.major}"
+
+  # No zap stanza required
 end

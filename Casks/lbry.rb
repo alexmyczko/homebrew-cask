@@ -1,6 +1,6 @@
 cask "lbry" do
-  version "0.51.2"
-  sha256 "f497927baa8f8b1c1a1c8b0bcf5eabbc89b2bb5ed9a7bc448612df69d7292ba6"
+  version "0.53.9"
+  sha256 "3769997e7cdb6e563a505c5f8375325ef26fc74318aea0defde711fc5fcfee5e"
 
   url "https://github.com/lbryio/lbry-desktop/releases/download/v#{version}/LBRY_#{version}.dmg",
       verified: "github.com/lbryio/lbry-desktop/"
@@ -10,8 +10,11 @@ cask "lbry" do
 
   livecheck do
     url :url
+    regex(/v?(\d+(?:\.\d+)+)/i)
     strategy :github_latest
   end
+
+  depends_on macos: ">= :mojave"
 
   app "LBRY.app"
   # shim scripts (https://github.com/Homebrew/homebrew-cask/issues/18809)

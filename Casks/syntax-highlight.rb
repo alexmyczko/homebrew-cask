@@ -1,6 +1,6 @@
 cask "syntax-highlight" do
-  version "2.1.3"
-  sha256 "d360398c6f247cff823b4b84ef921ff0e11d29ac1a8d4b3555fae04625e1948e"
+  version "2.1.19"
+  sha256 "1c0e46687869775d4cd2d8996482b9f3ff4335e7d128d651f0ceef09223c8fc5"
 
   url "https://github.com/sbarex/SourceCodeSyntaxHighlight/releases/download/#{version}/Syntax.Highlight.zip"
   name "Syntax Highlight"
@@ -11,6 +11,7 @@ cask "syntax-highlight" do
   depends_on macos: ">= :catalina"
 
   app "Syntax Highlight.app"
+  binary "#{appdir}/Syntax Highlight.app/Contents/Resources/syntax_highlight_cli"
 
   zap trash: [
     "~/Library/Application Scripts/org.sbarex.SourceCodeSyntaxHighlight",

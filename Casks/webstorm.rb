@@ -1,12 +1,9 @@
 cask "webstorm" do
-  arch = Hardware::CPU.intel? ? "" : "-aarch64"
-  version "2021.3,213.5744.224"
+  arch arm: "-aarch64"
 
-  if Hardware::CPU.intel?
-    sha256 "60c857097e437400196054182741aeb42ae78a614a205c9dfb933e245d14abd4"
-  else
-    sha256 "8b21f3f4ee204356801b187c8b4f4a21a4185d7247c30815c032b74b7e4e3a2b"
-  end
+  version "2023.1.3,231.9161.29"
+  sha256 arm:   "c5cc29db9a12515892beed79e1970e628a816f78c629045795ea16c6e5629a2b",
+         intel: "ac8a4edbc2d846e2ac205ebf62ad0d883df5eac812b226b1b99c4f19764df005"
 
   url "https://download.jetbrains.com/webstorm/WebStorm-#{version.csv.first}#{arch}.dmg"
   name "WebStorm"
@@ -15,8 +12,8 @@ cask "webstorm" do
 
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=WS&latest=true&type=release"
-    strategy :page_match do |page|
-      JSON.parse(page)["WS"].map do |release|
+    strategy :json do |json|
+      json["WS"].map do |release|
         "#{release["version"]},#{release["build"]}"
       end
     end
@@ -29,7 +26,7 @@ cask "webstorm" do
 
   uninstall_postflight do
     ENV["PATH"].split(File::PATH_SEPARATOR).map { |path| File.join(path, "wstorm") }.each do |path|
-      if File.exist?(path) &&
+      if File.readable?(path) &&
          File.readlines(path).grep(/# see com.intellij.idea.SocketLock for the server side of this interface/).any?
         File.delete(path)
       end
@@ -37,12 +34,12 @@ cask "webstorm" do
   end
 
   zap trash: [
-    "~/Library/Preferences/com.jetbrains.WebStorm.plist",
-    "~/Library/Preferences/jetbrains.webstorm.*.plist",
-    "~/Library/Preferences/WebStorm#{version.major_minor}",
     "~/Library/Application Support/JetBrains/WebStorm#{version.major_minor}",
     "~/Library/Caches/JetBrains/WebStorm#{version.major_minor}",
     "~/Library/Logs/JetBrains/WebStorm#{version.major_minor}",
+    "~/Library/Preferences/com.jetbrains.WebStorm.plist",
+    "~/Library/Preferences/jetbrains.webstorm.*.plist",
+    "~/Library/Preferences/WebStorm#{version.major_minor}",
     "~/Library/Saved Application State/com.jetbrains.WebStorm.savedState",
   ]
 end

@@ -1,16 +1,12 @@
 cask "electron-fiddle" do
-  arch = Hardware::CPU.intel? ? "x64" : "arm64"
+  arch arm: "arm64", intel: "x64"
 
-  version "0.26.0"
+  version "0.32.9"
+  sha256 arm:   "a74bf7acb632ddc20d6d4a44c6d8ddf069365e59c4911517412a088f83c628e8",
+         intel: "de5585326582bfd96868d0c051f60e2bab08e12351e5a1394c82276dc30e2020"
 
   url "https://github.com/electron/fiddle/releases/download/v#{version}/Electron.Fiddle-darwin-#{arch}-#{version}.zip",
       verified: "github.com/electron/fiddle/"
-  if Hardware::CPU.intel?
-    sha256 "194e36302952db1234e3dc067f43ab2b3eef0fca46c3bf6353d081b7d1a06d34"
-  else
-    sha256 "edd7d9739b076f0c5145a02169c1b29018314fd93a6c368b1ca686d2d1ae25b2"
-  end
-
   name "Electron Fiddle"
   desc "Create and play with small Electron experiments"
   homepage "https://www.electronjs.org/fiddle"

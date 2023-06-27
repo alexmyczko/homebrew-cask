@@ -1,19 +1,24 @@
 cask "another-redis-desktop-manager" do
-  version "1.5.0"
+  arch arm: "-M1-arm64-", intel: "."
 
-  if Hardware::CPU.intel?
-    sha256 "ef3f82d87064d2c4673285647732878070bbdf709db25a84a099b01ae918660a"
+  version "1.6.0"
+  sha256 arm:   "36fead22f6cef9ee618a93b3ee80c3066a61cf7bf9623ec6811d1600438e5146",
+         intel: "841535562a2c80f29e5c85978a52f8f2bea2bab014aa8f6a4efed11b12f235f2"
 
-    url "https://github.com/qishibo/AnotherRedisDesktopManager/releases/download/v#{version}/Another-Redis-Desktop-Manager.#{version}.dmg"
-  else
-    sha256 "00a5dd87fa8915d1ae96d1b70a33a056efdd79711561773ca208ec71ca72a29e"
-
-    url "https://github.com/qishibo/AnotherRedisDesktopManager/releases/download/v#{version}/Another-Redis-Desktop-Manager-M1-arm64-#{version}.dmg"
-  end
-
+  url "https://github.com/qishibo/AnotherRedisDesktopManager/releases/download/v#{version}/Another-Redis-Desktop-Manager#{arch}#{version}.dmg"
   name "Another Redis Desktop Manager"
   desc "Redis desktop manager"
   homepage "https://github.com/qishibo/AnotherRedisDesktopManager/"
 
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
+
   app "Another Redis Desktop Manager.app"
+
+  zap trash: [
+    "~/Library/Application Support/another-redis-desktop-manager",
+    "~/Library/Preferences/me.qii404.another-redis-desktop-manager.plist",
+  ]
 end

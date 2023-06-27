@@ -1,18 +1,19 @@
 cask "wifi-explorer" do
-  version "3.3.1,46"
-  sha256 "34131f165e6a01fdaa23ddfc416fcd11a77131bc04737279fb4eb4f22e2b84a6"
+  version "3.4.3"
+  sha256 "abc525e9639162063ec67960b513d9eae17b833d19d88d02cd0dce7683f56626"
 
-  url "https://www.intuitibits.com/downloads/WiFiExplorer_#{version.before_comma}.dmg"
+  url "https://www.intuitibits.com/downloads/WiFiExplorer_#{version}.dmg"
   name "WiFi Explorer"
   desc "Scan, monitor, and troubleshoot wireless networks"
   homepage "https://www.intuitibits.com/products/wifi-explorer/"
 
   livecheck do
     url "https://www.intuitibits.com/appcasts/wifiexplorercast.xml"
-    strategy :sparkle
+    strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :high_sierra"
+  auto_updates true
+  depends_on macos: ">= :mojave"
 
   app "WiFi Explorer.app"
 

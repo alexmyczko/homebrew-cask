@@ -1,6 +1,6 @@
 cask "syncroom" do
-  version "1.1.0"
-  sha256 "867afd64937ef81b8546c30c5264c1262f5c08930b4e804ba3d5d7a4abb1b377"
+  version "1.5.3"
+  sha256 "3fd96720f4060eb5675fdac7f8b72e101fed7f166be9245cba09e8388f6dafaa"
 
   url "https://syncroom.yamaha.com/play/dl/app/SYNCROOM-JP-mac-#{version}.zip"
   name "SYNCROOM"
@@ -9,7 +9,6 @@ cask "syncroom" do
 
   livecheck do
     url "https://syncroom.yamaha.com/play/dl/"
-    strategy :page_match
     regex(%r{href=.*?/SYNCROOM-JP-mac-(\d+(?:\.\d+)*)\.zip}i)
   end
 

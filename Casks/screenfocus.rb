@@ -1,6 +1,6 @@
 cask "screenfocus" do
-  version "1.0.1"
-  sha256 "2b64e3b66b3b105a01f801e6fa1ec1aa66ee1804e4a3e1c427b66c830e0151ce"
+  version "1.1.23"
+  sha256 "f7c2ff9ec616c2bc316ddc796b87fcc003926cf8b1c6d366bf05093cbb6e99d1"
 
   url "https://www.apptorium.com/public/products/screenfocus/releases/ScreenFocus-#{version}.zip"
   name "ScreenFocus"

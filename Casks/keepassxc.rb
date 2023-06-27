@@ -1,16 +1,12 @@
 cask "keepassxc" do
-  arch = Hardware::CPU.intel? ? "x86_64" : "arm64"
+  arch arm: "arm64", intel: "x86_64"
 
-  version "2.6.6"
+  version "2.7.5"
+  sha256 arm:   "7be9323219ceaa489deb9135ed24ca65e71b44a899ba07bedeb0eee1317cfd57",
+         intel: "8e3eca26f29fd7c4dfe6c5d0f6c67cbc094c59ff8cfa6c07880826854292c642"
 
   url "https://github.com/keepassxreboot/keepassxc/releases/download/#{version}/KeePassXC-#{version}-#{arch}.dmg",
       verified: "github.com/keepassxreboot/keepassxc/"
-  if Hardware::CPU.intel?
-    sha256 "ab96033c16459de5a95e1f9e5864a5bd8cc47b4f3dee2c68ede6199dd44286ec"
-  else
-    sha256 "9dc121bb08f5b46186930ac9ba189553cec2c2ce9688df466e9ce1d9d75fe8c5"
-  end
-
   name "KeePassXC"
   desc "Password manager app"
   homepage "https://keepassxc.org/"
@@ -25,6 +21,8 @@ cask "keepassxc" do
 
   app "KeePassXC.app"
   binary "#{appdir}/KeePassXC.app/Contents/MacOS/keepassxc-cli"
+
+  uninstall quit: "org.keepassxc.keepassxc"
 
   zap trash: [
     "~/.keepassxc",

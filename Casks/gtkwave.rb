@@ -9,13 +9,12 @@ cask "gtkwave" do
   homepage "https://gtkwave.sourceforge.io/"
 
   livecheck do
-    url "https://sourceforge.net/projects/gtkwave/rss"
-    strategy :page_match
-    regex(/url=.*?gtkwave[._-]v?(\d+(?:\.\d+)+)[._-]osx[._-]app/i)
+    url :url
+    regex(%r{url=.*?/gtkwave[._-]v?(\d+(?:\.\d+)+)[._-]osx[._-]app/}i)
   end
 
   app "gtkwave.app"
-  binary "#{appdir}/gtkwave.app/Contents/Resources/bin/gtkwave_bin_launcher.sh", target: "gtkwave"
+  binary "#{appdir}/gtkwave.app/Contents/Resources/bin/gtkwave", target: "gtkwave"
 
   zap trash: [
     "~/Library/Application Support/CrashReporter/gtkwave-bin_*.plist",
@@ -24,7 +23,8 @@ cask "gtkwave" do
   ]
 
   caveats <<~EOS
-    You may need to install Perl’s Switch module to run #{token}’s command line tool.
+    You may need to install Perl’s Switch module to run #{token}’s command line
+    tool.
 
       https://ughe.github.io/2018/11/06/gtkwave-osx
   EOS

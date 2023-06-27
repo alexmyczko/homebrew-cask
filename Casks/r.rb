@@ -1,59 +1,99 @@
 cask "r" do
-  if MacOS.version <= :yosemite
-    version "3.3.3"
-    sha245 "77d7a145d1f7d5c3f5bd7310ae2beb7349118528d938e519845ce7d205b4c864"
-    url "https://cloud.r-project.org/bin/macosx/R-#{version}.pkg"
-  elsif MacOS.version <= :sierra
+  arch arm: "arm64", intel: "x86_64"
+  folder = on_arch_conditional arm: "big-sur-arm64/"
+  arch_legacy = on_arch_conditional arm: "-arm64"
+
+  on_sierra :or_older do
     version "3.6.3.nn"
     sha256 "f2b771e94915af0fe0a6f042bc7a04ebc84fb80cb01aad5b7b0341c4636336dd"
+
     url "https://cloud.r-project.org/bin/macosx/R-#{version}.pkg"
-  elsif Hardware::CPU.intel?
-    version "4.1.2"
-    sha256 "86d169f9d62b2b2ddbf5fde55935fbb96729da5c47d7bf09240228cd23b664e5"
-    url "https://cloud.r-project.org/bin/macosx/base/R-#{version}.pkg"
-  else
-    version "4.1.2"
-    sha256 "247604393ec271cb3e72f42f2ffca9024de1b2d77fcba142c8ab866dc498ba21"
-    url "https://cloud.r-project.org/bin/macosx/big-sur-arm64/base/R-#{version}-arm64.pkg"
+
+    livecheck do
+      skip "Legacy version"
+    end
+
+    pkg "R-#{version}.pkg"
+  end
+  on_high_sierra do
+    version "4.2.3"
+    sha256 arm:   "e61f25b529940e229b69c19e01428505d7f59cc1e1209ed41dca39452b56fb98",
+           intel: "dd96e8dcae20cf3c9cde429dd29f252b87af69028a6a403ec867eb92bb8eb659"
+
+    url "https://cloud.r-project.org/bin/macosx/#{folder}base/R-#{version}#{arch_legacy}.pkg"
+
+    livecheck do
+      skip "Legacy version"
+    end
+
+    pkg "R-#{version}#{arch_legacy}.pkg"
+  end
+  on_mojave do
+    version "4.2.3"
+    sha256 arm:   "e61f25b529940e229b69c19e01428505d7f59cc1e1209ed41dca39452b56fb98",
+           intel: "dd96e8dcae20cf3c9cde429dd29f252b87af69028a6a403ec867eb92bb8eb659"
+
+    url "https://cloud.r-project.org/bin/macosx/#{folder}base/R-#{version}#{arch_legacy}.pkg"
+
+    livecheck do
+      skip "Legacy version"
+    end
+
+    pkg "R-#{version}#{arch_legacy}.pkg"
+  end
+  on_catalina do
+    version "4.2.3"
+    sha256 arm:   "e61f25b529940e229b69c19e01428505d7f59cc1e1209ed41dca39452b56fb98",
+           intel: "dd96e8dcae20cf3c9cde429dd29f252b87af69028a6a403ec867eb92bb8eb659"
+
+    url "https://cloud.r-project.org/bin/macosx/#{folder}base/R-#{version}#{arch_legacy}.pkg"
+
+    livecheck do
+      skip "Legacy version"
+    end
+
+    pkg "R-#{version}#{arch_legacy}.pkg"
+  end
+  on_big_sur :or_newer do
+    version "4.3.1"
+    sha256 arm:   "6e048f45437a64c35961817aafe09bfb0a5956a85ff182469a0d5aa446bf0c64",
+           intel: "b3665509b53208d7fac31d4d271955c2930e4670847aeda25ebd35c73e637265"
+
+    url "https://cloud.r-project.org/bin/macosx/big-sur-#{arch}/base/R-#{version}-#{arch}.pkg"
+
+    livecheck do
+      url "https://cloud.r-project.org/bin/macosx"
+      regex(/href=.*?R[._-]v?(\d+(?:\.\d+)*)([._-]#{arch})?\.pkg/i)
+    end
+
+    pkg "R-#{version}-#{arch}.pkg"
   end
 
   name "R"
   desc "Environment for statistical computing and graphics"
   homepage "https://www.r-project.org/"
 
-  livecheck do
-    url "https://cloud.r-project.org/bin/macosx/"
-    strategy :page_match
-    regex(/href=.*?R-(\d+(?:\.\d+)*)\.pkg/i)
-  end
-
   depends_on macos: ">= :el_capitan"
 
-  if Hardware::CPU.intel?
-    pkg "R-#{version}.pkg"
-  else
-    pkg "R-#{version}-arm64.pkg"
-  end
-
   uninstall pkgutil: [
-    "org.r-project*",
-    "org.R-project*",
-  ],
+              "org.r-project*",
+              "org.R-project*",
+            ],
             delete:  [
-              "/Library/Frameworks/R.Framework",
               "/usr/bin/R",
               "/usr/bin/Rscript",
             ]
 
-  zap trash: [
-    "~/.R",
-    "~/.Rapp.history",
-    "~/.RData",
-    "~/.Rhistory",
-    "~/.Rprofile",
-    "~/Library/R",
-    "~/Library/Caches/org.R-project.R",
-  ]
+  zap trash:  [
+        "~/.R",
+        "~/.Rapp.history",
+        "~/.RData",
+        "~/.Rhistory",
+        "~/.Rprofile",
+        "~/Library/R",
+        "~/Library/Caches/org.R-project.R",
+      ],
+      delete: "/Library/Frameworks/R.Framework"
 
   caveats do
     files_in_usr_local

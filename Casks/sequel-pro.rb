@@ -8,12 +8,6 @@ cask "sequel-pro" do
   desc "MySQL/MariaDB database management platform"
   homepage "https://www.sequelpro.com/"
 
-  livecheck do
-    url :url
-    strategy :git
-    regex(/^release-(\d+(?:\.\d+)*)$/i)
-  end
-
   app "Sequel Pro.app"
 
   zap trash: [
@@ -22,4 +16,13 @@ cask "sequel-pro" do
     "~/Library/Preferences/com.sequelpro.SequelPro.plist",
     "~/Library/Saved Application State/com.sequelpro.SequelPro.savedState",
   ]
+
+  caveats do
+    discontinued
+
+    <<~EOS
+      #{token} has been deprecated in favor of Sequel Ace.
+        brew install --cask sequel-ace
+    EOS
+  end
 end

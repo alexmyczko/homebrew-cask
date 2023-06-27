@@ -1,6 +1,6 @@
 cask "micro-snitch" do
-  version "1.4"
-  sha256 "fc5e4fc14d7eed0508bddb03a074c4ce4aff1bc481698ce26ce95f59dc260a96"
+  version "1.6"
+  sha256 "1db8247eb47a717b86c8ea5623403781e062747bb831ad907741eb747d0c5a45"
 
   url "https://www.obdev.at/downloads/MicroSnitch/MicroSnitch-#{version}.dmg"
   name "Micro Snitch"
@@ -9,8 +9,7 @@ cask "micro-snitch" do
 
   livecheck do
     url "https://www.obdev.at/products/microsnitch/download.html"
-    strategy :page_match
-    regex(%r{href=.*?/MicroSnitch-(\d+(?:\.\d+)*)\.dmg}i)
+    regex(%r{href=.*?/MicroSnitch[._-]v?(\d+(?:\.\d+)+)\.dmg}i)
   end
 
   auto_updates true

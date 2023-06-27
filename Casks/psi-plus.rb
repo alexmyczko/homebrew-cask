@@ -1,8 +1,8 @@
 cask "psi-plus" do
-  version "1.5.1519"
-  sha256 "f3d0bb42046d6ad3a2b2e181318ea52d82fdb02844c76e11040c76e4e12f55e0"
+  version "1.5.1639"
+  sha256 "e73774fe112f08c28b61c917a7f01e40195bf8f8c9720487cb9abfbf9e84eb38"
 
-  url "https://downloads.sourceforge.net/psiplus/Psi+-#{version}-macOS10.14-x86_64.dmg",
+  url "https://downloads.sourceforge.net/psiplus/Psi+-#{version}-macOS10.15-x86_64.dmg",
       verified: "downloads.sourceforge.net/psiplus/"
   name "Psi+"
   desc "XMPP client designed for experienced users"
@@ -10,10 +10,10 @@ cask "psi-plus" do
 
   livecheck do
     url "https://sourceforge.net/projects/psiplus/files/macOS/tehnick/"
-    regex(/Psi%2B[._-]?(\d+(?:\.\d+)*)[._-]?macOS.*-x86_64\.dmg/i)
+    regex(/Psi%2B[._-]?(\d+(?:\.\d+)+)[._-]?macOS.*-x86_64\.dmg/i)
   end
 
-  depends_on macos: ">= :sierra"
+  depends_on macos: ">= :catalina"
 
   app "Psi+.app"
 

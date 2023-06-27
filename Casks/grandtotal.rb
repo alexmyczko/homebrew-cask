@@ -1,15 +1,18 @@
 cask "grandtotal" do
-  version "7.2"
-  sha256 "5c8c0a56b3535ef79c4d7039c49da96db17d60dd7310297c43ef508bece540df"
+  version "8.1.1.17"
+  sha256 "55657bcda9078fd3cf04d1194696c48b052c283ee1743b0936606a45de0dc651"
 
-  url "https://mediaatelier.com/GrandTotal#{version.major}/GrandTotal_#{version}.zip"
+  url "https://www.mediaatelier.com/GrandTotal#{version.major}/GrandTotal_#{version}.dmg"
   name "GrandTotal"
   desc "Create invoices and estimates"
   homepage "https://www.mediaatelier.com/GrandTotal#{version.major}/"
 
   livecheck do
-    url "https://mediaatelier.com/GrandTotal#{version.major}/feed.php"
-    strategy :sparkle
+    url "https://www.mediaatelier.com/GrandTotal#{version.major}/feed.php"
+    regex(/GrandTotal[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
+    strategy :sparkle do |items, regex|
+      items.map { |item| item.url[regex, 1] }
+    end
   end
 
   depends_on macos: ">= :high_sierra"
@@ -18,6 +21,8 @@ cask "grandtotal" do
 
   zap trash: [
     "~/Library/Application Support/com.mediaatelier.GrandTotal3",
+    "~/Library/Caches/com.mediaatelier.GrandTotal3",
+    "~/Library/HTTPStorages/com.mediaatelier.GrandTotal3",
     "~/Library/Preferences/com.mediaatelier.GrandTotal3.plist",
     "~/Library/Saved Application State/com.mediaatelier.GrandTotal3.savedState",
   ]

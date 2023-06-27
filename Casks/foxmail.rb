@@ -1,6 +1,6 @@
 cask "foxmail" do
-  version "1.5.4.94544"
-  sha256 "1bf3d95357cb98b9c163b8c63d78a9d7e6e9bd65085b7bf7a6bca0835fff0749"
+  version "1.5.8.94590"
+  sha256 "fa31a882583a5bd72288ec671293299c95dcaecddd4a059b691f5eafcd78126b"
 
   url "https://dldir1.qq.com/foxmail/MacFoxmail/Foxmail_for_Mac_#{version}.dmg",
       verified: "dldir1.qq.com/foxmail/MacFoxmail/"
@@ -16,4 +16,9 @@ cask "foxmail" do
   depends_on macos: ">= :el_capitan"
 
   app "Foxmail.app"
+
+  zap trash: [
+    "~/Library/Application Scripts/com.tencent.Foxmail*",
+    "~/Library/Containers/com.tencent.Foxmail*",
+  ]
 end

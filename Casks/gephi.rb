@@ -1,12 +1,20 @@
 cask "gephi" do
-  version "0.9.2"
-  sha256 "e83641108bcab4326526293acf2da48ac107c95b811d7f23e1fc1c621489f097"
+  arch arm: "aarch64", intel: "x64"
 
-  url "https://github.com/gephi/gephi/releases/download/v#{version}/gephi-#{version}-macos.dmg",
+  version "0.10.1"
+  sha256 arm:   "cbb852d2f33cddf793290a64aee564cd46ad80ef6c51766ad05dfeb801ac7227",
+         intel: "abc7ca1ba7f2a91e51af716ad0a1a785a798f7bb7100841dfdb775895919f508"
+
+  url "https://github.com/gephi/gephi/releases/download/v#{version}/gephi-#{version}-macos-#{arch}.dmg",
       verified: "github.com/gephi/gephi/"
   name "Gephi"
-  desc "Utility to visualize and explore GraphViz graphs"
+  desc "Open-source platform for visualizing and manipulating large graphs"
   homepage "https://gephi.org/"
 
   app "Gephi.app"
+
+  zap trash: [
+    "~/Library/Application Support/gephi",
+    "~/Library/Caches/gephi",
+  ]
 end

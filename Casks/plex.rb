@@ -1,8 +1,8 @@
 cask "plex" do
-  version "1.38.0.2734,ec4489fe"
-  sha256 "4052e31618c993c3796da2402562719ba000a16ba32349f51f4effc2a2614b6f"
+  version "1.71.1.3888,b32ecaf8"
+  sha256 "ba5ad095bfe2e3b4f298ce2af2cf2bc49e259fefe478fe37a89b71e2908dcd54"
 
-  url "https://downloads.plex.tv/plex-desktop/#{version.csv.first}-#{version.csv.second}/macos/Plex-#{version.csv.first}-#{version.csv.second}-x86_64.zip"
+  url "https://downloads.plex.tv/plex-desktop/#{version.csv.first}-#{version.csv.second}/macos/Plex-#{version.csv.first}-#{version.csv.second}-universal.zip"
   name "Plex"
   desc "Home media player"
   homepage "https://www.plex.tv/"

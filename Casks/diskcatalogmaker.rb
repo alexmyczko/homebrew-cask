@@ -1,10 +1,10 @@
 cask "diskcatalogmaker" do
-  version "8.4.1"
-  sha256 "01c60578e6919268517d4c32ebe7a58e9669aec4e3f250877f5ce9f2e6eeb035"
+  version "8.6.6"
+  sha256 "4392f293293fe97f4d35d4b2b60b9ceee0f8febd58454207c509adae40664519"
 
   url "https://download.diskcatalogmaker.com/download/zip/DiskCatalogMaker#{version.no_dots}.zip"
   name "DiskCatalogMaker"
-  desc "Toast-bundled version of DiskCatalogMaker"
+  desc "Disk management tool"
   homepage "https://diskcatalogmaker.com/"
 
   livecheck do
@@ -22,10 +22,10 @@ cask "diskcatalogmaker" do
   app "DiskCatalogMaker.app"
 
   zap trash: [
-    "~/Library/Application Support/DiskCatalogMaker",
     "~/Library/Application Support/com.mac.fujisoft.DiskCatalogMaker",
-    "~/Library/Caches/DiskCatalogMaker",
+    "~/Library/Application Support/DiskCatalogMaker",
     "~/Library/Caches/com.mac.fujisoft.DiskCatalogMaker",
+    "~/Library/Caches/DiskCatalogMaker",
     "~/Library/Logs/DiskCatalogMaker",
     "~/Library/Preferences/com.mac.fujisoft.DiskCatalogMaker.plist",
     "~/Library/Saved Application State/com.mac.fujisoft.DiskCatalogMaker.savedState",

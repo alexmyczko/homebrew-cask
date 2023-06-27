@@ -1,6 +1,6 @@
 cask "sauce-connect" do
-  version "4.7.1"
-  sha256 "198ed62080372822d6588bb55dfd292b044e7dce711be665b897c629c33ba854"
+  version "4.9.1"
+  sha256 "ead25acaaa3ea7b3cccfc33ae758a41f3ead1231a34487df3aa4017219295b94"
 
   url "https://saucelabs.com/downloads/sc-#{version}-osx.zip"
   name "Sauce Connect"
@@ -8,9 +8,11 @@ cask "sauce-connect" do
   homepage "https://docs.saucelabs.com/secure-connections/sauce-connect/"
 
   livecheck do
-    url "https://changelog.saucelabs.com/en?category=sauce%20connect"
-    regex(/Sauce Connect Proxy Version (\d+(?:\.\d+)+)/i)
+    url "https://docs.saucelabs.com/secure-connections/sauce-connect/installation/index.html"
+    regex(/href=.*?sc[._-]v?(\d+(?:\.\d+)+)[._-]osx\.zip/i)
   end
 
   binary "sc-#{version}-osx/bin/sc"
+
+  # No zap stanza required
 end

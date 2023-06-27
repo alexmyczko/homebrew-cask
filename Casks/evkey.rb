@@ -1,5 +1,5 @@
 cask "evkey" do
-  version "3.3.6,1"
+  version "3.3.8"
   sha256 :no_check
 
   url "https://github.com/lamquangminh/EVKey/releases/download/Release/EVKeyMac.zip",
@@ -9,7 +9,8 @@ cask "evkey" do
   homepage "https://evkeyvn.com/"
 
   livecheck do
-    skip "unversioned URL"
+    url :homepage
+    regex(/EVKeyMac\.zip.*?v?(\d+(?:\.\d+)+)/im)
   end
 
   app "EVKey.app"

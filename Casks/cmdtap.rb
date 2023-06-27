@@ -8,8 +8,7 @@ cask "cmdtap" do
   homepage "https://www.yingdev.com/projects/cmdtap"
 
   livecheck do
-    url "https://www.yingdev.com/projects/cmdtap"
-    strategy :page_match
+    url :homepage
     regex(%r{href=.*?/(\d+(?:\.\d+)+)/CmdTap\.zip}i)
   end
 

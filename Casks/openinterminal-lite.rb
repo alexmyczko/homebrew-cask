@@ -1,6 +1,6 @@
 cask "openinterminal-lite" do
-  version "1.2.3"
-  sha256 "67239f7201fed7457d283add3a4f23320038ff757473a1f2238f986fd413b853"
+  version "1.2.5"
+  sha256 "2d2f7ab19bcd443fa533a294875a0e95333cca0a60707ac7226bcafaaae2972b"
 
   url "https://github.com/Ji4n1ng/OpenInTerminal/releases/download/v#{version}/OpenInTerminal-Lite.app.zip"
   name "OpenInTerminal-Lite"
@@ -8,9 +8,10 @@ cask "openinterminal-lite" do
   homepage "https://github.com/Ji4n1ng/OpenInTerminal"
 
   livecheck do
-    url "https://raw.githubusercontent.com/Ji4n1ng/OpenInTerminal/master/Resources/README-Lite.md"
-    regex(%r{href=.*?/tag/v?(\d+(?:\.\d+)*)}i)
+    skip "No reliable way to get version info"
   end
 
   app "OpenInTerminal-Lite.app"
+
+  zap trash: "~/Library/Preferences/wang.jianing.app.OpenInTerminal-Lite.plist"
 end

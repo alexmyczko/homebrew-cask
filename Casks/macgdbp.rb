@@ -1,16 +1,18 @@
 cask "macgdbp" do
-  version "2.0.3,203.1"
-  sha256 "1f80a3868ccb1023c602337a925b964aebde9da7c90f3c27679f5becd5c6d071"
+  version "2.1.2"
+  sha256 "2951d17fadbdb50df79f50a386265d0cdcd8fb5526348712a86e2a801d4064cc"
 
-  url "https://www.bluestatic.org/downloads/macgdbp/macgdbp-#{version.before_comma}.zip"
+  url "https://www.bluestatic.org/downloads/macgdbp/macgdbp-#{version}.zip"
   name "MacGDBp"
   desc "Live, interactive debugging of your running PHP applications"
   homepage "https://www.bluestatic.org/software/macgdbp/"
 
   livecheck do
     url "https://www.bluestatic.org/software/macgdbp/appcast.xml"
-    strategy :sparkle
+    strategy :sparkle, &:short_version
   end
 
   app "MacGDBp.app"
+
+  zap trash: "~/Library/Preferences/org.bluestatic.macgdbp.plist"
 end

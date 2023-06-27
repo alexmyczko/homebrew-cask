@@ -1,12 +1,17 @@
 cask "dmidiplayer" do
-  version "1.5.2"
-  sha256 "1f96beab927b75a0065f09720269db0bc61401a7674c359be9f06bdf9a76826a"
+  version "1.7.1"
+  sha256 "6876797cce6c3cbfcb6098bce84bb5323fdbea70eacbedf54b81f5f93779ef76"
 
   url "https://downloads.sourceforge.net/dmidiplayer/#{version}/dmidiplayer-#{version}-mac-x64.dmg",
       verified: "downloads.sourceforge.net/dmidiplayer/"
   name "dmidiplayer"
   desc "Multiplatform MIDI File Player"
   homepage "https://dmidiplayer.sourceforge.io/"
+
+  livecheck do
+    url :url
+    regex(%r{url=.*?/dmidiplayer[._-]v?(\d+(?:\.\d+)+)[^"' >]*?\.dmg}i)
+  end
 
   depends_on formula: "fluid-synth"
   depends_on macos: ">= :sierra"

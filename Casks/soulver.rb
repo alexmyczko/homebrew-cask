@@ -1,8 +1,8 @@
 cask "soulver" do
-  version "3.5.3,238"
-  sha256 "725cfec7ae43d0b77aa500b38493154d138feaf71b4b3b89598eb62f13779921"
+  version "3.8.2,390"
+  sha256 "5b731b67f346de6107596a710e23886da90f532a9e1db797b1a242cb3f399122"
 
-  url "https://soulver.app/mac/sparkle/soulver-#{version.before_comma}-#{version.after_comma}.zip"
+  url "https://soulver.app/mac/sparkle/soulver-#{version.csv.first}-#{version.csv.second}.zip"
   name "Soulver"
   desc "Notepad with a built-in calculator"
   homepage "https://soulver.app/"
@@ -13,7 +13,7 @@ cask "soulver" do
   end
 
   auto_updates true
-  depends_on macos: ">= :mojave"
+  depends_on macos: ">= :big_sur"
 
   app "Soulver #{version.major}.app"
 

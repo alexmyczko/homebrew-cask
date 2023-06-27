@@ -1,8 +1,11 @@
 cask "losslesscut" do
-  version "3.39.0"
-  sha256 "f950c793088d94629cbd7192437be514bca03f180708e087aefeab12e191f276"
+  arch arm: "arm64", intel: "x64"
 
-  url "https://github.com/mifi/lossless-cut/releases/download/v#{version}/LosslessCut-mac.dmg"
+  version "3.54.0"
+  sha256 arm:   "3869a234e600dc1c9b65491b950c6e7a933f46d01eb1deff4c7e067502975b0a",
+         intel: "fb7c33a22bf05429bcfc47b0a1449862d38f5bdff45e5c405571575fc11ea17d"
+
+  url "https://github.com/mifi/lossless-cut/releases/download/v#{version}/LosslessCut-mac-#{arch}.dmg"
   name "LosslessCut"
   desc "Trims video and audio files losslessly"
   homepage "https://github.com/mifi/lossless-cut"

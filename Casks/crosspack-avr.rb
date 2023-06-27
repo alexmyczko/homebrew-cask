@@ -4,7 +4,7 @@ cask "crosspack-avr" do
 
   url "https://www.obdev.at/downloads/crosspack/CrossPack-AVR-#{version.no_hyphens}.dmg"
   name "CrossPack"
-  desc "Development environment for Atmel’s AVR® microcontrollers"
+  desc "Development environment for Atmel’s AVR microcontrollers"
   homepage "https://www.obdev.at/products/crosspack/index.html"
 
   livecheck do
@@ -15,10 +15,10 @@ cask "crosspack-avr" do
   pkg "CrossPack-AVR.pkg"
 
   uninstall script:  {
-    executable: "/usr/local/CrossPack-AVR/uninstall",
-    input:      ["Yes"],
-    sudo:       true,
-  },
+              executable: "/usr/local/CrossPack-AVR/uninstall",
+              input:      ["Yes"],
+              sudo:       true,
+            },
             pkgutil: "at.obdev.CrossPack-AVR"
 
   caveats do

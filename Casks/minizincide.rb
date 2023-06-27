@@ -1,6 +1,6 @@
 cask "minizincide" do
-  version "2.5.5"
-  sha256 "392c45ee3c98d72e892938048f488dc9eb9788d08538f186b84b33e256013e81"
+  version "2.7.6"
+  sha256 "8700b0ae2cca355a3e2039b8e8d9ec9e47724b9c9881ea222cb9693dff38719f"
 
   url "https://github.com/MiniZinc/MiniZincIDE/releases/download/#{version}/MiniZincIDE-#{version}-bundled.dmg",
       verified: "github.com/MiniZinc/MiniZincIDE/"
@@ -14,4 +14,9 @@ cask "minizincide" do
   app "MiniZincIDE.app"
   binary "#{appdir}/MiniZincIDE.app/Contents/Resources/minizinc"
   binary "#{appdir}/MiniZincIDE.app/Contents/Resources/mzn2doc"
+
+  zap trash: [
+    "~/Library/Preferences/org.minizinc.MiniZinc IDE (bundled).plist",
+    "~/Library/Saved Application State/org.minizinc.MiniZincIDE.savedState",
+  ]
 end

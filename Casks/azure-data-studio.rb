@@ -1,17 +1,19 @@
 cask "azure-data-studio" do
-  version "1.33.1"
-  sha256 "73ff269b941929e650be6e8e73203185a0949c86cd072fa42436a141ffeed2ed"
+  arch arm: "darwin-arm64", intel: "darwin"
 
-  url "https://azuredatastudio-update.azurewebsites.net/#{version}/darwin/stable",
+  version "1.44.1"
+  sha256 arm:   "eb8560b987967935e559d27a321b861fcaadc16b2be41b043daec48ba3b62316",
+         intel: "8a08983159a16c9f8d97d84c8bbd388dabc3fa52f7e37698bba682063f446f0c"
+
+  url "https://azuredatastudio-update.azurewebsites.net/#{version}/#{arch}/stable",
       verified: "azuredatastudio-update.azurewebsites.net/"
   name "Azure Data Studio"
   desc "Data management tool that enables working with SQL Server"
   homepage "https://docs.microsoft.com/en-us/sql/azure-data-studio/"
 
   livecheck do
-    url "https://azuredatastudio-update.azurewebsites.net/api/update/darwin/stable/VERSION"
-    strategy :page_match
-    regex(/"productVersion"\s*:\s*"(\d+(:?\.\d+)+)"/)
+    url "https://azuredatastudio-update.azurewebsites.net/api/update/#{arch}/stable/VERSION"
+    regex(/"productVersion"\s*:\s*"(\d+(:?\.\d+)+)"/i)
   end
 
   auto_updates true

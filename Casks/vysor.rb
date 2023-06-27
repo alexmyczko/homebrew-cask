@@ -1,6 +1,6 @@
 cask "vysor" do
-  version "4.1.77"
-  sha256 "b02f1f01c0ea8c071d3e1fe5ca4d4a0affa9a5d40a2544af49cc24fc5b4fbbb9"
+  version "5.0.7"
+  sha256 "b3db71a61e6b46df7242038335b0ff6be961fcfd3e31250fda0488236bcadd6f"
 
   url "https://github.com/koush/vysor.io/releases/download/v#{version}/Vysor-mac-#{version}.zip",
       verified: "github.com/koush/vysor.io/"
@@ -9,8 +9,8 @@ cask "vysor" do
   homepage "https://www.vysor.io/"
 
   livecheck do
-    url "http://vysornuts.clockworkmod.com/download/mac"
-    strategy :header_match
+    url :url
+    strategy :github_latest
   end
 
   app "Vysor.app"
@@ -19,8 +19,8 @@ cask "vysor" do
     "~/Library/Application Support/Vysor",
     "~/Library/Caches/com.electron.vysor",
     "~/Library/Caches/com.electron.vysor.ShipIt",
-    "~/Library/Preferences/com.electron.vysor.plist",
     "~/Library/Preferences/com.electron.vysor.helper.plist",
+    "~/Library/Preferences/com.electron.vysor.plist",
     "~/Library/Saved Application State/com.electron.vysor.savedState",
   ]
 end

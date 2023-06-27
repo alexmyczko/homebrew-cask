@@ -8,9 +8,15 @@ cask "dolphin" do
   homepage "https://dolphin-emu.org/"
 
   livecheck do
-    url "https://github.com/dolphin-emu/dolphin"
-    strategy :git
+    url "https://dolphin-emu.org/download/"
+    regex(/href=.*?dolphin[._-]v?(\d+(?:\.\d+)+)(?:[._-]universal)?\.dmg/i)
   end
+
+  conflicts_with cask: [
+    "homebrew/cask-versions/dolphin-beta",
+    "homebrew/cask-versions/dolphin-dev",
+  ]
+  depends_on macos: ">= :catalina"
 
   app "Dolphin.app"
 

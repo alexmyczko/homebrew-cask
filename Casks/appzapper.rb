@@ -9,11 +9,9 @@ cask "appzapper" do
 
   livecheck do
     url :homepage
+    regex(/href=.*?appzapper(\d+)(\d+)(\d+)\.zip/i)
     strategy :page_match do |page|
-      match = page.match(%r{href=.*?/appzapper(\d+)(\d+)(\d+)\.zip}i)
-      next if match.blank?
-
-      "#{match[1]}.#{match[2]}.#{match[3]}"
+      page.scan(regex).map { |match| "#{match[0]}.#{match[1]}.#{match[2]}" }
     end
   end
 
@@ -21,4 +19,9 @@ cask "appzapper" do
   depends_on macos: ">= :sierra"
 
   app "AppZapper.app"
+
+  zap trash: [
+    "~/Library/Application Support/AppZapper",
+    "~/Library/Preferences/com.appzapper.appzapper2.plist",
+  ]
 end

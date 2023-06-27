@@ -1,9 +1,9 @@
 cask "nova" do
-  version "8.3"
-  sha256 "2d97ed0472e2042d0c5de1857381be4b07f2f9e33f1b07cd4ec9381d8f8bca47"
+  version "11.2"
+  sha256 "341f0fa8791a1ead8b356bd5ca152a7d7d390d3601abe88252e4390604ae1c4e"
 
-  url "https://download-cdn.panic.com/nova/Nova%20#{version}.zip",
-      verified: "https://download-cdn.panic.com/nova/"
+  url "https://download-keycdn.panic.com/nova/Nova%20#{version}.zip",
+      verified: "download-keycdn.panic.com/nova/"
   name "Panic Nova"
   desc "Native code editor"
   homepage "https://nova.app/"
@@ -14,17 +14,19 @@ cask "nova" do
   end
 
   auto_updates true
-  depends_on macos: ">= :mojave"
+  depends_on macos: ">= :big_sur"
 
   app "Nova.app"
-  binary "#{appdir}/Nova.app/Contents/SharedSupport/nova"
 
-  zap trash: [
+  uninstall delete: [
     "/Library/LaunchDaemons/com.panic.NovaPrivilegedHelper.plist",
     "/Library/PrivilegedHelperTools/com.panic.NovaPrivilegedHelper",
+  ]
+
+  zap trash: [
     "~/Library/Application Scripts/com.panic.Nova.NovaQuickLookPreview",
     "~/Library/Application Scripts/com.panic.Nova.NovaQuickLookThumbnail",
-    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.panic.nova.sfl2",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.panic.nova.sfl*",
     "~/Library/Caches/com.panic.Nova",
     "~/Library/Containers/com.panic.Nova.NovaQuickLookPreview",
     "~/Library/Containers/com.panic.Nova.NovaQuickLookThumbnail",

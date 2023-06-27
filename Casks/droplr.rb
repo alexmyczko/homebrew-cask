@@ -1,26 +1,26 @@
 cask "droplr" do
-  version "5.9.13,472"
-  sha256 "730f0e5064ccc1af034d1b070aeec1e8490c0580e80b4cd8184375ee0a4df723"
+  version "5.9.19,478"
+  sha256 "d2d0741f7caad6bae1d9db9a97f09d21fc2086c3d1155c3427542842b8ab9402"
 
-  url "https://files.droplr.com/apps/mac/Droplr#{version.before_comma.no_dots}-#{version.after_comma}.zip"
+  url "https://files.droplr.com/apps/mac/Droplr#{version.csv.first.no_dots}-#{version.csv.second}.zip"
   name "Droplr"
   desc "Screenshot and screen recorder"
   homepage "https://droplr.com/"
 
   livecheck do
     url "https://files.droplr.com/apps/mac-current"
-    strategy :header_match do |headers|
-      match = headers["location"].match(%r{/Droplr(\d)(\d)(\d+)-(\d+)\.zip}i)
-      next if match.blank?
-
-      "#{match[1]}.#{match[2]}.#{match[3]},#{match[4]}"
+    regex(%r{/Droplr(\d)(\d)(\d+)-(\d+)\.zip}i)
+    strategy :header_match do |headers, regex|
+      headers["location"].scan(regex).map do |match|
+        "#{match[0]}.#{match[1]}.#{match[2]},#{match[3]}"
+      end
     end
   end
 
   auto_updates true
   depends_on macos: ">= :sierra"
 
-  pkg "Droplr#{version.before_comma.no_dots}-#{version.after_comma}.pkg"
+  pkg "Droplr#{version.csv.first.no_dots}-#{version.csv.second}.pkg"
 
   uninstall pkgutil: "com.droplr.droplr-mac"
 end

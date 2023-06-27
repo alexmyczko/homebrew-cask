@@ -1,6 +1,6 @@
 cask "datovka" do
-  version "4.18.0"
-  sha256 "62cb7909c1b191974d2890aa6dcc80cc6d869af406d3cb794230841fac7fe933"
+  version "4.22.1"
+  sha256 "ee7e05eab2eb2d5b9afa04f56fc83a5dfd070fb1560d39f90d1a599eecdf7975"
 
   url "https://secure.nic.cz/files/datove_schranky/#{version}/datovka-#{version}-64bit-macos10.12.dmg",
       verified: "secure.nic.cz/files/datove_schranky/"
@@ -10,9 +10,10 @@ cask "datovka" do
 
   livecheck do
     url "https://www.datovka.cz/cs/pages/instalace.html"
-    strategy :page_match
     regex(%r{href=.*?/datovka-(\d+(?:\.\d+)+)-64bit-macos10\.12\.dmg}i)
   end
 
   app "datovka.app"
+
+  zap trash: "~/Library/Saved Application State/cz.nic.datovka.savedState"
 end

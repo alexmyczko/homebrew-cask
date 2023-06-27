@@ -1,8 +1,10 @@
 cask "twobird" do
-  version "1.0.41"
+  arch arm: "arm64", intel: "x64"
+
+  version "1.0.52"
   sha256 :no_check
 
-  url "https://www.twobird.com/download/mac"
+  url "https://www.twobird.com/download/mac-#{arch}"
   name "Twobird"
   desc "Email client with collaborative notes"
   homepage "https://www.twobird.com/"

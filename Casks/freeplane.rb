@@ -1,13 +1,9 @@
 cask "freeplane" do
-  arch = Hardware::CPU.intel? ? "intel" : "apple"
+  arch arm: "apple", intel: "intel"
 
-  version "1.9.11"
-
-  if Hardware::CPU.intel?
-    sha256 "b9d989832db053e7b0892f1d2778a77c9444ae5b45beceb5746b15245c08cf64"
-  else
-    sha256 "2332e15f6352871af86f90ea22221c0d905c88ba815c5653c29d425e95058c1a"
-  end
+  version "1.11.4"
+  sha256 arm:   "6dc5d30090ac279b9ab0405d48dc12867b32ab1935d42099d887a4e067a2aeed",
+         intel: "b50f599e5eba56e6ad52a3aed6fb5a1abc572b32fb05303b3ec8b3040402c215"
 
   url "https://downloads.sourceforge.net/freeplane/Freeplane-#{version}-#{arch}.dmg",
       verified: "downloads.sourceforge.net/freeplane/"
@@ -17,8 +13,8 @@ cask "freeplane" do
 
   livecheck do
     url "https://sourceforge.net/projects/freeplane/rss?path=/freeplane%20stable"
+    regex(%r{/freeplane%20stable/Freeplane[._-]v?(\d+(?:\.\d+)+)(?:[._-]#{arch})?\.dmg}i)
     strategy :page_match
-    regex(%r{stable/Freeplane[._-]v?(\d+(?:\.\d+)+)(?:[._-]apple)?\.dmg}i)
   end
 
   app "Freeplane.app"

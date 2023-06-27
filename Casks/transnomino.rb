@@ -1,11 +1,11 @@
 cask "transnomino" do
-  version "6.1"
-  sha256 "cd52b4636cf2913e08315098c9cb2cec514423a1a08f3cb110c43f72b5b8a130"
+  version "7.3"
+  sha256 "39f5a45c27bce1d8dd4463c68d074be5caab4b58b29ac0aecfb3ad19c5502b21"
 
-  url "https://transnomino.bastiaanverreijt.com/download/Transnomino-#{version}.dmg"
+  url "https://www.transnomino.com/download/Transnomino-#{version}.dmg"
   name "Transnomino"
   desc "Batch rename utility"
-  homepage "https://transnomino.bastiaanverreijt.com/"
+  homepage "https://www.transnomino.com/"
 
   livecheck do
     url :homepage
@@ -16,4 +16,10 @@ cask "transnomino" do
   depends_on macos: ">= :high_sierra"
 
   app "Transnomino.app"
+
+  zap trash: [
+    "~/Library/Caches/com.apple.helpd/Generated/com.bastiaanverreijt.Transnomino.help*",
+    "~/Library/HTTPStorages/com.bastiaanverreijt.Transnomino",
+    "~/Library/Preferences/com.bastiaanverreijt.Transnomino.plist",
+  ]
 end

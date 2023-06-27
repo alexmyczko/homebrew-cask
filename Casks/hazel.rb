@@ -1,6 +1,6 @@
 cask "hazel" do
-  version "5.1.1"
-  sha256 "b668aed30a4d1c3960ed5e9f9aee675f1a5f7cb8f43dfc21cb28b104d53b419b"
+  version "5.2.2"
+  sha256 "dc99cec0dc2d73e4bec2b2b8cba0bc2bc14a93aa58d50b3451520d043bc84263"
 
   url "https://s3.amazonaws.com/Noodlesoft/Hazel-#{version}.dmg",
       verified: "s3.amazonaws.com/Noodlesoft/"
@@ -14,7 +14,7 @@ cask "hazel" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :mojave"
 
   app "Hazel.app"
 

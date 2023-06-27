@@ -1,8 +1,8 @@
 cask "supercollider" do
-  version "3.12.1"
-  sha256 "7a987249751f7eb5d1678b01e8ade88b7afd205e907afdbd1e0d587856a1ea71"
+  version "3.13.0"
+  sha256 "fae71509475d66d47bb7b8d204a57a0d6cd4bcb3d9e77c5f2670b916b7160868"
 
-  url "https://github.com/supercollider/supercollider/releases/download/Version-#{version}/SuperCollider-#{version}-macOS.dmg",
+  url "https://github.com/supercollider/supercollider/releases/download/Version-#{version}/SuperCollider-#{version}-macOS-universal.dmg",
       verified: "github.com/supercollider/supercollider/"
   name "SuperCollider"
   desc "Server, language, and IDE for sound synthesis and algorithmic composition"
@@ -10,9 +10,14 @@ cask "supercollider" do
 
   livecheck do
     url :url
-    strategy :git
-    regex(/^Version-(\d+(?:\.\d+)*)$/i)
+    regex(/^Version[._-]v?(\d+(?:\.\d+)+)$/i)
   end
 
   app "SuperCollider.app"
+
+  zap trash: [
+    "~/Library/Application Support/SuperCollider",
+    "~/Library/Preferences/net.sourceforge.supercollider.plist",
+    "~/Library/Saved Application State/net.sourceforge.supercollider.savedState",
+  ]
 end

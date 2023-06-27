@@ -1,16 +1,21 @@
 cask "wireshark" do
-  url_arch = Hardware::CPU.intel? ? "Intel" : "Arm"
-  livecheck_arch = Hardware::CPU.intel? ? "x86-" : "arm"
+  arch arm: "Arm", intel: "Intel"
+  livecheck_arch = on_arch_conditional arm: "arm", intel: "x86-"
 
-  version "3.6.0"
+  version "4.0.6"
 
-  url "https://2.na.dl.wireshark.org/osx/Wireshark%20#{version}%20#{url_arch}%2064.dmg"
-  if Hardware::CPU.intel?
-    sha256 "c571417d3318074fbe73814a0180e84262e10b58cadb2e80c9fc05cf97e99645"
-  else
-    sha256 "9893a985693c01b29b532745ca0f999590b119a3e8e9820a403291ffce11fd97"
+  on_arm do
+    sha256 "62fac39ba7848d19dff39804fd906908d9417157dfbcd6a9d4aac27956254f2e"
+
+    depends_on macos: ">= :big_sur"
+  end
+  on_intel do
+    sha256 "3c0d75cd363dc9753c57dd109683447ea0eedb97cab75108db18d387be5b92eb"
+
+    depends_on macos: ">= :sierra"
   end
 
+  url "https://2.na.dl.wireshark.org/osx/Wireshark%20#{version}%20#{arch}%2064.dmg"
   name "Wireshark"
   desc "Network protocol analyzer"
   homepage "https://www.wireshark.org/"
@@ -23,7 +28,6 @@ cask "wireshark" do
   auto_updates true
   conflicts_with cask:    "wireshark-chmodbpf",
                  formula: "wireshark"
-  depends_on macos: ">= :sierra"
 
   app "Wireshark.app"
   pkg "Add Wireshark to the system path.pkg"
@@ -47,6 +51,27 @@ cask "wireshark" do
   binary "#{appdir}/Wireshark.app/Contents/MacOS/sharkd"
   binary "#{appdir}/Wireshark.app/Contents/MacOS/text2pcap"
   binary "#{appdir}/Wireshark.app/Contents/MacOS/tshark"
+  manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/androiddump.1"
+  manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/capinfos.1"
+  manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/captype.1"
+  manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/ciscodump.1"
+  manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/dftest.1"
+  manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/dumpcap.1"
+  manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/editcap.1"
+  manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/etwdump.1"
+  manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/mergecap.1"
+  manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/mmdbresolve.1"
+  manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/randpkt.1"
+  manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/randpktdump.1"
+  manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/rawshark.1"
+  manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/reordercap.1"
+  manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/sshdump.1"
+  manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/text2pcap.1"
+  manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/tshark.1"
+  manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/udpdump.1"
+  manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/wireshark.1"
+  manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man4/extcap.4"
+  manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man4/wireshark-filter.4"
 
   uninstall_preflight do
     system_command "/usr/sbin/installer",

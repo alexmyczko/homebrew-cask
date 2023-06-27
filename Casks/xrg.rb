@@ -1,15 +1,15 @@
 cask "xrg" do
-  version "3.0.0"
-  sha256 "9e3a70c7c5ab58b5e891a4c0766e02be4f4cfc1b6c070b7c24c5e3ee6bb8512e"
+  version "3.2.0"
+  sha256 "6fd44ec881808be1ff4716183b9d87ca32e8893c66da33214776d407ebff5e64"
 
   url "https://download.gauchosoft.com/xrg/XRG-release-#{version}.zip"
   name "XRG"
+  desc "System monitor"
   homepage "https://gauchosoft.com/Products/XRG/"
 
   livecheck do
     url :homepage
-    strategy :page_match
-    regex(%r{href=.*?/XRG-release-(\d+(?:\.\d+)*)\.zip}i)
+    regex(%r{href=.*?/XRG-release-(\d+(?:\.\d+)+)\.zip}i)
   end
 
   app "XRG.app"

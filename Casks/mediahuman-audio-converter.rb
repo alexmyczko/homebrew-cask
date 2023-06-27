@@ -1,17 +1,24 @@
 cask "mediahuman-audio-converter" do
-  version "1.9.8"
+  arch arm: "-arm"
+
+  version "2.2.1"
   sha256 :no_check
 
-  url "https://www.mediahuman.com/download/MHAudioConverter.dmg"
+  url "https://www.mediahuman.com/files/MHAudioConverter#{arch}.dmg"
   name "MediaHuman Audio Converter"
   desc "Audio converter"
   homepage "https://www.mediahuman.com/audio-converter/"
 
   livecheck do
     url :homepage
-    strategy :page_match
-    regex(/"softwareVersion">(\d+(?:\.\d+)*)/i)
+    regex(/"softwareVersion">\s*(\d+(?:\.\d+)+)[\s<]/i)
   end
 
   app "MediaHuman Audio Converter.app"
+
+  zap trash: [
+    "~/Library/Preferences/com.mediahuman.Audio Converter.plist",
+    "~/Library/Preferences/com.mediahuman.plist",
+    "~/Library/Saved Application State/com.mediahuman.Audio Converter.savedState",
+  ]
 end

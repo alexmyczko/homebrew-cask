@@ -1,6 +1,6 @@
 cask "android-commandlinetools" do
-  version "7583922"
-  sha256 "6929a1957f3e71008adfade0cebd08ebea9b9f506aa77f1849c7bdc3418df7cf"
+  version "9477386"
+  sha256 "2072ffce4f54cdc0e6d2074d2f381e7e579b7d63e915c220b96a7db95b2900ee"
 
   url "https://dl.google.com/android/repository/commandlinetools-mac-#{version}_latest.zip",
       verified: "dl.google.com/android/repository/"
@@ -17,7 +17,7 @@ cask "android-commandlinetools" do
                  formula: "proguard"
 
   android_sdk_root = "#{HOMEBREW_PREFIX}/share/android-commandlinetools"
-  android_clt_dir = "#{android_sdk_root}/cmdline-tools/homebrew"
+  android_clt_dir = "#{android_sdk_root}/cmdline-tools/latest"
 
   binary "#{android_clt_dir}/bin/apkanalyzer"
   binary "#{android_clt_dir}/bin/avdmanager"

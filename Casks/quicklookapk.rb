@@ -4,12 +4,14 @@ cask "quicklookapk" do
 
   url "https://github.com/hezi/QuickLookAPK/raw/master/QuickLookAPK.qlgenerator.zip"
   name "QuickLookAPK"
+  desc "Quick Look plugin for Android packages"
   homepage "https://github.com/hezi/QuickLookAPK"
 
-  livecheck do
-    url :url
-    strategy :extract_plist
-  end
-
   qlplugin "QuickLookAPK.qlgenerator"
+
+  # No zap stanza required
+
+  caveats do
+    discontinued
+  end
 end

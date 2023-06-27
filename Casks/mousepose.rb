@@ -1,8 +1,8 @@
 cask "mousepose" do
-  version "4.2,10276"
-  sha256 "a8e1d256f5931e78d730cb9d8de0f50758529373a6bfada9743e069e3ec70ef7"
+  version "4.3,10282"
+  sha256 "75151165bfeb6eb1fe6ac3835cb0c80ce0bba26559d3c5410977bf034f688883"
 
-  url "https://cdn.boinx.com/software/mousepose/Mousepose-#{version.before_comma}-Boinx-(#{version.after_comma}).app.zip"
+  url "https://cdn.boinx.com/software/mousepose/Mousepose-#{version.csv.first}-Boinx-(#{version.csv.second}).app.zip"
   name "Mouseposé"
   desc "Highlight your mouse pointer and cursor position"
   homepage "https://boinx.com/mousepose/overview/"
@@ -12,7 +12,7 @@ cask "mousepose" do
     strategy :sparkle
   end
 
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :mojave"
 
   # Renamed for consistency: app name is different in the Finder and in a shell.
   # Original discussion: https://github.com/Homebrew/homebrew-cask/pull/15708

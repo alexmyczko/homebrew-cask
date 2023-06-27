@@ -8,8 +8,7 @@ cask "alchemy" do
   homepage "https://al.chemy.org/"
 
   livecheck do
-    url "http://al.chemy.org/download/"
-    strategy :page_match
+    url "https://al.chemy.org/download/"
     regex(%r{href=.*?/Alchemy-(\d+(?:\.\d+)*)\.dmg}i)
   end
 

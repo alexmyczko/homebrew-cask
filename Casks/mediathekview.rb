@@ -1,16 +1,18 @@
 cask "mediathekview" do
-  version "13.8.0"
-  sha256 "a35a3fe6303cbdca6129c367192d860e54e7397d979d656d5dd1375856fb99c0"
+  arch arm: "mac-as", intel: "mac"
 
-  url "https://download.mediathekview.de/stabil/MediathekView-#{version}-mac.dmg"
+  version "13.9.1"
+  sha256 arm:   "4eb0e2de15f1852b66ac16b84b6fdba1c3dfc18e19a646763c4e636a7c7932b0",
+         intel: "4529bbed37b3736623b5083e99088866bfec98973383df2553c27175738072a9"
+
+  url "https://download.mediathekview.de/stabil/MediathekView-#{version}-#{arch}.dmg"
   name "MediathekView"
   desc "Manages online multimedia libs of German, Austrian and Swiss public broadcasters"
   homepage "https://mediathekview.de/"
 
   livecheck do
     url "https://download.mediathekview.de/stabil/"
-    strategy :page_match
-    regex(%r{href=.*?/MediathekView-(\d+(?:\.\d+)*)-mac\.dmg}i)
+    regex(%r{href=.*?/MediathekView-(\d+(?:\.\d+)+)-#{arch}\.dmg}i)
   end
 
   app "MediathekView.app"

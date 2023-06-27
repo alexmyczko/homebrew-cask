@@ -1,18 +1,18 @@
 cask "pdfelement" do
-  version "8.5.7"
+  version "9.5.5"
   sha256 :no_check
 
-  url "https://download.wondershare.com/cbs_down/mac-pdfelement_full5237.zip"
+  url "https://download.wondershare.com/cbs_down/mac-pdfelement_full5237.dmg"
   name "Wondershare PDFelement for Mac"
   desc "Create, edit, convert and sign PDF documents"
   homepage "https://pdf.wondershare.com/"
 
   livecheck do
-    url "http://cbs.wondershare.com/go.php?m=upgrade_info&pid=5237&version=latest"
+    url "https://cbs.wondershare.com/go.php?m=upgrade_info&pid=5237&version=latest"
     regex(%r{<Version>(\d+(?:\.\d+)+)</Version>}i)
   end
 
-  depends_on macos: ">= :sierra"
+  depends_on macos: ">= :mojave"
 
   app "PDFelement.app"
 

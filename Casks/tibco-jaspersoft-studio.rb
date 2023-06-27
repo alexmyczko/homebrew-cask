@@ -1,6 +1,6 @@
 cask "tibco-jaspersoft-studio" do
-  version "6.17.0"
-  sha256 "e58652dd76e13828986d66fa1778a6182841a82cabc22c1434577094b9fb5e31"
+  version "6.20.0"
+  sha256 "3025aaa6b5bf74f689f75eae5dbe119ee5cf11cad3bdb2661bbfda6c02d38dfe"
 
   url "https://downloads.sourceforge.net/jasperstudio/JaspersoftStudio-#{version}/TIB_js-studiocomm_#{version}_macosx_x86_64.dmg",
       verified: "sourceforge.net/jasperstudio/"
@@ -16,4 +16,12 @@ cask "tibco-jaspersoft-studio" do
   auto_updates true
 
   app "TIBCO Jaspersoft Studio #{version}.app"
+
+  zap trash: [
+    "~/JaspersoftWorkspace",
+    "~/Library/Application Support/Jaspersoft Studio",
+    "~/Library/Preferences/com.jaspersoft.studio.plist",
+    "~/Library/Preferences/com.jaspersoft.studio.rcp.product.plist",
+    "~/Library/Saved Application State/com.jaspersoft.studio.rcp.product.savedState",
+  ]
 end

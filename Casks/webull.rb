@@ -1,20 +1,26 @@
 cask "webull" do
-  version "5.4.22_us"
-  sha256 "75f4c8981b27e248360fdf024ca6620ae50711af3ff54d03e60efadfa66b3c26"
+  version "6.12.5"
+  sha256 "57e22e19d94360f1e4312d86e2e4cc1881ea09c493f6d19751a4d9620ea13b35"
 
-  url "https://pub.webull.com/us/desktop/Webull%20Desktop%20#{version}.dmg"
+  url "https://u1sweb.webullfintech.com/us/Webull%20Desktop_#{version}_global_universalsigned.dmg",
+      verified: "u1sweb.webullfintech.com/us/"
   name "Webull"
   desc "Desktop client for Webull Financial LLC"
-  homepage "https://webull.com/"
+  homepage "https://www.webull.com/"
 
   livecheck do
-    url "https://infoapi.webullfintech.com/api/operation/appver/last?platform=qt_mac_global"
-    regex(%r{"upgradeUrl"\s*:\s*"[^"]*/Webull%20Desktop%20(\d+(?:\.\d+)*(?:[._-][a-z]+)?)\.dmg"}i)
+    url "https://infoapi.webullfintech.com/api/operation/appver/last?platform=qt_mac_global&osv=10.14"
+    regex(/Webull%20Desktop[._-](\d+(?:\.\d+)+).*?.dmg/i)
   end
 
-  depends_on macos: ">= :sierra"
+  depends_on macos: ">= :mojave"
 
   app "Webull Desktop.app"
 
-  zap trash: "~/Library/Application Support/Webull Desktop"
+  zap trash: [
+    "~/.config/Webull Desktop",
+    "~/Library/Application Support/Webull Desktop",
+    "~/Library/Preferences/com.webulldesktop.*",
+    "~/Library/Saved Application State/com.webull.desktop.v1.savedState",
+  ]
 end

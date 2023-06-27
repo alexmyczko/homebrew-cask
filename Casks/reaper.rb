@@ -1,18 +1,15 @@
 cask "reaper" do
-  version "6.42"
+  version "6.80"
 
-  if MacOS.version <= :mojave
-    sha256 "899e32ecc25666da5b6237c76a69f71258ca7e4bdf3443f6bc62606cfc5240cb"
+  on_mojave :or_older do
+    sha256 "3416de4979819ef83433b504ab1a7edfc52509cfceba1e68699e2ed52afcda56"
 
-    url "https://www.reaper.fm/files/#{version.major}.x/reaper#{version.major_minor.no_dots}_x86_64.dmg"
-  elsif Hardware::CPU.intel?
-    sha256 "d921e32d28bd0833cbf9cf79254f9b6e3d6bb7db26687b7dbb9e7a6e22ba5805"
+    url "https://dlcf.reaper.fm/#{version.major}.x/reaper#{version.major_minor.no_dots}_x86_64.dmg"
+  end
+  on_catalina :or_newer do
+    sha256 "914063f16db3aabb1922998638757ed0d5b2e52e997f62b2ab9dfc20fc83158e"
 
-    url "https://www.reaper.fm/files/#{version.major}.x/reaper#{version.major_minor.no_dots}_x86_64_catalina.dmg"
-  else
-    sha256 "58f908f3a48fb3cc33092077275dc3149b394496c335454f4972ebd3ee7bc277"
-
-    url "https://www.reaper.fm/files/#{version.major}.x/reaper#{version.major_minor.no_dots}_arm64.dmg"
+    url "https://dlcf.reaper.fm/#{version.major}.x/reaper#{version.major_minor.no_dots}_universal.dmg"
   end
 
   name "REAPER"
@@ -24,13 +21,8 @@ cask "reaper" do
     regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 
-  if Hardware::CPU.intel?
-    app "REAPER.app"
-    app "ReaMote.app"
-  else
-    app "REAPER-ARM.app"
-    app "ReaMote-ARM.app"
-  end
+  app "REAPER.app"
+  app "ReaMote.app"
 
   zap trash: [
     "~/Library/Application Support/REAPER",

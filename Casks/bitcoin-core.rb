@@ -1,15 +1,18 @@
 cask "bitcoin-core" do
-  version "22.0"
-  sha256 "3b3e2680f7d9304c13bfebaf6445ada40d72324b4b3e0a07de9db807389a6c5b"
+  arch arm: "arm64", intel: "x86_64"
 
-  url "https://bitcoincore.org/bin/bitcoin-core-#{version}/bitcoin-#{version}-osx-signed.dmg"
+  version "25.0"
+  sha256 arm:   "b4dfca3fa2824fd344393659e43541cc27029f455a245ad816f467cb72b29973",
+         intel: "277c436d3119d7f9a3fa0e580d444a28887d9e097fdb2578609db9e050f4f5d7"
+
+  url "https://bitcoincore.org/bin/bitcoin-core-#{version}/bitcoin-#{version}-#{arch}-apple-darwin.dmg"
   name "Bitcoin Core"
   desc "Bitcoin client and wallet"
   homepage "https://bitcoincore.org/"
 
   livecheck do
     url "https://github.com/bitcoin/bitcoin"
-    regex(/^v?(\d+(?:\.\d+)+)$/i)
+    strategy :github_latest
   end
 
   # Renamed for consistency: app name is different in the Finder and in a shell.

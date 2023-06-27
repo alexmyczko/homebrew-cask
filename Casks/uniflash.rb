@@ -1,15 +1,15 @@
 cask "uniflash" do
-  version "6.4.0.3394"
-  sha256 "8ddb6990b78fa40d293effd471ba8850613a2ae2997e87b8d9863ccba172d43a"
+  version "8.3.0.4307"
+  sha256 "b93dc02fae18448f0221c0945195ed0d4af96f426df943f901725bce147c58e7"
 
-  url "https://downloads.ti.com/ccs/esd/uniflash/uniflash_sl.#{version}.dmg"
+  url "https://dr-download.ti.com/software-development/software-programming-tool/MD-QeJBJLj8gq/#{version.major_minor_patch}/uniflash_sl.#{version}.dmg"
   name "TI UniFlash"
   desc "Flash tool for microcontrollers"
   homepage "https://www.ti.com/tool/UNIFLASH"
 
   livecheck do
     url :homepage
-    regex(%r{href=.*?/uniflash_sl\.(\d+(?:\.\d+)*)\.dmg}i)
+    regex(/href=.*?uniflash_sl\.(\d+(?:\.\d+)+)\.dmg/i)
   end
 
   installer script: {
@@ -32,4 +32,11 @@ cask "uniflash" do
     args:       ["--mode", "unattended"],
     sudo:       true,
   }
+
+  zap trash: [
+        "~/.ti/uniflash",
+        "~/Library/Application Support/Uniflash",
+        "~/Library/Caches/Uniflash",
+      ],
+      rmdir: "~/.ti"
 end

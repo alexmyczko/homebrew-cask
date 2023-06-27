@@ -1,6 +1,6 @@
 cask "packetproxy" do
-  version "2.1.8"
-  sha256 "4ae04b7951291d651dc8ee56eb5a7526fabb734641100babf4d108537604541c"
+  version "2.2.0"
+  sha256 "b25aa90db773bb8d00871db777d383c6de292ae2dad448102f50702a9c0790fc"
 
   url "https://github.com/DeNA/PacketProxy/releases/download/#{version}/PacketProxy-#{version}-Installer-Mac-Signed.dmg"
   name "PacketProxy"
@@ -8,4 +8,9 @@ cask "packetproxy" do
   homepage "https://github.com/DeNA/PacketProxy"
 
   app "PacketProxy.app"
+
+  zap trash: [
+    "~/.packetproxy",
+    "~/Library/Saved Application State/packetproxy",
+  ]
 end

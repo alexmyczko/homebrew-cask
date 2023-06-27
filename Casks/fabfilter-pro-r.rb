@@ -1,6 +1,6 @@
 cask "fabfilter-pro-r" do
-  version "1.10"
-  sha256 "76143741ee304b8a1f5fa20001fa7990e8dae8f5cdd2104243047adceed8b419"
+  version "1.14"
+  sha256 "a2d0585aea90701bbc6c2408f49c027f4b01c6b722824b3dcc48f92c83bd627c"
 
   url "https://download.fabfilter.com/ffpror#{version.no_dots}.dmg"
   name "FabFilter Pro-R"
@@ -10,18 +10,16 @@ cask "fabfilter-pro-r" do
   livecheck do
     url "https://www.fabfilter.com/download"
     strategy :page_match do |page|
-      match = page.match(%r{href=".*?/ffpror(\d)(\d\d)\.dmg}i)
+      match = page.match(/ffpror(\d)(\d+)\.dmg/i)
       next if match.blank?
 
       "#{match[1]}.#{match[2]}"
     end
   end
 
-  depends_on macos: ">= :yosemite"
+  depends_on macos: ">= :sierra"
 
   pkg "FabFilter Pro-R #{version} Installer.pkg"
 
-  uninstall pkgutil: [
-    "com.fabfilter.Pro-R.#{version.major}",
-  ]
+  uninstall pkgutil: "com.fabfilter.Pro-R.#{version.major}"
 end

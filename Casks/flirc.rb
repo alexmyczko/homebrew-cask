@@ -1,15 +1,22 @@
 cask "flirc" do
-  version "3.25.3"
-  sha256 "ca01961197f99e232e13d27dd5fe198ef84f476268504e2860507b6530a7f101"
+  version "3.27.2"
+  sha256 "c6ff9eb019688c1709ad23950aeba8262b462540e7e9c32cfa2b386c6b2d7928"
 
-  url "https://flirc.tv/software/flirc-usb/GUI/release/mac/Flirc-#{version}.dmg"
+  url "https://flirc.com/software/flirc-usb/GUI/release/mac/Flirc-#{version}.dmg"
   name "Flirc"
-  homepage "https://flirc.tv/"
+  desc "IR USB receiver configurator"
+  homepage "https://flirc.com/"
 
   livecheck do
-    url "https://flirc.tv/software/release/gui/mac/appcast.xml"
+    url "https://flirc.com/software/release/gui/mac/appcast.xml"
     strategy :sparkle
   end
 
   app "Flirc.app"
+
+  zap trash: [
+    "~/Library/HTTPStorages/com.flirc.Flirc",
+    "~/Library/HTTPStorages/com.flirc.Flirc.binarycookies",
+    "~/Library/Preferences/com.flirc.Flirc.plist",
+  ]
 end

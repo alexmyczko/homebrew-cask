@@ -5,14 +5,13 @@ cask "bit-fiddle" do
   url "https://manderc.com/apps/bitfiddle/000000000_downloads/Bit_Fiddle_#{version.dots_to_underscores}.dmg"
   name "Bit Fiddle"
   desc "Converts decimal, hexadecimal, binary numbers and ASCII characters"
-  homepage "https://manderc.com/apps/bitfiddle/index_en.php"
+  homepage "https://manderc.com/apps/bitfiddle/index_eng.php"
 
   livecheck do
     url :homepage
-    strategy :page_match do |page|
-      page.scan(/href=.*?Bit[._-]Fiddle[._-]v?(\d+(?:[._-]\d+)+)\.dmg/i).map do |match|
-        match[0].tr("_", ".")
-      end
+    regex(/href=.*?Bit[._-]Fiddle[._-]v?(\d+(?:[._-]\d+)+)\.dmg/i)
+    strategy :page_match do |page, regex|
+      page.scan(regex)&.map { |match| match[0].tr("_", ".") }
     end
   end
 

@@ -9,9 +9,10 @@ cask "openscad" do
 
   livecheck do
     url "https://files.openscad.org/"
-    strategy :page_match
-    regex(/href=.*?OpenSCAD-(\d+(?:\.\d+)*)\.dmg/i)
+    regex(/href=.*?OpenSCAD[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
   end
+
+  conflicts_with cask: "homebrew/cask-versions/openscad-snapshot"
 
   app "OpenSCAD.app"
 

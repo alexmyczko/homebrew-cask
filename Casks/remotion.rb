@@ -1,11 +1,11 @@
 cask "remotion" do
-  version "1.66.1"
-  sha256 "8f2379c03e6f76fc8beba7fc52aeffcc84572f8639f3aef113876a6e19a7f55e"
+  version "3.171.0"
+  sha256 "c0f70be41fe5e5ceb5243315907709b0db1830f38a46991619c90b2345216739"
 
   url "https://updates.remotion.com/installers/Remotion%20#{version}.dmg"
   name "remotion"
   desc "Communication tool for remote teams"
-  homepage "https://remotion.com/"
+  homepage "https://www.remotion.com/"
 
   livecheck do
     url "https://updates.remotion.com/latest"

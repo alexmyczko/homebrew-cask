@@ -1,6 +1,6 @@
 cask "lidarr" do
-  version "0.8.1.2135"
-  sha256 "cb11dffaf2b4aa800adfb3540e10ea7723b3f5cc379cf2f4486a2836712f1991"
+  version "1.1.4.3027"
+  sha256 "7528b67b62e68fe96b7638296534709d3b7755c365470b3de10fb8a4a7d5afe8"
 
   url "https://github.com/lidarr/Lidarr/releases/download/v#{version}/Lidarr.master.#{version}.osx-app-core-x64.zip",
       verified: "github.com/lidarr/Lidarr/"
@@ -16,4 +16,6 @@ cask "lidarr" do
   depends_on macos: ">= :high_sierra"
 
   app "Lidarr.app"
+
+  zap trash: "~/.config/Lidarr/"
 end

@@ -1,18 +1,24 @@
 cask "smartsvn" do
-  version "14.1.1"
-  sha256 "bd60c98f8e92eff0d8d8c196bc54fef8d9e3dbda2d20861971643095d3817457"
+  arch arm: "aarch64", intel: "x86_64"
 
-  url "https://www.smartsvn.com/downloads/smartsvn/smartsvn-macosx-#{version.dots_to_underscores}.dmg"
+  version "14.3.1"
+  sha256 arm:   "ad862c460d535d7259ecd7216b5707d8db8802e461c7d995c82a7b44472afc70",
+         intel: "c43ab4579b6fae09097bafb75c24a3bc3c9891d5cf2115069f8a99967fa2789e"
+
+  url "https://www.smartsvn.com/downloads/smartsvn/smartsvn-#{arch}-#{version.dots_to_underscores}.dmg"
   name "SmartSVN"
   desc "Subversion client"
   homepage "https://www.smartsvn.com/"
 
   livecheck do
-    url "https://www.smartsvn.com/documents/smartsvn/changelog.txt"
-    regex(/SmartSVN\s+(\d+(?:\.\d+)*)/i)
+    url "https://www.smartsvn.com/download/"
+    strategy :page_match do |page|
+      page.scan(/smartsvn[._-]#{arch}[._-](\d+(?:_\d+)+).dmg/i)
+          .map { |match| match&.first&.tr("_", ".") }
+    end
   end
 
-  depends_on macos: ">= :el_capitan"
+  depends_on macos: ">= :high_sierra"
 
   app "SmartSVN.app"
 

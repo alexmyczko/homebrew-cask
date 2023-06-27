@@ -1,6 +1,6 @@
 cask "iriunwebcam" do
-  version "2.7.1"
-  sha256 "e13b6708debbe6f92676fff2a98073774a64d556e88a3bedd0681477a0a123e8"
+  version "2.8.4"
+  sha256 "76ebd1b1ac52a3486119ae5864ab7b92b477dd572c46b6ea081b95b2f61598e2"
 
   url "https://1758658189.rsc.cdn77.org/IriunWebcam-#{version}.pkg",
       verified: "1758658189.rsc.cdn77.org/"
@@ -13,9 +13,14 @@ cask "iriunwebcam" do
     regex(%r{href=.*?/IriunWebcam[._-]?v?(\d+(?:\.\d+)+)\.pkg}i)
   end
 
+  depends_on macos: ">= :monterey"
+
   pkg "IriunWebcam-#{version}.pkg"
 
-  uninstall quit:      "com.iriun.webcam",
+  uninstall quit:      [
+              "com.iriun.macwebcam",
+              "com.iriun.webcam",
+            ],
             pkgutil:   "com.iriun.*",
             launchctl: [
               "com.iriun.cmio.DPA.camera",
@@ -23,4 +28,6 @@ cask "iriunwebcam" do
               "com.iriun.cmio.DPA.camerc",
               "com.iriun.cmio.DPA.camerd",
             ]
+
+  zap trash: "~/Library/Saved Application State/com.iriun.macwebcam.savedState"
 end

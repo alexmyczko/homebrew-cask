@@ -1,6 +1,6 @@
 cask "fabfilter-one" do
-  version "3.33"
-  sha256 "99f87b5194e8087fb9569ec59825342505526a14e4cf0385a215f8467625ab02"
+  version "3.36"
+  sha256 "4740f7447d1056422cfc5b1c1cc0e7ae4e5585185ee21100ee6cb52a32eaab57"
 
   url "https://download.fabfilter.com/ffone#{version.no_dots}.dmg"
   name "FabFilter One"
@@ -10,18 +10,16 @@ cask "fabfilter-one" do
   livecheck do
     url "https://www.fabfilter.com/download"
     strategy :page_match do |page|
-      match = page.match(%r{href=.*?/ffone(\d)(\d\d)\.dmg}i)
+      match = page.match(/ffone(\d)(\d+)\.dmg/i)
       next if match.blank?
 
       "#{match[1]}.#{match[2]}"
     end
   end
 
-  depends_on macos: ">= :yosemite"
+  depends_on macos: ">= :sierra"
 
   pkg "FabFilter One #{version} Installer.pkg"
 
-  uninstall pkgutil: [
-    "com.fabfilter.One.#{version.major}",
-  ]
+  uninstall pkgutil: "com.fabfilter.One.#{version.major}"
 end

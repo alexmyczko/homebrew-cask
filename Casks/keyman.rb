@@ -1,6 +1,6 @@
 cask "keyman" do
-  version "14.0.282"
-  sha256 "698fb7e2dbb08d760d24a348efb9e3003656662de3ab8442e1f025581de01d3c"
+  version "16.0.139"
+  sha256 "ad0ce2f5635a5cb4b7065da11fb1bcc1c8e233791f3c566b03f240c268ac38ed"
 
   url "https://downloads.keyman.com/mac/stable/#{version}/keyman-#{version}.dmg"
   name "Keyman"
@@ -11,8 +11,6 @@ cask "keyman" do
     url "https://downloads.keyman.com/mac/stable"
     regex(%r{href=["']?v?(\d+(?:\.\d+)+)/?["' >]}i)
   end
-
-  depends_on macos: ">= :yosemite"
 
   input_method "Install Keyman.app/Contents/MacOS/Keyman.app"
 
@@ -29,9 +27,10 @@ cask "keyman" do
 
        Preferences → Keyboard → Input Sources
 
-    Before uninstalling Keyman, it is also suggested to manually remove the input method.
+    Before uninstalling Keyman, it is also suggested to manually remove the
+    input method. For further details, see the following links:
 
-    See https://help.keyman.com/products/mac/current-version/start/install-keyman.
-    and https://help.keyman.com/products/mac/current-version/troubleshooting/uninstall-keyman.
+    https://help.keyman.com/products/mac/current-version/start/install-keyman
+    https://help.keyman.com/products/mac/current-version/troubleshooting/uninstall-keyman
   EOS
 end

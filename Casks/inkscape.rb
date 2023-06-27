@@ -1,8 +1,11 @@
 cask "inkscape" do
-  version "1.1.1"
-  sha256 "f201468781d827b6c4055d08a603d828a29d5cff40f96228e535842c91c9debe"
+  arch arm: "arm64", intel: "x86_64"
 
-  url "https://media.inkscape.org/dl/resources/file/Inkscape-#{version}.dmg"
+  version "1.2.2"
+  sha256 arm:   "e101f59f5ae858ac21199cd434dfc903b6e409eaebecc9447b9451b6a38cbd86",
+         intel: "d2e9969ba8b5056926b08719e527f781cca9f6b35fdbc54e855d0540c93709b2"
+
+  url "https://media.inkscape.org/dl/resources/file/Inkscape-#{version}_#{arch}.dmg"
   name "Inkscape"
   desc "Vector graphics editor"
   homepage "https://inkscape.org/"

@@ -1,6 +1,6 @@
 cask "gqrx" do
-  version "2.14.6"
-  sha256 "825364e34579d491d641844e3885821ea59839bff836d9c3ce778dbce216aaae"
+  version "2.16"
+  sha256 "e18fe29cbaf83ed560b377ff444dba221882eb37a19628d96c9da7960a09a25b"
 
   url "https://github.com/gqrx-sdr/gqrx/releases/download/v#{version.major_minor_patch}/Gqrx-#{version}.dmg",
       verified: "github.com/gqrx-sdr/gqrx/"
@@ -21,4 +21,6 @@ cask "gqrx" do
       '#{appdir}/Gqrx.app/Contents/MacOS/gqrx' "$@"
     EOS
   end
+
+  zap trash: "~/.config/gqrx"
 end

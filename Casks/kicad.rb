@@ -1,37 +1,33 @@
 cask "kicad" do
-  version "5.1.12-1"
-  sha256 "c2380302f0ddce72123aa0ae4a6561b3acc168c3c04fc6b3019ee3325dcd65e3"
+  version "7.0.5-0"
+  sha256 "11e5fe1975575a31a521881a1152e437fb083266f028281bd32fdff6be79ca3a"
 
-  url "https://kicad-downloads.s3.cern.ch/osx/stable/kicad-unified-#{version}-10_14.dmg",
-      verified: "kicad-downloads.s3.cern.ch/"
+  url "https://kicad-downloads.s3.cern.ch/osx/stable/kicad-unified-universal-#{version}.dmg",
+      verified: "kicad-downloads.s3.cern.ch/osx/stable/"
   name "KiCad"
   desc "Electronics design automation suite"
   homepage "https://kicad.org/"
 
   livecheck do
-    url "https://kicad-downloads.s3.cern.ch/?delimiter=/&prefix=osx/stable/"
-    regex(/kicad-unified-(\d+(?:.\d+)*)-10_14\.dmg/i)
+    url "https://downloads.kicad.org/kicad/macos/explore/stable"
+    regex(/kicad[._-]unified[._-]universal[._-]v?(\d+(?:.\d+)+)\.dmg/i)
   end
 
-  depends_on macos: ">= :mojave"
+  depends_on macos: ">= :catalina"
 
-  app "KiCad/kicad.app",            target: "KiCad/kicad.app"
-  app "KiCad/bitmap2component.app", target: "KiCad/bitmap2component.app"
-  app "KiCad/eeschema.app",         target: "KiCad/eeschema.app"
-  app "KiCad/gerbview.app",         target: "KiCad/gerbview.app"
-  app "KiCad/pcb_calculator.app",   target: "KiCad/pcb_calculator.app"
-  app "KiCad/pcbnew.app",           target: "KiCad/pcbnew.app"
-  app "KiCad/pl_editor.app",        target: "KiCad/pl_editor.app"
-  artifact "kicad/help",            target: "/Library/Application Support/kicad/help"
-  artifact "kicad/library",         target: "/Library/Application Support/kicad/library"
-  artifact "kicad/modules",         target: "/Library/Application Support/kicad/modules"
-  artifact "kicad/share",           target: "/Library/Application Support/kicad/share"
-  artifact "kicad/template",        target: "/Library/Application Support/kicad/template"
+  suite "KiCad"
+  binary "KiCad/KiCad.app/Contents/MacOS/dxf2idf"
+  binary "KiCad/KiCad.app/Contents/MacOS/idf2vrml"
+  binary "KiCad/KiCad.app/Contents/MacOS/idfcyl"
+  binary "KiCad/KiCad.app/Contents/MacOS/idfrect"
+  binary "KiCad/KiCad.app/Contents/MacOS/kicad-cli"
+  artifact "demos", target: "/Library/Application Support/kicad/demos"
 
-  uninstall rmdir: [
+  zap trash: [
     "/Library/Application Support/kicad",
-    "#{appdir}/KiCad",
+    "~/Library/Application Support/kicad",
+    "~/Library/Preferences/kicad",
+    "~/Library/Preferences/org.kicad-pcb.*",
+    "~/Library/Saved Application State/org.kicad-pcb.*",
   ]
-
-  zap trash: "~/Library/Preferences/kicad"
 end

@@ -1,24 +1,19 @@
 cask "phpstorm" do
-  version "2021.3,213.5744.279"
+  arch arm: "-aarch64"
 
-  if Hardware::CPU.intel?
-    sha256 "3baedcc1cfac39b49a87d284e01c539dd044cf48dae9aa8cd82f5860a3874fba"
+  version "2023.1.3,231.9161.47"
+  sha256 arm:   "49ca043ee6119ae31c5f3fd12aa085f22dc0117c95bf70fca8afe29960c1a546",
+         intel: "d181a8c9ff92f183f1ce68c1867de61b17e5a82f5b16ec472baa99f5a5f9ce83"
 
-    url "https://download.jetbrains.com/webide/PhpStorm-#{version.before_comma}.dmg"
-  else
-    sha256 "763ce71f924bb760c14281797aa31fd3d2eaa43ad2c3a9135ee476a25a5fa46e"
-
-    url "https://download.jetbrains.com/webide/PhpStorm-#{version.before_comma}-aarch64.dmg"
-  end
-
+  url "https://download.jetbrains.com/webide/PhpStorm-#{version.csv.first}#{arch}.dmg"
   name "JetBrains PhpStorm"
   desc "PHP IDE by JetBrains"
   homepage "https://www.jetbrains.com/phpstorm/"
 
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=PS&latest=true&type=release"
-    strategy :page_match do |page|
-      JSON.parse(page)["PS"].map do |release|
+    strategy :json do |json|
+      json["PS"].map do |release|
         "#{release["version"]},#{release["build"]}"
       end
     end
@@ -31,7 +26,7 @@ cask "phpstorm" do
 
   uninstall_postflight do
     ENV["PATH"].split(File::PATH_SEPARATOR).map { |path| File.join(path, "pstorm") }.each do |path|
-      if File.exist?(path) &&
+      if File.readable?(path) &&
          File.readlines(path).grep(/# see com.intellij.idea.SocketLock for the server side of this interface/).any?
         File.delete(path)
       end
@@ -42,7 +37,7 @@ cask "phpstorm" do
     "~/Library/Application Support/PhpStorm#{version.major_minor}",
     "~/Library/Caches/PhpStorm#{version.major_minor}",
     "~/Library/Logs/PhpStorm#{version.major_minor}",
-    "~/Library/Preferences/PhpStorm#{version.major_minor}",
     "~/Library/Preferences/jetbrains.phpstorm.*.plist",
+    "~/Library/Preferences/PhpStorm#{version.major_minor}",
   ]
 end

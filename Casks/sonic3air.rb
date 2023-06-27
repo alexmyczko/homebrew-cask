@@ -1,6 +1,6 @@
 cask "sonic3air" do
-  version "21.09.28.0"
-  sha256 "689c7de10c6a6f4c795902e470e63f3e49017970387d34ca932a66b33e1ee79c"
+  version "22.09.10.0"
+  sha256 "c76b7e305ef0e73e588a40c5970dd3168e527aaf87d1fb636be7fb0c61070c0f"
 
   url "https://projects.sappharad.com/s3air_mac/sonic3air_mac_#{version.major_minor_patch.no_dots}.dmg",
       verified: "projects.sappharad.com/s3air_mac/"
@@ -14,9 +14,9 @@ cask "sonic3air" do
   end
 
   app "Sonic 3 AIR.app"
-  artifact "Manual.pdf", target: "#{ENV["HOME"]}/Library/Application Support/sonic3air/Manual.pdf"
-  artifact "doc", target: "#{ENV["HOME"]}/Library/Application Support/sonic3air/doc"
-  artifact "bonus", target: "#{ENV["HOME"]}/Library/Application Support/sonic3air/bonus"
+  artifact "Manual.pdf", target: "~/Library/Application Support/sonic3air/Manual.pdf"
+  artifact "doc", target: "~/Library/Application Support/sonic3air/doc"
+  artifact "bonus", target: "~/Library/Application Support/sonic3air/bonus"
 
   zap trash: "~/Library/Application Support/sonic3air"
 end

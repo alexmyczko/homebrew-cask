@@ -1,6 +1,6 @@
 cask "bluewallet" do
-  version "6.2.13"
-  sha256 "6ea09b7d89f623e5456d7ab58125f76a641190c666c00c8ac578cf867f9a5a21"
+  version "6.4.5"
+  sha256 "bf5ce738ac0ef7fe8f52d0f1016f271376007ce28b55ce61b0915a288c7e649d"
 
   url "https://github.com/BlueWallet/BlueWallet/releases/download/v#{version}/BlueWallet.#{version}.dmg",
       verified: "github.com/BlueWallet/BlueWallet/"
@@ -8,7 +8,7 @@ cask "bluewallet" do
   desc "Bitcoin wallet and Lightning wallet"
   homepage "https://bluewallet.io/"
 
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :big_sur"
 
   app "BlueWallet.app"
 

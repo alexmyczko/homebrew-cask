@@ -1,18 +1,22 @@
 cask "firefly" do
-  version "1.2.0"
-  sha256 "b80a8b319f70d418c961a0c86f4cfaf5baa5b6e25f76329b8f11a2013899b84a"
+  version "1.7.2"
+  sha256 "c62de21639fb0081150fd97bc2ca511197646a3826baef66b37a2be28a976424"
 
-  url "https://github.com/iotaledger/firefly/releases/download/desktop-#{version}/firefly-desktop-#{version}.dmg",
-      verified: "github.com/iotaledger/firefly/"
+  url "https://dl.firefly.iota.org/firefly-desktop-#{version}.dmg"
   name "Firefly"
   desc "Official wallet for IOTA"
   homepage "https://firefly.iota.org/"
 
   livecheck do
-    url :url
-    strategy :git
-    regex(/^desktop-(\d+(?:\.\d+)*)$/i)
+    url "https://dl.firefly.iota.org/latest-mac.yml"
+    regex(/firefly[._-]desktop[._-]v?(\d+(?:\.\d+)+)/i)
+    strategy :yaml do |yaml|
+      yaml["version"]
+    end
   end
+
+  auto_updates true
+  depends_on macos: ">= :el_capitan"
 
   app "Firefly.app"
 

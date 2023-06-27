@@ -1,15 +1,11 @@
 cask "vlc" do
-  arch = Hardware::CPU.intel? ? "intel64" : "arm64"
+  arch arm: "arm64", intel: "intel64"
 
-  version "3.0.16"
+  version "3.0.18"
+  sha256 arm:   "99c259bdbc5221fd50817f518b70e9bf9ee175e890743903c9807bc778668f47",
+         intel: "88edcdfceb3bd2f680367d9009d38a0c147fa758f2dd395e43412c1e08ce1ccb"
 
-  if Hardware::CPU.intel?
-    sha256 "cf559ed2aa7c47e536534a8b10867d7a32b37e76a6c2d2b94f998b77eb36f121"
-  else
-    sha256 "a765306f3d5cae095fa55d7ea36995e9c60939445b21a2ea44057b083da6c6e1"
-  end
-
-  url "https://download.videolan.org/vlc/#{version}/macosx/vlc-#{version}-#{arch}.dmg"
+  url "https://get.videolan.org/vlc/#{version}/macosx/vlc-#{version}-#{arch}.dmg"
   name "VLC media player"
   desc "Multimedia player"
   homepage "https://www.videolan.org/vlc/"

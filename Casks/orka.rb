@@ -1,6 +1,6 @@
 cask "orka" do
-  version "1.6.0"
-  sha256 "accc2136bcd68c8b83463d9e4a77d755479a3e90b111452d8717b87160343708"
+  version "2.4.0"
+  sha256 "c7f6fbd9bfca29353618f22736d1d83234239fa1a00cb4493c62a853ebaa5abb"
 
   url "https://cli-builds-public.s3-eu-west-1.amazonaws.com/official/#{version}/macos/orka.pkg",
       verified: "cli-builds-public.s3-eu-west-1.amazonaws.com/official/"
@@ -10,11 +10,12 @@ cask "orka" do
 
   livecheck do
     url "https://orkadocs.macstadium.com/docs/downloads"
-    strategy :page_match
-    regex(%r{href=.*?/official/(\d+(?:\.\d+)*)/macos/orka\.pkg}i)
+    regex(%r{href=.*?/official/(\d+(?:\.\d+)+)/macos/orka\.pkg}i)
   end
 
   pkg "orka.pkg"
 
   uninstall pkgutil: "com.macstadium.orka.pkg"
+
+  # No zap stanza required
 end

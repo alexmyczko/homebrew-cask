@@ -1,14 +1,17 @@
 cask "texmacs" do
-  version "2.1"
-  sha256 "e6a55318821d69f50e27f57aee56ed4700227d678973b7a48be80a7ec03642a8"
+  arch arm: "-arm"
 
-  url "https://ftp.texmacs.org/TeXmacs/tmftp/macos/TeXmacs-#{version}.dmg"
+  version "2.1.2"
+  sha256 arm:   "d0a5abf3dafba31073ffc3bbfbeff5300453954a54495affee8a16a2f9196587",
+         intel: "db1f9a525554d76794e0339cc19fb4d45eee79bce5f7a176c8dc8b8667181b08"
+
+  url "https://ftp.texmacs.org/TeXmacs/tmftp/macos/TeXmacs-#{version}#{arch}.dmg"
   name "GNU TeXmacs"
   desc "Scientific editing platform"
   homepage "https://www.texmacs.org/"
 
   livecheck do
-    url "http://ftp.texmacs.org/TeXmacs/appcast/macos.xml"
+    url "https://ftp.texmacs.org/TeXmacs/appcast/macos.xml"
     strategy :sparkle
   end
 

@@ -1,17 +1,17 @@
 cask "ubports-installer" do
-  version "0.8.8-beta"
-  sha256 "57b296031cf7d2f72384d7b43e336a5b629ef01e3af9afbd7b8a3a622c6c8bf9"
+  version "0.10.0"
+  sha256 "1a9e1bb64c8a714e239a985a521e7ca38b46a77bfc3c80adbf938e3078d51c2f"
 
-  url "https://github.com/ubports/ubports-installer/releases/download/#{version}/ubports-installer_#{version}_mac.dmg",
+  url "https://github.com/ubports/ubports-installer/releases/download/#{version}/ubports-installer_#{version}_mac_x64.dmg",
       verified: "github.com/ubports/ubports-installer/"
   name "ubports-installer"
   desc "Application to install ubports on mobile devices"
   homepage "https://ubports.com/"
 
   livecheck do
-    url "https://github.com/ubports/ubports-installer/releases"
-    strategy :page_match
-    regex(%r{href=.*?/ubports-installer_(\d+(?:\.\d+)*(?:-beta)?)_mac\.dmg}i)
+    url :url
+    regex(/v?(\d+(?:\.\d+)+(?:-beta)?)/i)
+    strategy :github_latest
   end
 
   app "ubports-installer.app"

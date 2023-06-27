@@ -1,16 +1,24 @@
 cask "keybase" do
-  version "5.8.0,20210920184218,ac2177aec7"
-  sha256 "55333b285a0c31712e478480462371efdec96c77cca7d7831b4748778fa5b7d5"
+  arch arm: "arm64-"
 
-  url "https://prerelease.keybase.io/darwin-updates/Keybase-#{version.csv.first}-#{version.csv.second}%2B#{version.csv.third}.zip"
+  on_arm do
+    version "6.0.4,20230113195947,6e1343b357"
+    sha256 "f1bd79665b11a392f1b48c595e42442f593126ed0ffe1c862c71d7f7de87f99d"
+  end
+  on_intel do
+    version "6.0.4,20230113191846,6e1343b357"
+    sha256 "eaaeb2797f81375ddea1de92b8f1ec41b8110a684804a802a27ad2a5ec65f9ef"
+  end
+
+  url "https://prerelease.keybase.io/darwin-#{arch}updates/Keybase-#{version.csv.first}-#{version.csv.second}%2B#{version.csv.third}.zip"
   name "Keybase"
   desc "End-to-end encryption software"
   homepage "https://keybase.io/"
 
   livecheck do
-    url "https://prerelease.keybase.io/update-darwin-prod-v2.json"
+    url "https://prerelease.keybase.io/update-darwin-#{arch}prod-v2.json"
     strategy :page_match do |page|
-      match = page.match(/Keybase-(\d+(?:\.\d+)*)-(\d+)%2B([0-9a-f]+)\.zip/i)
+      match = page.match(/Keybase[._-]v?(\d+(?:\.\d+)+)[._-](\d+)%2B([0-9a-f]+)\.zip/i)
       next if match.blank?
 
       "#{match[1]},#{match[2]},#{match[3]}"
@@ -26,7 +34,10 @@ cask "keybase" do
                    args: ["install-auto"]
   end
 
-  uninstall delete:    "/Library/PrivilegedHelperTools/keybase.Helper",
+  uninstall delete:    [
+              "/Library/Logs/keybase*",
+              "/Library/PrivilegedHelperTools/keybase.Helper",
+            ],
             launchctl: "keybase.Helper",
             signal:    [
               ["TERM", "keybase.Electron"],
@@ -40,13 +51,11 @@ cask "keybase" do
             }
 
   zap trash: [
-    "~/Library/Application Support/Keybase",
-    "~/Library/Caches/Keybase",
-    "~/Library/Group Containers/keybase",
-    "~/Library/Logs/Keybase*",
-    "~/Library/Logs/keybase*",
-    "~/Library/Preferences/keybase*",
-    "/Library/Logs/keybase*",
-  ],
+        "~/Library/Application Support/Keybase",
+        "~/Library/Caches/Keybase",
+        "~/Library/Group Containers/keybase",
+        "~/Library/Logs/Keybase*",
+        "~/Library/Preferences/keybase*",
+      ],
       rmdir: "/keybase"
 end

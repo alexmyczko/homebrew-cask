@@ -3,16 +3,16 @@ cask "paragon-ntfs" do
   sha256 :no_check # required as upstream package is updated in-place
 
   url "https://dl.paragon-software.com/demo/ntfsmac#{version}_trial.dmg"
-  name "Paragon NTFS for Mac"
-  homepage "https://www.paragon-software.com/ufsdhome/ntfs-mac/"
+  name "Microsoft NTFS for Mac by Paragon Software"
+  desc "Read/write support for NTFS formatted volumes"
+  homepage "https://www.paragon-software.com/home/ntfs-mac/"
 
   livecheck do
-    url :homepage
-    strategy :page_match
-    regex(%r{href=.*?/ntfsmac(\d+)_trial\.dmg}i)
+    skip "No version information available"
   end
 
   auto_updates true
+  depends_on macos: ">= :sierra"
 
   installer manual: "FSInstaller.app"
 
@@ -25,5 +25,12 @@ cask "paragon-ntfs" do
               ["KILL", "com.paragon-software.ntfs.notification-agent"],
             ]
 
-  zap trash: "~/Library/Preferences/com.paragon-software.ntfs.fsapp.plist"
+  zap trash: [
+    "~/Library/Application Support/com.paragon-software.ntfs.*",
+    "~/Library/Caches/com.paragon-software.ntfs.fsapp",
+    "~/Library/HTTPStorages/com.paragon-software.ntfs.*",
+    "~/Library/Preferences/com.paragon-software.ntfs.*",
+    "~/Library/Saved Application State/com.paragon-software.ntfs.fsapp.savedState",
+    "~/Library/WebKit/com.paragon-software.ntfs.fsapp",
+  ]
 end

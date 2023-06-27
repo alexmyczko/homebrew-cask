@@ -1,6 +1,6 @@
 cask "private-internet-access" do
-  version "3.1.2-06767"
-  sha256 "403f2a3fecae94c753f54f14feb972f9d73c2dbc9ea426d552164b7b06da0c52"
+  version "3.3.1-06924"
+  sha256 "62e2f46f0b072d03c2b03d79e19d52c3386fe131b698b70f8b6d99a8ee5c0100"
 
   url "https://installers.privateinternetaccess.com/download/pia-macos-#{version}.zip"
   name "Private Internet Access"
@@ -20,16 +20,27 @@ cask "private-internet-access" do
     sudo:       true,
   }
 
-  uninstall script: {
+  uninstall quit:      "com.privateinternetaccess.vpn",
+            delete:    [
+              "/Applications/Private Internet Access.app",
+              "/usr/local/bin/piactl",
+            ],
+            launchctl: [
+              "com.privateinternetaccess.vpn.installhelper",
+              "com.privateinternetaccess.vpn.daemon",
+            ]
+
+  # The uninstall script should only be used with --zap because it removes all preference files
+  zap script: {
     executable: "/Applications/Private Internet Access.app/Contents/Resources/vpn-installer.sh",
     args:       ["uninstall"],
     sudo:       true,
-  }
-
-  zap trash: [
+  }, trash: [
     "~/Library/Application Support/com.privateinternetaccess.vpn",
     "~/Library/LaunchAgents/com.privateinternetaccess.vpn",
+    "~/Library/LaunchAgents/com.privateinternetaccess.vpn.client.plist",
     "~/Library/Preferences/com.privateinternetaccess.vpn",
     "~/Library/Preferences/com.privateinternetaccess.vpn.plist",
+    "~/Library/Preferences/com.privateinternetaccess.vpn.support-tool.com.privateinternetaccess.vpn.plist",
   ]
 end

@@ -1,11 +1,11 @@
 cask "photosrevive" do
-  version "2.0.2,93ada3a9-d1fd-4b56-922f-c6f803fd3cb0"
-  sha256 "c46978b7166ebbe4e3c40fecfa905f2398921589f6ec15fce7027d692be56ced"
+  version "2.1.0,aa3d20be-fb7a-4714-ad4c-0a447838e067"
+  sha256 "1ca8f66e25702dbf5fd4fbe75b9d8964cd77705d3a57d01d193051139caae02d"
 
   url "https://neededapps.nyc3.digitaloceanspaces.com/media/public/#{version.csv.second}.zip",
-      verified: "neededapps.nyc3.digitaloceanspaces.com"
+      verified: "neededapps.nyc3.digitaloceanspaces.com/media/public/"
   name "PhotosRevive"
-  desc "Colorize old black and white photos automatically"
+  desc "Colorise old black and white photos automatically"
   homepage "https://neededapps.com/photosrevive/"
 
   livecheck do

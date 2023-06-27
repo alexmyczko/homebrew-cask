@@ -1,6 +1,6 @@
 cask "netlogo" do
-  version "6.2.1"
-  sha256 "96580609987aa489b659922b01ce3dec07cff2d25061bbef1fc65a70b3ac460f"
+  version "6.3.0"
+  sha256 "a595dfdb5382f13ff1da44d9402e8ec3b78c927d12e6b83378da391596ee2b04"
 
   url "https://ccl.northwestern.edu/netlogo/#{version}/NetLogo-#{version}.dmg"
   name "NetLogo"
@@ -9,7 +9,6 @@ cask "netlogo" do
 
   livecheck do
     url "https://ccl.northwestern.edu/netlogo/oldversions.shtml"
-    strategy :page_match
     regex(/NetLogo\s*(\d+(?:\.\d+)+)/i)
   end
 

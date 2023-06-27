@@ -1,8 +1,8 @@
 cask "freetube" do
-  version "0.15.1"
-  sha256 "33c663f726be44c5ea570a4545afc3581190ad9d1a37499e931db87639a1b400"
+  version "0.18.0"
+  sha256 "28ff5b17fd5e69184e7ab198fb0b196f78a427f52153b3a6164b4d7a9e9a785a"
 
-  url "https://github.com/FreeTubeApp/FreeTube/releases/download/v#{version}-beta/freetube-#{version}-mac.dmg"
+  url "https://github.com/FreeTubeApp/FreeTube/releases/download/v#{version}-beta/freetube-#{version}-mac-x64.dmg"
   name "FreeTube"
   desc "YouTube player focusing on privacy"
   homepage "https://github.com/FreeTubeApp/FreeTube"

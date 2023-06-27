@@ -1,6 +1,6 @@
 cask "media-converter" do
-  version "3.0"
-  sha256 "a5c61e461aca7c570a3ea99f0ecf0f27a8e2ab5713c3edd79d3eaf7ca1543b5e"
+  version "3.0.2"
+  sha256 "e7753762138c2b5552b606d02ece75bb40969d626ea5027dd8165d78fb078369"
 
   url "https://downloads.sourceforge.net/media-converter/media-converter/#{version}/media-converter-#{version}.zip",
       verified: "downloads.sourceforge.net/media-converter/"

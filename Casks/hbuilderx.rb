@@ -1,19 +1,21 @@
 cask "hbuilderx" do
-  version "3.2.16.20211122"
-  sha256 "3a219ea9ec0d66a6833e55fc7e09aac0fa2358da35bad01a459ba825e5ab3717"
+  version "3.8.4.20230531"
+  sha256 "45a69f80805d2764dec904d297172effeae66aacd003359db32b4abcbcfa8bdc"
 
   url "https://download1.dcloud.net.cn/download/HBuilderX.#{version}.dmg",
-      verified: "download1.dcloud.net.cn/"
+      verified: "download1.dcloud.net.cn/download/"
   name "HBuilderX"
   desc "HTML editor"
   homepage "https://www.dcloud.io/hbuilderx.html"
 
   livecheck do
     url "https://download1.dcloud.net.cn/hbuilderx/release.json"
-    strategy :page_match do |page|
-      JSON.parse(page)["version"]
+    strategy :json do |json|
+      json["version"]
     end
   end
 
   app "HBuilderX.app"
+
+  zap trash: "~/Library/Application Support/HBuilder X"
 end

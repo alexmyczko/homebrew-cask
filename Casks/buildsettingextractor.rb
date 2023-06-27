@@ -1,6 +1,6 @@
 cask "buildsettingextractor" do
-  version "1.4.3"
-  sha256 "0c3cf0bc5ff9169080164521fe8214d9876121452820d1c32456b2a8a72cc2b4"
+  version "1.4.6"
+  sha256 "a8828f75838bf026c75f6847be458a2488e4c6ccaf3158321c5084eba733d341"
 
   url "https://github.com/dempseyatgithub/BuildSettingExtractor/releases/download/v#{version}/BuildSettingExtractor_#{version}.dmg"
   name "BuildSettingExtractor"
@@ -10,4 +10,9 @@ cask "buildsettingextractor" do
   depends_on macos: ">= :mojave"
 
   app "BuildSettingExtractor.app"
+
+  zap trash: [
+    "~/Library/Application Scripts/net.tapas-software.BuildSettingExtractor",
+    "~/Library/Containers/net.tapas-software.BuildSettingExtractor",
+  ]
 end

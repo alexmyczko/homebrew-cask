@@ -1,6 +1,6 @@
 cask "audiobook-builder" do
-  version "2.1.4"
-  sha256 "beb51287843d9960171f64c5ed983c370c616f84b83b0c48a7e398bf6a0b25e8"
+  version "2.2.6"
+  sha256 "33eb942c5d403e08cb3c225f525e37f0bbb047f1d5937d945075d276db658a27"
 
   url "https://www.splasm.com/downloads/audiobookbuilder/Audiobook%20Builder%20#{version}.dmg"
   name "Audiobook Builder"
@@ -8,8 +8,8 @@ cask "audiobook-builder" do
   homepage "https://www.splasm.com/audiobookbuilder/"
 
   livecheck do
-    url :homepage
-    regex(/Version\s*(\d+(?:\.\d+)+)/i)
+    url "https://www.splasm.com/audiobookbuilder/update.html"
+    regex(/class=.*["' >]Audiobook\sBuilder\s?(\d+(?:\.\d+)+)</i)
   end
 
   depends_on macos: ">= :el_capitan"

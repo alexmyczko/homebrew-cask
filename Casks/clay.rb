@@ -1,16 +1,9 @@
 cask "clay" do
-  arch = Hardware::CPU.intel? ? "" : "-arm64"
+  version "2.10.7"
+  sha256 "abc46a68135c1fc5a3a208131d8734f63026524a09c9c7bdde31d74aa5bac251"
 
-  version "1.6.6"
-
-  if Hardware::CPU.intel?
-    sha256 "f6274cea31adc89e3f2f7c1602d301160dc4b5edcc3681f36929ef38ae52da23"
-  else
-    sha256 "87c70135ea182cb1c54439e0e70b952d09f5dd4a78d0556b47efcbf0f94c34cf"
-  end
-
-  url "https://assets.clay.earth/desktop/mac/Clay-#{version}#{arch}.dmg"
-  name "clay"
+  url "https://assets.clay.earth/desktop/mac/Clay-#{version}-universal.dmg"
+  name "Clay"
   desc "Private rolodex to remember people better"
   homepage "https://clay.earth/"
 

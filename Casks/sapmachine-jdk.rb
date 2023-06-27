@@ -1,25 +1,24 @@
 cask "sapmachine-jdk" do
-  arch = Hardware::CPU.intel? ? "x64" : "aarch64"
+  arch arm: "aarch64", intel: "x64"
 
-  version "17.0.1"
+  version "20.0.1"
+  sha256 arm:   "75f85bfb4db30e73e7893703c8016c5a087d412cfb656ad5f89652ba432b0f7a",
+         intel: "449efda64407162788eb04734a522d79540510663d3a648dd487519ab281450e"
 
   url "https://github.com/SAP/SapMachine/releases/download/sapmachine-#{version}/sapmachine-jdk-#{version}_macos-#{arch}_bin.dmg",
       verified: "github.com/SAP/SapMachine/"
-  if Hardware::CPU.intel?
-    sha256 "86a3c95d2f7f478677aacbbd498637027b5f270652be75690f475b22483cbef5"
-  else
-    sha256 "958c37a0875a822e93302365701dbd78546da5371948615f617154b056585108"
-  end
-
   name "SapMachine OpenJDK Development Kit"
   desc "OpenJDK distribution from SAP"
   homepage "https://sapmachine.io/"
 
+  # The version information on the homepage is rendered client-side from the
+  # following JSON file, so we have to check it instead.
   livecheck do
-    url :url
-    strategy :github_latest
-    regex(%r{href=.*/sapmachine-jdk-(\d+(?:\.\d+)*(?:\+\d+(?:\.\d+)*)?)_macos-(aarch64|x64)_bin\.dmg}i)
+    url "https://sap.github.io/SapMachine/assets/data/sapmachine_releases.json"
+    regex(/["']tag["']:\s*["']sapmachine[._-]v?(\d+(?:\.\d+)*)["']/i)
   end
 
   artifact "sapmachine-jdk-#{version}.jdk", target: "/Library/Java/JavaVirtualMachines/sapmachine-jdk-#{version}.jdk"
+
+  zap trash: "~/Library/Saved Application State/com.sap.openjdk.jconsole.savedState"
 end

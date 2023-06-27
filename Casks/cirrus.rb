@@ -2,7 +2,7 @@ cask "cirrus" do
   version "1.12,2021.04"
   sha256 "80ed7a29fdaafa54aaf11a455716be15be248424a81301e1352c59696ef63ffa"
 
-  url "https://eclecticlightdotcom.files.wordpress.com/#{version.after_comma.major}/#{version.after_comma.minor}/cirrus#{version.before_comma.no_dots}.zip",
+  url "https://eclecticlightdotcom.files.wordpress.com/#{version.csv.second.major}/#{version.csv.second.minor}/cirrus#{version.csv.first.no_dots}.zip",
       verified: "eclecticlightdotcom.files.wordpress.com/"
   name "Cirrus"
   desc "Inspector for iCloud Drive folders"
@@ -10,8 +10,9 @@ cask "cirrus" do
 
   livecheck do
     url "https://raw.githubusercontent.com/hoakleyelc/updates/master/eclecticapps.plist"
-    strategy :page_match do |page|
-      match = page.match(%r{/(\d+)/(\d+)/cirrus(\d+)\.zip}i)
+    regex(%r{/(\d+)/(\d+)/cirrus(\d+)\.zip}i)
+    strategy :page_match do |page, regex|
+      match = page.match(regex)
       next if match.blank?
 
       "#{match[3].split("", 2).join(".")},#{match[1]}.#{match[2]}"
@@ -20,7 +21,7 @@ cask "cirrus" do
 
   depends_on macos: ">= :sierra"
 
-  app "cirrus#{version.before_comma.major}#{version.before_comma.minor}/Cirrus.app"
+  app "cirrus#{version.csv.first.major}#{version.csv.first.minor}/Cirrus.app"
 
   zap trash: [
     "~/Library/Caches/co.eclecticlight.CirrusMac",

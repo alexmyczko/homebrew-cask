@@ -1,13 +1,9 @@
 cask "android-studio" do
-  arch = Hardware::CPU.intel? ? "mac" : "mac_arm"
+  arch arm: "mac_arm", intel: "mac"
 
-  version "2020.3.1.25"
-
-  if Hardware::CPU.intel?
-    sha256 "caa2a4a6adbd5ff94e0fbb9ffec798d5b24319070d7d231684ea9a458b1420ee"
-  else
-    sha256 "156935cdc02d0525d1b1529492468194027d1f63eac71d89ebd9c1fc08ba7c60"
-  end
+  version "2022.2.1.20"
+  sha256 arm:   "cf121ab0caa4acaa162cd107989a00be983bfc5f092f48a0f55b107695d23c79",
+         intel: "eff730036d61deac9dafd956750f213692baf343c493a907791dfc7fdb894a2b"
 
   url "https://redirector.gvt1.com/edgedl/android/studio/install/#{version}/android-studio-#{version}-#{arch}.dmg",
       verified: "redirector.gvt1.com/edgedl/android/studio/"
@@ -17,7 +13,7 @@ cask "android-studio" do
 
   livecheck do
     url :homepage
-    regex(/android-studio-(\d+(?:\.\d+)+)-#{arch}\.dmg/i)
+    regex(/android[._-]studio[._-]v?(\d+(?:\.\d+)+)[._-]#{arch}\.dmg/i)
   end
 
   auto_updates true
@@ -25,15 +21,15 @@ cask "android-studio" do
   app "Android Studio.app"
 
   zap trash: [
-    "~/.android",
-    "~/Library/Android/sdk",
-    "~/Library/Application Support/Google/AndroidStudio#{version.major_minor}",
-    "~/Library/Caches/Google/AndroidStudio#{version.major_minor}",
-    "~/Library/Logs/Google/AndroidStudio#{version.major_minor}",
-    "~/Library/Preferences/com.android.Emulator.plist",
-    "~/Library/Preferences/com.google.android.studio.plist",
-    "~/Library/Saved Application State/com.google.android.studio.savedState",
-  ],
+        "~/.android",
+        "~/Library/Android/sdk",
+        "~/Library/Application Support/Google/AndroidStudio#{version.major_minor}",
+        "~/Library/Caches/Google/AndroidStudio#{version.major_minor}",
+        "~/Library/Logs/Google/AndroidStudio#{version.major_minor}",
+        "~/Library/Preferences/com.android.Emulator.plist",
+        "~/Library/Preferences/com.google.android.studio.plist",
+        "~/Library/Saved Application State/com.google.android.studio.savedState",
+      ],
       rmdir: [
         "~/AndroidStudioProjects",
         "~/Library/Android",

@@ -1,14 +1,21 @@
 cask "wasabi-wallet" do
-  version "1.1.13.0"
-  sha256 "1659ff94d84a38605572d59b3903973c47639690949d724182b0ddeb983ca964"
+  arch arm: "-arm64"
 
-  url "https://github.com/zkSNACKs/WalletWasabi/releases/download/v#{version}/Wasabi-#{version.chomp(".0")}.dmg",
-      verified: "github.com/zkSNACKs/WalletWasabi/"
+  version "2.0.3"
+  sha256 arm:   "646a32dc379534a6373c7bc6f72ea82b6a2973fc5c416b67a7c574b8bff2ddcf",
+         intel: "03f228ff21d29f908e52a7b508ad2adddc6b21d3a532963aac6b9232feeaac49"
+
+  url "https://github.com/zkSNACKs/WalletWasabi/releases/download/v#{version}/Wasabi-#{version.chomp(".0")}#{arch}.dmg"
   name "Wasabi Wallet"
   desc "Open-source, non-custodial, privacy focused Bitcoin wallet"
-  homepage "https://www.wasabiwallet.io/"
+  homepage "https://github.com/zkSNACKs/WalletWasabi/"
 
-  depends_on macos: ">= :sierra"
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
+
+  depends_on macos: ">= :catalina"
 
   app "Wasabi Wallet.app"
 

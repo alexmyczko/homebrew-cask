@@ -1,6 +1,6 @@
 cask "xee" do
-  version "3.5.3,45,1504018134"
-  sha256 "756719157ae7d9cd3a0153ca80b48b71a239691d3ff8aa0061fd529a825d7926"
+  version "3.5.4,69,1640101604"
+  sha256 "12db74f58ee04f28193e18df964b6a8a8715dfe3f47c7dadc9fea44ead39be0c"
 
   url "https://dl.devmate.com/cx.c3.Xee3/#{version.csv.second}/#{version.csv.third}/Xee-#{version.csv.second}.zip",
       verified: "devmate.com/cx.c3.Xee3/"
@@ -10,8 +10,12 @@ cask "xee" do
 
   livecheck do
     url "https://updates.devmate.com/cx.c3.Xee3.xml"
-    strategy :sparkle do |item|
-      "#{item.short_version},#{item.version},#{item.url[%r{/([^/]+)/[^/]+\.zip}i, 1]}"
+    regex(%r{/(\d+)/Xee\d*?[_-]v?(\d+(?:\.\d+)*)\.(?:dmg|zip)}i)
+    strategy :sparkle do |item, regex|
+      match = item.url.match(regex)
+      next if match.blank?
+
+      "#{item.short_version},#{match[2]},#{match[1]}"
     end
   end
 

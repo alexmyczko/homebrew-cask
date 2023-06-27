@@ -1,6 +1,6 @@
 cask "doxygen" do
-  version "1.9.2"
-  sha256 "788d56c30ecb1d3f816f3eca31a2e983a7864ed28fce0566143dfb70afed7916"
+  version "1.9.7"
+  sha256 "cbcb1d0d146f0fcf543a93d1d42bfdb1d2dfdf5a1979d30d930faccb83e26fd2"
 
   url "https://doxygen.nl/files/Doxygen-#{version}.dmg"
   name "Doxygen"
@@ -9,9 +9,14 @@ cask "doxygen" do
 
   livecheck do
     url "https://www.doxygen.nl/download.html"
-    strategy :page_match
     regex(%r{href=.*?/Doxygen-(\d+(?:\.\d+)+)\.dmg}i)
   end
 
   app "Doxygen.app"
+
+  zap trash: [
+    "~/Library/Preferences/org.doxygen.Doxywizard.plist",
+    "~/Library/Preferences/org.doxygen.plist",
+    "~/Library/Saved Application State/org.doxygen.savedState",
+  ]
 end

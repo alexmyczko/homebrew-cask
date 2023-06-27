@@ -1,15 +1,11 @@
 cask "pycharm" do
-  arch = Hardware::CPU.intel? ? "" : "-aarch64"
+  arch arm: "-aarch64"
 
-  version "2021.3,213.5744.248"
+  version "2023.1.3,231.9161.41"
+  sha256 arm:   "fa2403fd138dc013929ebf0a1054f8a55639666f2d4e4b14fa6f904467e74ba0",
+         intel: "70ee1bbdb2cb214be048174bba4b0f6ba969e0f257f74fb5adee951b517adb0e"
 
-  url "https://download.jetbrains.com/python/pycharm-professional-#{version.before_comma}#{arch}.dmg"
-  if Hardware::CPU.intel?
-    sha256 "c393fcd925840cdd2458b6010bc66b105d7625b974e10a73a0d6e3d9b341116f"
-  else
-    sha256 "33d9d5a5bcfc47110b9cda02557cd241941a545ab4c804a823b367c49c94d292"
-  end
-
+  url "https://download.jetbrains.com/python/pycharm-professional-#{version.csv.first}#{arch}.dmg"
   name "PyCharm"
   name "PyCharm Professional"
   desc "IDE for professional Python development"
@@ -17,8 +13,8 @@ cask "pycharm" do
 
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=PCP&latest=true&type=release"
-    strategy :page_match do |page|
-      JSON.parse(page)["PCP"].map do |release|
+    strategy :json do |json|
+      json["PCP"].map do |release|
         "#{release["version"]},#{release["build"]}"
       end
     end
@@ -31,7 +27,7 @@ cask "pycharm" do
 
   uninstall_postflight do
     ENV["PATH"].split(File::PATH_SEPARATOR).map { |path| File.join(path, "charm") }.each do |path|
-      if File.exist?(path) &&
+      if File.readable?(path) &&
          File.readlines(path).grep(/# see com.intellij.idea.SocketLock for the server side of this interface/).any?
         File.delete(path)
       end

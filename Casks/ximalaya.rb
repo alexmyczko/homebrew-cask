@@ -1,23 +1,31 @@
 cask "ximalaya" do
-  version "2.2.0,1637833363"
-  sha256 "08683899b2ae0b633063607e8cc117126ca4940a360b0c590e0cdb75db3493fe"
+  version "4.0.0,GMCoOSMIGmpqACAAAAISmOuF,9198,26,49"
+  sha256 "61e157e303e27f11ccdb328a62e2930540d818c07fb01fdb1dc4b8ca25ccf3fc"
 
-  url "https://s1.xmcdn.com/yx/ximalaya-pc-client/#{version.before_comma}/download/mac-x64/Ximalaya_#{version.before_comma}_#{version.after_comma}.dmg",
-      verified: "s1.xmcdn.com/"
+  url "https://nativedl.pcdn.xmcdn.com/storages/#{version.csv.third}-audiofreehighqps/#{version.csv.fourth}/#{version.csv.fifth}/#{version.csv.second}.dmg?ct=application/octet-stream&filename=Ximalaya_#{version.csv.first}_x64_c_99",
+      verified: "nativedl.pcdn.xmcdn.com/storages/"
   name "ximalaya"
   name "喜马拉雅"
   desc "Platform for podcasting and audio-sharing"
   homepage "https://www.ximalaya.com/"
 
   livecheck do
-    url "https://www.ximalaya.com/down/lite?client=mac"
-    strategy :header_match do |headers|
-      match = headers["location"].match(%r{/Ximalaya[_-](\d+(?:\.\d+)+)[_-](\d+)\.dmg}i)
-      next if match.blank?
-
-      "#{match[1]},#{match[2]}"
+    url "https://www.ximalaya.com/down/lite/v2?client=mac&channelId=99"
+    regex(%r{storages/(.+)-aud.*?/(.+)/(.+)/(.+)\.dmg.*?Ximalaya[._-](\d+(?:\.\d+)+)}i)
+    strategy :header_match do |headers, regex|
+      headers["location"].scan(regex).map do |match|
+        "#{match[4]},#{match[3]},#{match[0]},#{match[1]},#{match[2]}"
+      end
     end
   end
 
   app "喜马拉雅.app"
+
+  zap trash: [
+    "~/Library/Application Support/喜马拉雅",
+    "~/Library/Application Support/Ximalaya SetUp",
+    "~/Library/Logs/喜马拉雅",
+    "~/Library/Preferences/com.gemd.iting.plist",
+    "~/Library/Saved Application State/com.gemd.iting.savedState",
+  ]
 end

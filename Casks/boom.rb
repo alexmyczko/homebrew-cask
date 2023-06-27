@@ -1,5 +1,5 @@
 cask "boom" do
-  version "1.7.1,101.7.1039"
+  version "1.7.9,101.7.9023"
   sha256 :no_check
 
   url "https://d13nae1tw8tdnq.cloudfront.net/Boom2mac/webstore/Boom2.dmg",
@@ -12,8 +12,6 @@ cask "boom" do
     url :url
     strategy :extract_plist
   end
-
-  depends_on macos: ">= :yosemite"
 
   app "Boom 2.app"
 

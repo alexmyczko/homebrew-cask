@@ -1,17 +1,18 @@
 cask "vcv-rack" do
-  version "1.1.6"
-  sha256 "79078ca77dff41beab2247cadf22d1a9d4112b3981f8a4084923b75519664a50"
+  version "2.3.0"
+  sha256 "3ad9235c68447956407b39c83fff8ec2f1572f9e8a78a9f56ac8d807092f8552"
 
-  url "https://vcvrack.com/downloads/Rack-#{version}-mac.zip"
+  url "https://vcvrack.com/downloads/RackFree-#{version}-mac-x64.pkg"
   name "VCV Rack"
   desc "Open-source virtual modular synthesizer"
   homepage "https://vcvrack.com/"
 
   livecheck do
-    url "https://vcvrack.com/Rack.html"
-    strategy :page_match
-    regex(%r{href=.*?/Rack-(\d+(?:\.\d+)*)-mac\.zip}i)
+    url "https://raw.githubusercontent.com/VCVRack/Rack/v#{version.major}/CHANGELOG.md"
+    regex(/###\s(\d+(?:\.\d+)+)/i)
   end
 
-  app "Rack.app"
+  pkg "RackFree-#{version}-mac-x64.pkg"
+
+  uninstall pkgutil: "com.vcvrack.rack"
 end

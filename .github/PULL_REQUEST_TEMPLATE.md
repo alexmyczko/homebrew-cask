@@ -2,10 +2,10 @@
 
 _In the following questions `<cask>` is the token of the cask you're submitting._
 
-After making all changes to a cask, verify:
+After making any changes to a cask, existing or new, verify:
 
 - [ ] The submission is for [a stable version](https://docs.brew.sh/Acceptable-Casks#stable-versions) or [documented exception](https://docs.brew.sh/Acceptable-Casks#but-there-is-no-stable-version).
-- [ ] `brew audit --cask <cask>` is error-free.
+- [ ] `brew audit --cask --online <cask>` is error-free.
 - [ ] `brew style --fix <cask>` reports no offenses.
 
 Additionally, **if adding a new cask**:

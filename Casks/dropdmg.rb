@@ -1,6 +1,6 @@
 cask "dropdmg" do
-  version "3.6.3"
-  sha256 "529b78a507dcc5a35e425a35d6cc3b2bad3115db8abbd63e918bf92a47440557"
+  version "3.6.6"
+  sha256 "efedd81e5dba0538647234a8eeda8d9fef223a7991cc0e5a93f076dd2ea520fd"
 
   url "https://c-command.com/downloads/DropDMG-#{version}.dmg"
   name "DropDMG"
@@ -8,9 +8,8 @@ cask "dropdmg" do
   homepage "https://c-command.com/dropdmg/"
 
   livecheck do
-    url "https://c-command.com/dropdmg/"
-    strategy :page_match
-    regex(%r{href=.*?/DropDMG-(\d+(?:\.\d+)+)\.dmg}i)
+    url :homepage
+    regex(%r{href=.*?/DropDMG[._-]v?(\d+(?:\.\d+)+)\.dmg}i)
   end
 
   app "DropDMG.app"

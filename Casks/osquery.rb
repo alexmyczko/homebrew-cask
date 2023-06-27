@@ -1,6 +1,6 @@
 cask "osquery" do
-  version "5.0.1"
-  sha256 "ec58996e64637d861ccead8dc6bc8865662728f6e5bc2694a3c92f0f4a371095"
+  version "5.8.2"
+  sha256 "1fea8ac9b603851d2e76c5fc73138a468a3075a3002c8cb1fd7fff53b889c4dd"
 
   url "https://pkg.osquery.io/darwin/osquery-#{version}.pkg"
   name "osquery"
@@ -9,7 +9,7 @@ cask "osquery" do
 
   livecheck do
     url "https://github.com/osquery/osquery"
-    strategy :git
+    strategy :github_latest
   end
 
   pkg "osquery-#{version}.pkg"
@@ -19,4 +19,6 @@ cask "osquery" do
               "com.facebook.osquery",
               "io.osquery.agent",
             ]
+
+  # No zap stanza required
 end

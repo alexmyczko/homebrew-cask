@@ -8,9 +8,8 @@ cask "easyfind" do
   homepage "https://www.devontechnologies.com/apps/freeware"
 
   livecheck do
-    url "https://www.devontechnologies.com/apps/freeware"
-    strategy :page_match
-    regex(%r{href=.*?/(\d+(?:\.\d+)*)/EasyFind\.app\.zip}i)
+    url :homepage
+    regex(%r{href=.*?/(\d+(?:\.\d+)+)/EasyFind\.app\.zip}i)
   end
 
   app "EasyFind.app"

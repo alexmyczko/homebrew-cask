@@ -1,6 +1,6 @@
 cask "keycue" do
-  version "9.10"
-  sha256 "a2cc031e25be2caa04680588f4164864a3d806b23c92b83d4c9a2291d02c1ab9"
+  version "10.2"
+  sha256 "a17a6920f25bf77b5f1e6d83379c845b51ad9a0d0774ef7cf2733e8de4cd667d"
 
   url "https://www.ergonis.com/downloads/products/keycue/KeyCue#{version.no_dots}-Install.dmg",
       user_agent: :fake
@@ -10,7 +10,7 @@ cask "keycue" do
 
   livecheck do
     url "https://www.ergonis.com/products/keycue/history.html"
-    regex(/<h\d>\s*?KeyCue\s+?v?(\d+(?:\.\d+)+)/i)
+    regex(/<h\d.*?KeyCue\sv?(\d+(?:\.\d+)+)/i)
   end
 
   app "KeyCue.app"

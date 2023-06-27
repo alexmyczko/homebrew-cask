@@ -1,6 +1,6 @@
 cask "perforce" do
-  version "2021.2,2201121"
-  sha256 "7dd6dc41b4b86738926af6963ea86c34a8162e9616494f9c848a0d0267db923d"
+  version "2022.1,2409226"
+  sha256 "c9da1429c95bba4cd388187559d6b825838e12998e0bb7d206572eca1aa2e317"
 
   url "https://cdist2.perforce.com/perforce/r#{version.major[-2..]}.#{version.minor}/bin.macosx1015x86_64/helix-core-server.tgz"
   name "Perforce Helix Core Server"
@@ -12,11 +12,10 @@ cask "perforce" do
   homepage "https://www.perforce.com/"
 
   livecheck do
-    url "https://www.perforce.com/perforce/doc.current/user/relnotes.txt"
-    strategy :page_match do |page|
-      page.scan(%r{\((\d+(?:\.\d+)+)/(\d+)\)}i).map do |match|
-        "#{match[0]},#{match[1]}"
-      end
+    url "https://cdist2.perforce.com/perforce/r#{version.major[-2..]}.#{version.minor}/doc/user/relnotes.txt"
+    regex(%r{\((\d+(?:\.\d+)+)/(\d+)\)}i)
+    strategy :page_match do |page, regex|
+      page.scan(regex).map { |match| "#{match[0]},#{match[1]}" }
     end
   end
 

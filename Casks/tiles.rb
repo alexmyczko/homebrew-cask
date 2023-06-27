@@ -1,8 +1,8 @@
 cask "tiles" do
-  version "1.2.3,9890ca0f"
-  sha256 "024ca61875fa1d7cac205b7c656b0490cd491389b94d4c98c4733c128060e670"
+  version "1.3.2,03b500a8"
+  sha256 "b051ea7e5048bac0f7a72b6dd893bb1a02cf47ecde6def9f103d2be8e122f01e"
 
-  url "https://updates.sempliva.com/tiles/Tiles-#{version.after_comma}.dmg"
+  url "https://updates.sempliva.com/tiles/Tiles-#{version.csv.second}.dmg"
   name "Sempliva Tiles"
   desc "Window manager"
   homepage "https://www.sempliva.com/tiles/"
@@ -16,7 +16,7 @@ cask "tiles" do
   end
 
   auto_updates true
-  depends_on macos: ">= :el_capitan"
+  depends_on macos: ">= :mojave"
 
   app "Tiles.app"
 

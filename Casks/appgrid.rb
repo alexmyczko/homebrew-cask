@@ -7,6 +7,12 @@ cask "appgrid" do
   desc "Window manager with Vim–like hotkeys"
   homepage "https://github.com/mjolnirapp/AppGrid/"
 
+  livecheck do
+    url :homepage
+    regex(/href=.*?AppGrid[._-]v?(\d+(?:\.\d+)+)\.zip/i)
+    strategy :page_match
+  end
+
   app "AppGrid.app"
 
   uninstall quit: "com.sdegutis.AppGrid"

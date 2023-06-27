@@ -1,10 +1,21 @@
 cask "qbittorrent" do
-  if MacOS.version <= :high_sierra
+  on_high_sierra :or_older do
     version "4.3.2"
     sha256 "dd38e80710978430694c430276a6b7749ef3533cbd0271075bc9eada484ea36b"
-  else
-    version "4.3.9"
-    sha256 "c43323a625a937383da68e50a99d823d56e6843580dc8550dd4942683467c3ed"
+
+    livecheck do
+      skip "Legacy version"
+    end
+  end
+  on_mojave :or_newer do
+    version "4.5.4"
+    sha256 "86f6b73da30ab14e7f7e7ac829b1bbf67469340ecd099a527a3661b8e5da82b0"
+
+    livecheck do
+      url "https://sourceforge.net/projects/qbittorrent/rss?path=/qbittorrent-mac"
+      regex(/qbittorrent[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
+      strategy :page_match
+    end
   end
 
   url "https://downloads.sourceforge.net/qbittorrent/qbittorrent-mac/qbittorrent-#{version}/qbittorrent-#{version}.dmg",
@@ -13,12 +24,7 @@ cask "qbittorrent" do
   desc "Peer to peer Bitorrent client"
   homepage "https://www.qbittorrent.org/"
 
-  livecheck do
-    url "https://sourceforge.net/projects/qbittorrent/rss?path=/qbittorrent-mac"
-    strategy :page_match
-    regex(/qbittorrent-(\d+(?:\.\d+)+)\.dmg/i)
-  end
-
+  conflicts_with cask: "homebrew/cask-versions/qbittorrent-lt20"
   depends_on macos: ">= :high_sierra"
 
   # Renamed for consistency: app name is different in the Finder and in a shell.

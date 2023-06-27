@@ -1,8 +1,8 @@
 cask "hype" do
-  version "4.1.7,736"
-  sha256 "d8c095e6a45ad0231b9a5aaa23c6ff042e477f09ca8d1c6b7734f59a499b5755"
+  version "4.1.13,752"
+  sha256 "fd6375b0889a247e91e559ae56ac92eac133ef2e4afa6f0d2ada987178e6ff8a"
 
-  url "https://tumult.com/hype/download/Hype-#{version.after_comma}.dmg"
+  url "https://tumult.com/hype/download/Hype-#{version.csv.second}.dmg"
   name "Tumult Hype"
   desc "App to create animated and interactive web content"
   homepage "https://tumult.com/hype/"
@@ -11,8 +11,6 @@ cask "hype" do
     url "https://tumult.com/hype/appcast_hype#{version.major}.xml"
     strategy :sparkle
   end
-
-  depends_on macos: ">= :yosemite"
 
   # Renamed for consistency: app name is different in the Finder and in a shell
   app "Hype#{version.major}.app", target: "Hype #{version.major}.app"

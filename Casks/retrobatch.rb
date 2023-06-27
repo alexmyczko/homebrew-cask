@@ -1,15 +1,15 @@
 cask "retrobatch" do
-  version "1.4.4,963"
-  sha256 "0307da1a3ea5cda76f616433370522c01fc3c1b5b794968f98892e0e22afc872"
+  version "1.5"
+  sha256 "786ea08770b80ff859f93c622980d352296ac3d2a0068d160823e1ad0082f11d"
 
-  url "https://flyingmeat.com/download/Retrobatch-#{version.before_comma}.zip"
+  url "https://flyingmeat.com/download/Retrobatch-#{version}.zip"
   name "Retrobatch"
   desc "Batch image processor"
   homepage "https://flyingmeat.com/retrobatch/"
 
   livecheck do
     url "https://www.flyingmeat.com/download/retrobatch#{version.major}update.xml"
-    strategy :sparkle
+    strategy :sparkle, &:short_version
   end
 
   auto_updates true

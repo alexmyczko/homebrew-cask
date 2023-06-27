@@ -1,6 +1,6 @@
 cask "prince" do
-  version "14.2"
-  sha256 "b6ba20b26e5451118727ab595bf5a0ea9342aa5923ac29e7edfd7e84407348d8"
+  version "15.1"
+  sha256 "61854a487562faa5b23e3e0378b4eed3a29f7bab71c06d4b7ceb064f088117fe"
 
   url "https://www.princexml.com/download/prince-#{version}-macos.zip"
   name "Prince"
@@ -9,7 +9,6 @@ cask "prince" do
 
   livecheck do
     url "https://www.princexml.com/download/"
-    strategy :page_match
     regex(%r{href=.*?/prince-(\d+(?:\.\d+)*)-macos\.zip}i)
   end
 
@@ -23,4 +22,6 @@ cask "prince" do
       exec '#{staged_path}/prince-#{version}-macos/lib/prince/bin/prince' --prefix '#{staged_path}/prince-#{version}-macos/lib/prince' "$@"
     EOS
   end
+
+  # No zap stanza required
 end

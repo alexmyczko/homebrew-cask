@@ -1,10 +1,11 @@
 cask "gureumkim" do
-  version "1.11.1"
-  sha256 "f1e7db79b49a7675dbfc8ff57b4b55eaa55b3018803c6c46671c88b402b496c2"
+  version "1.13.2"
+  sha256 "eadbc2904e54885eea08f7c410e2adeec4caf8463c1321706cb3d1a3e42612d1"
 
   url "https://github.com/gureum/gureum/releases/download/#{version}/Gureum-#{version}.pkg",
       verified: "github.com/gureum/gureum/"
   name "구름 입력기"
+  desc "Libhangul-based keyboard input"
   homepage "https://gureum.io/"
 
   livecheck do
@@ -15,4 +16,6 @@ cask "gureumkim" do
   pkg "Gureum-#{version}.pkg"
 
   uninstall pkgutil: "org.youknowone.inputmethod.Gureum"
+
+  # No zap stanza required
 end

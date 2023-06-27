@@ -1,6 +1,6 @@
 cask "seadrive" do
-  version "2.0.18"
-  sha256 "850a7a732dc50ea8683bda2502d43143a3d8c2fef5c4d9f8f3ced0e26890b6b1"
+  version "2.0.26"
+  sha256 "e43c5711510f578be9346e09bd35df8926cd4eb980330acf2d266d7cf70aff22"
 
   url "https://download.seadrive.org/seadrive-#{version}.dmg",
       verified: "download.seadrive.org/"
@@ -15,5 +15,5 @@ cask "seadrive" do
 
   depends_on macos: ">= :high_sierra"
 
-  app "Seadrive.app"
+  app "SeaDrive.app"
 end

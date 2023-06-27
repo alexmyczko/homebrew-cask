@@ -1,16 +1,18 @@
 cask "hashbackup" do
-  version "2552"
-  sha256 "ee1b974e588d372155994a14471da576b30e67ab2d5d58312762dea0a60dc0f4"
+  version "3067"
+  sha256 "b8d4ab6fcdf022262eb755588854b87963fa2ec3a2fb4910172be1be81f873f0"
 
   url "http://upgrade.hashbackup.com/#{version}/hb.r#{version}.Darwin.x86_64.bz2"
-  name "hashbackup"
+  name "HashBackup"
   desc "Command-line backup program"
-  homepage "http://www.hashbackup.com/"
+  homepage "https://www.hashbackup.com/hashbackup/index.html"
 
   livecheck do
-    url "http://www.hashbackup.com/changelog"
-    regex(/>\s*#(\d+)\s+[a-z]+\s*\d{1,2},\s*\d{4}/i)
+    url "https://www.hashbackup.com/hashbackup/releases.html"
+    regex(/>\s*#(\d+)\s+[a-z]+\s*\d{1,2},\s*\d{4}\s*</i)
   end
 
   binary "hb.r#{version}.Darwin.x86_64", target: "hb"
+
+  zap trash: "~/hashbackup"
 end

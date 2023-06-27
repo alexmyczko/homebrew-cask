@@ -1,8 +1,8 @@
 cask "disk-expert" do
-  version "3.6.3,361"
-  sha256 "c2786062fcfa1cfbfbf62eefa605dc0377b79a525ac73bb785b72a0d1732fe78"
+  version "3.8.2,376"
+  sha256 "3478678a86c29bd086fd42a2fd1641b0f1b489586add2727f5045aeff7e5a1cb"
 
-  url "https://nektony.com/pro-support/disk-expert/update/update_#{version.before_comma}b#{version.after_comma}.zip"
+  url "https://nektony.com/pro-support/disk-expert/update/update_#{version.csv.first}b#{version.csv.second}.zip"
   name "Disk Expert"
   desc "Disk space analyzer"
   homepage "https://nektony.com/disk-expert"
@@ -11,8 +11,6 @@ cask "disk-expert" do
     url "https://nektony.com/pro-support/disk-expert/update/update.xml"
     strategy :sparkle
   end
-
-  depends_on macos: ">= :yosemite"
 
   app "Disk Expert #{version.major}.app"
 

@@ -1,6 +1,6 @@
 cask "bome-network" do
-  version "1.4"
-  sha256 "aaafa7d6744950664baed6c040dd442768c438692bc01842cec494e9eccb8162"
+  version "1.5.0"
+  sha256 "baa91064e83f144feb5501f7e24dad7bbb7cc8969987f6286662387e06bed11d"
 
   url "https://download.bome.com/BomeNet#{version}.dmg"
   name "Bome Network"

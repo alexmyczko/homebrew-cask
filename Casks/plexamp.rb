@@ -1,30 +1,32 @@
 cask "plexamp" do
-  if Hardware::CPU.intel?
-    version "3.8.2"
-    sha256 "6fd7bcfd1ccce7249912bfa4d42947d703e02e827e4fc3eb6c199cd7e06da627"
+  arch arm: "-arm64"
 
-    url "https://plexamp.plex.tv/plexamp.plex.tv/desktop/Plexamp-#{version}.dmg",
-        verified: "plexamp.plex.tv/"
+  version "4.7.4"
+  sha256 arm:   "cb7c4684333dbee5fd979503ae3d7946acb9e249e70515eea47b3b34d04db49d",
+         intel: "d4f95bfb8e8d8f2893c2a1a3c2801996c111ff2e1b214d760b3b2a43d5999811"
 
-    livecheck do
-      url "https://plexamp.plex.tv/plexamp.plex.tv/desktop/latest-mac.yml"
-      strategy :electron_builder
-    end
-  else
-    version "3.5.0"
-    sha256 "ead85dd518814718ce57b47a2cf76d0f290a9fd6465c88369d33964a67dbb76d"
-
-    url "https://plexamp.plex.tv/plexamp.plex.tv/desktop/Plexamp-#{version}-arm64.dmg",
-        verified: "plexamp.plex.tv/"
-
-    livecheck do
-      skip "No version information available"
-    end
-  end
-
+  url "https://plexamp.plex.tv/plexamp.plex.tv/desktop/Plexamp-#{version}#{arch}.dmg",
+      verified: "plexamp.plex.tv/"
   name "Plexamp"
   desc "Music player focusing on visuals"
   homepage "https://plexamp.com/"
 
+  livecheck do
+    url "https://plexamp.plex.tv/plexamp.plex.tv/desktop/latest-mac.yml"
+    strategy :electron_builder
+  end
+
+  auto_updates true
+
   app "Plexamp.app"
+
+  zap trash: [
+    "~/Library/Application Support/Caches/plexamp-updater",
+    "~/Library/Application Support/Plexamp",
+    "~/Library/Caches/Plexamp",
+    "~/Library/Caches/tv.plex.plexamp*",
+    "~/Library/Logs/Plexamp",
+    "~/Library/Preferences/tv.plex.plexamp.plist",
+    "~/Library/Saved Application State/tv.plex.plexamp.savedState",
+  ]
 end

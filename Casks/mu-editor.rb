@@ -1,12 +1,18 @@
 cask "mu-editor" do
-  version "1.0.3"
-  sha256 "b1815923ab38d00a5ec512912e50694e29c17f087989cd21aa52c88ce10452b0"
+  version "1.2.0"
+  sha256 "306bef4ebfafd1dcf928bc260d5d57e64efbccb537b27f5818a9fc12437726b6"
 
-  url "https://github.com/mu-editor/mu/releases/download/#{version}/mu-editor.dmg",
+  url "https://github.com/mu-editor/mu/releases/download/v#{version}/MuEditor-osx-#{version}.dmg",
       verified: "github.com/mu-editor/mu/"
   name "Mu"
   desc "Small, simple editor for beginner Python programmers"
   homepage "https://codewith.mu/"
 
-  app "mu-editor.app"
+  app "Mu Editor.app"
+
+  zap rmdir: "~/mu_code",
+      trash: [
+        "~/Library/Application Support/mu",
+        "~/Library/Logs/mu",
+      ]
 end

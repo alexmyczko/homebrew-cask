@@ -1,6 +1,6 @@
 cask "emclient" do
-  version "8.2.1687"
-  sha256 "3d2fe06dc75014d8f2c91eb8d7a9c0947b0abae94aa89e2da8a7bef7fdc65ae6"
+  version "9.2.1841"
+  sha256 "d87f91e1257669cacd1bc02e9724d23adeaecc1a9cf8615882d78587a9100352"
 
   url "https://cdn-dist.emclient.com/dist/v#{version}_Mac/setup.pkg"
   name "eM Client"
@@ -18,7 +18,8 @@ cask "emclient" do
 
   pkg "setup.pkg"
 
-  uninstall pkgutil: "com.emclient.mail.client.pkg"
+  uninstall delete:  "/Applications/eM Client.app",
+            pkgutil: "com.emclient.mail.client.pkg"
 
   zap trash: [
     "~/Library/Caches/com.emclient.mail.client",

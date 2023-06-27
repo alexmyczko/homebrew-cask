@@ -1,16 +1,16 @@
 cask "xampp-vm" do
-  version "8.0.9-0"
-  sha256 "1934778ffa461ee13aa197050ff58499d67e15f8f5f8f1b002f7a01b25f448db"
+  version "8.1.6-0"
+  sha256 "11be67f9c8bd955a07bbc93af9cf126fda20ba2b60eef66f8c92bb655776cedb"
 
-  url "https://www.apachefriends.org/xampp-files/#{version.split("-").first}/xampp-osx-#{version}-vm.dmg"
+  url "https://downloads.sourceforge.net/xampp/xampp-osx-#{version}-vm.dmg",
+      verified: "downloads.sourceforge.net/xampp/"
   name "XAMPP-VM"
   desc "Virtual machine with apache distribution containing MySQL, PHP, and Perl"
   homepage "https://www.apachefriends.org/index.html"
 
-  livecheck do
-    url "https://www.apachefriends.org/download.html"
-    regex(%r{href=.*?/xampp-osx-(\d+(?:\.\d+)*-\d+)-vm\.dmg}i)
-  end
+  app "xampp-osx-#{version}-vm.app"
 
-  app "XAMPP.app"
+  caveats do
+    discontinued
+  end
 end
